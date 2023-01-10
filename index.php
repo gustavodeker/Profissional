@@ -24,7 +24,7 @@ function verificaLogin()
             if($sql->execute(array($token,$email,$senha_cript))){
             //Armazenar este token na sessão
             $_SESSION['TOKEN'] = $token;
-            header('location: ../index.php'); ?>
+            header('location: protegida.php'); ?>
             <?php }
     }else{
         $erro_login = "Dados incorretos!";
