@@ -1,5 +1,7 @@
 <?php
 include("config/conexao.php");
+sessionVerif();
+sessionVerifAdmin();
 
 //Verificar se a postagem existe de acordo com os campos
 if(isset($_POST['nome']) && isset($_POST['email']) && isset($_POST['senha'])){
@@ -55,42 +57,37 @@ if(isset($_POST['nome']) && isset($_POST['email']) && isset($_POST['senha'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
-    <link rel="stylesheet" href="css/login.css">
-    <link rel="stylesheet" href="css/protegida.css">
+    <link rel="stylesheet" href="css/geral.css">
+    <link rel="stylesheet" href="css/cadastro.css">
 </head>
 <body>
-    <header>
-           <nav class='nav-menu'>
-                <?php
-                    global $user;
-                    $user = auth($_SESSION['TOKEN']);
-                    if ($user){?>
-                        <a class='a-menu' id='botaologin' href='protegida.php'>Início</a>
-                        <a class='a-menu' id='botaologin' href='cadastro.php'><?php /* echo $user['user_nome']*/ echo "Cadastro" ?></a>
-                        <a class='a-menu sair' id='botaologin' href='logout.php'>Sair</a>
-                    <?php }else{ ?>
-                            <a class='a-menu login-menu' id='botaologin' href='../acesso/login.php'>Login</a>
-                    <?php } ?>
-           </nav>
-    </header>
-
-    <main class="main-login">
-        <div class="div-login">
-            <form class="form-login" method="POST">
-                <h1 class="h1-login">Cadastro</h1>
+    <?php include_once("header.php") ?>
+    <div id="corpo">
+        <div id="div-cadastro">
+            <form id="form-cadastro" method="POST">
+                <h2 id="h1-login">Cadastrar acesso de cliente</h2>
 
                 <?php //Erro $erro_geral
                     if(isset($erro_geral)){?>
-                        <div class="erro-geral animate__animated animate__headShake">
+                        <div id="erro-geral animate__animated animate__headShake">
                             <?php echo $erro_geral; ?>
                         </div>
                 <?php }?>
-                <input class="input-login" name="nome" placeholder="Nome" type="text">
-                <input class="input-login" name="email" placeholder="E-mail" type="text">
-                <input class="input-login" name="senha" placeholder="Senha" type="password">
-                <input class="btn-login" name="cadastrar" type="submit" value="Cadastrar">
+                <div id="input-label">
+                    <label for="">Nome: </label>
+                    <input name="nome" placeholder="Nome" type="text">
+                </div>
+                <div id="input-label">
+                    <label for="">E-mail: </label>
+                    <input name="email" placeholder="E-mail" type="text">
+                </div>
+                <div id="input-label">
+                    <label for="">Senha: </label>
+                    <input name="senha" placeholder="Senha" type="password">
+                </div>
+                <input id="cadastrar" name="cadastrar" type="submit" value="Cadastrar">
             </form>
         </div>
-    </main>
+    </div>
 </body>
 </html>

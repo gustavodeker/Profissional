@@ -1,0 +1,37 @@
+header {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    background: darkcyan;
+    height: 40px;
+}
+.nav-menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0px 5px;
+}
+.a-menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 9px;
+    cursor: pointer;
+    width: 120px;
+    transition: 0.1s;
+    font-size: 15px;
+    border-radius: 2px;
+}
+.a-menu:hover{
+    background-color: rgb(0, 152, 152);
+}
+.sair{
+    width: 120px;
+    color: whitesmoke;
+}
+.sair:hover{
+    background-color: rgb(0, 152, 152);
+}

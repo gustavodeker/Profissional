@@ -40,3 +40,10 @@ function sessionVerif(){
         header('location: ../index.php');
     }
 }
+function sessionVerifAdmin(){
+    global $user;
+    $user = auth($_SESSION['TOKEN']);
+    if($user['user_nivel'] != "admin"){
+        header('location: ../index.php');
+    }
+}
