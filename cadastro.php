@@ -54,10 +54,26 @@ if(isset($_POST['nome']) && isset($_POST['email']) && isset($_POST['senha'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro     </title>
+    <title>Cadastro</title>
     <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/protegida.css">
 </head>
 <body>
+    <header>
+           <nav class='nav-menu'>
+                <?php
+                    global $user;
+                    $user = auth($_SESSION['TOKEN']);
+                    if ($user){?>
+                        <a class='a-menu' id='botaologin' href='protegida.php'>Início</a>
+                        <a class='a-menu' id='botaologin' href='cadastro.php'><?php /* echo $user['user_nome']*/ echo "Cadastro" ?></a>
+                        <a class='a-menu sair' id='botaologin' href='logout.php'>Sair</a>
+                    <?php }else{ ?>
+                            <a class='a-menu login-menu' id='botaologin' href='../acesso/login.php'>Login</a>
+                    <?php } ?>
+           </nav>
+    </header>
+
     <main class="main-login">
         <div class="div-login">
             <form class="form-login" method="POST">
