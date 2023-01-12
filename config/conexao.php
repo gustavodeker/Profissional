@@ -1,10 +1,15 @@
 <?php
 session_start();
-
+/*
 $servidor ="localhost";
 $usuario = "root";
 $senha = "";
 $banco = "basictest";
+*/
+$servidor ="basictest.mysql.dbaas.com.br";
+$usuario='basictest';
+$senha='G8038375Gg@';
+$banco='basictest';
 
 try{
     $pdo = new PDO("mysql:host=$servidor;dbname=$banco",$usuario,$senha);
@@ -37,13 +42,13 @@ function sessionVerif(){
     global $user;
     $user = auth($_SESSION['TOKEN']);
     if (!$user){
-        header('location: ../index.php');
+        header('location: ./index.php');
     }
 }
 function sessionVerifAdmin(){
     global $user;
     $user = auth($_SESSION['TOKEN']);
     if($user['user_nivel'] != "admin"){
-        header('location: ../index.php');
+        header('location: ./index.php');
     }
 }

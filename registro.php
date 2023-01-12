@@ -10,7 +10,7 @@ if(isset($_POST['nome']) && isset($_POST['setor']) && isset($_POST['servico']) &
         $setor = limpaPost($_POST['setor']);
         $servico = limpaPost($_POST['servico']);
         $desc = limpaPost($_POST['desc']);
-        $data = date('d/m/Y');
+        $data = date("Y-m-d H:i:s");
         try{
             $sql = $pdo->prepare("INSERT INTO registro VALUES (null,?,?,?,?,?)");
             $sql->execute(array($nome, $setor, $servico, $desc, $data));
@@ -29,7 +29,7 @@ if(isset($_POST['nome']) && isset($_POST['setor']) && isset($_POST['servico']) &
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/geral.css">
-    <link rel="stylesheet" href="/css/registro.css">
+    <link rel="stylesheet" href="css/registro.css">
     <title>Registro</title>
 </head>
 <body>

@@ -73,14 +73,35 @@ if(isset($_POST['nome']) && isset($_POST['email']) && isset($_POST['senha'])){
                             <?php echo $erro_geral; ?>
                         </div>
                 <?php }?>
+
+                <?php //Erro $erro_nome
+                    if(isset($erro_nome)){?>
+                        <div id="erro-geral animate__animated animate__headShake">
+                            <?php echo $erro_nome; ?>
+                        </div>
+                <?php }?>
                 <div id="input-label">
                     <label for="">Nome: </label>
                     <input name="nome" placeholder="Nome" type="text">
                 </div>
+
+                <?php //Erro $erro_email
+                    if(isset($erro_email)){?>
+                        <div id="erro-geral animate__animated animate__headShake">
+                            <?php echo $erro_email; ?>
+                        </div>
+                <?php }?>
                 <div id="input-label">
                     <label for="">E-mail: </label>
                     <input name="email" placeholder="E-mail" type="text">
                 </div>
+
+                <?php //Erro $erro_senha
+                    if(isset($erro_senha)){?>
+                        <div id="erro-geral animate__animated animate__headShake">
+                            <?php echo $erro_senha; ?>
+                        </div>
+                <?php }?>
                 <div id="input-label">
                     <label for="">Senha: </label>
                     <input name="senha" placeholder="Senha" type="password">

@@ -17,7 +17,6 @@ function indexTable()
         echo "<td><span class='material-icons' onclick=\"location.href='logregistros.php?page=logregistros&id=" . $row['registro_id'] . "'\">
         edit
         </span></td>";
-        echo "<td><span class='material-icons'>delete</span></td>";
     }
 }
  /**EDITAR**/
@@ -30,8 +29,7 @@ if(isset($_REQUEST["id"])){
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registros</title>
     <link rel="stylesheet" href="css/geral.css">
@@ -51,7 +49,6 @@ if(isset($_REQUEST["id"])){
                 <th>Serviço</th>
                 <th>Descrição</th>
                 <th>Data</th>
-                <th>#</th>
                 <th>#</th>
             </thead>
             <tbody>
@@ -96,7 +93,7 @@ if(isset($_REQUEST["id"])){
                     <input type="text" name="desc" id="desc" value="<?php echo $row_n['registro_desc'] ?>">
                 </div>
     
-                <input class="btn-editar" type="submit" id="submit" value="Editar"></input>
+                <input type="submit" id="submit" value="Editar"></input>
         </form>
     </div>
 </div>
@@ -131,5 +128,20 @@ if(isset($_REQUEST["id"])){
             }, "order": [[3, 'desc']/*QTD AVALIAÇÕES*/, [2, 'desc']/*MÉDIA AVALIAÇÕES*/]
         });
     });
+</script>
 
+<?php
+if(isset($_REQUEST["id"])){ ?>
+<script>
+    let modal = document.getElementById('janela-edit');
+    modal.style.display = 'flex';
+</script>
+<?php } ?>
+
+<script> /**FECHAR EDIT */
+    function fecharEdit(){
+        let modal = document.getElementById('janela-edit');
+        modal.style.display = 'none';
+        location.href = 'logregistros.php';
+    }
 </script>
