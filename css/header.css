@@ -1,0 +1,39 @@
+header {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: cornflowerblue;
+    height: 80px;
+}
+.nav-menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.a-menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0px;
+    padding: 19px 10px;
+    cursor: pointer;
+    width: 130px;
+    height: 100%;
+    transition: 0.1s;
+    font-size: 32px;
+    border-radius: 2px;
+    color: whitesmoke;
+}
+.a-menu:hover{
+    background-color: rgba(202, 219, 252, 0.6);
+}
+.sair{
+    width: 120px;
+    color: whitesmoke;
+}
+.sair:hover{
+    background-color: rgba(202, 219, 252, 0.6);
+}
