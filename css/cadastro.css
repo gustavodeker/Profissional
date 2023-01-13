@@ -16,11 +16,12 @@
     width: 100%;
     margin-top: 2px;
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
 }
 #input-label input{
     width: 75%;
     color: black;
+    margin-left: 5px;
 }
 #cadastrar{
     width: 100%;
@@ -36,4 +37,7 @@
     background-color:darkcyan;
     color: whitesmoke;
     border: 1px solid whitesmoke;
+}
+select{
+    margin-left: 13px;
 }

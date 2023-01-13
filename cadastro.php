@@ -1,48 +1,47 @@
 <?php
 include("config/conexao.php");
-sessionVerif();
-sessionVerifAdmin();
+/*sessionVerif();
+sessionVerifAdmin();*/
 
 //Verificar se a postagem existe de acordo com os campos
-if(isset($_POST['nome']) && isset($_POST['email']) && isset($_POST['senha'])){
+if(isset($_POST['nome']) && isset($_POST['senha']) && isset($_POST['level'])){
     //Verificar se todos os campos foram preenchidos
-    if(empty($_POST['nome']) or empty($_POST['email']) or empty($_POST['senha'])){
+    if(empty($_POST['nome']) or empty($_POST['senha']) or empty($_POST['level'])){
         $erro_geral = "Todos os campos são obrigatórios!";
     }else{
         //Receber e limpar dados do post
         $nome = limpaPost($_POST['nome']);
-        $email = limpaPost($_POST['email']);
         $senha = limpaPost($_POST['senha']);
+        $level = limpaPost($_POST['level']);
         $senha_cript = sha1($senha);
 
         //Verificação individual de campos
         //Nome
-        if (!preg_match("/^[a-zA-Z-' ]*$/",$nome)) {
-            $erro_nome = "Apenas letras e espaços";
-        }
-        //Email
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $erro_email = "Fomato de e-mail inválido";
+        if (!preg_match('/^[A-Za-z0-9-]+$/',$nome)) {
+            $erro_nome = "Apenas letras e números";
         }
         //Senha
         if(strlen($senha) < 6){
             $erro_senha = "Senha devo ter 6 caracteres ou mais!";
         }
+        //Level
+        if(!$level == "admin" or !$level == "user"){
+            $erro_senha = "Selecione user ou admin";
+        }
 
-        if(!isset($erro_geral) && !isset($erro_nome) && !isset($erro_email) && !isset($erro_senha)){
+        if(!isset($erro_geral) && !isset($erro_nome) && !isset($erro_senha) && !isset($erro_level)){
             //Verificar se o usuário já está cadastrado
-            $sql = $pdo->prepare("SELECT * FROM user WHERE user_email=? ");
-            $sql->execute(array($email));
+            $sql = $pdo->prepare("SELECT * FROM users WHERE user_name=? ");
+            $sql->execute(array($nome));
             $usuario = $sql->fetch();
 
             if(!$usuario){
-                $nivel ="";
                 $token="";
-                $sql = $pdo->prepare("INSERT INTO user VALUES (null,?,?,?,?,?)");
-                $sql->execute(array($nome, $email, $senha_cript,$nivel, $token));
-                header('Location: index.php');
+                $sql = $pdo->prepare("INSERT INTO users VALUES (null,?,?,?,?)");
+                $sql->execute(array($nome, $senha_cript, $level, $token));
+                $erro_geral = "Cadastrado com sucesso !";
             }else{
-                $erro_geral = "E-mail já cadastrado";
+                $erro_geral = "Nome de máquina já cadastrado!";
             }
         }
     }
@@ -61,11 +60,11 @@ if(isset($_POST['nome']) && isset($_POST['email']) && isset($_POST['senha'])){
     <link rel="stylesheet" href="css/cadastro.css">
 </head>
 <body>
-    <?php include_once("header.php") ?>
+    <?php/* include_once("header.php") */?>
     <div id="corpo">
         <div id="div-cadastro">
             <form id="form-cadastro" method="POST">
-                <h2 id="h1-login">Cadastrar acesso de cliente</h2>
+                <h2 id="h1-login">Cadastrar máquinas</h2>
 
                 <?php //Erro $erro_geral
                     if(isset($erro_geral)){?>
@@ -85,17 +84,6 @@ if(isset($_POST['nome']) && isset($_POST['email']) && isset($_POST['senha'])){
                     <input name="nome" placeholder="Nome" type="text">
                 </div>
 
-                <?php //Erro $erro_email
-                    if(isset($erro_email)){?>
-                        <div id="erro-geral animate__animated animate__headShake">
-                            <?php echo $erro_email; ?>
-                        </div>
-                <?php }?>
-                <div id="input-label">
-                    <label for="">E-mail: </label>
-                    <input name="email" placeholder="E-mail" type="text">
-                </div>
-
                 <?php //Erro $erro_senha
                     if(isset($erro_senha)){?>
                         <div id="erro-geral animate__animated animate__headShake">
@@ -105,6 +93,20 @@ if(isset($_POST['nome']) && isset($_POST['email']) && isset($_POST['senha'])){
                 <div id="input-label">
                     <label for="">Senha: </label>
                     <input name="senha" placeholder="Senha" type="password">
+                </div>
+
+                <?php //Erro $erro_level
+                    if(isset($erro_level)){?>
+                        <div id="erro-geral animate__animated animate__headShake">
+                            <?php echo $erro_level; ?>
+                        </div>
+                <?php }?>
+                <div id="input-label">
+                    <label for="">Level: </label>
+                    <select name="level">
+                        <option value="user">user</option>
+                        <option value="admin">admin</option>
+                    </select>
                 </div>
                 <input id="cadastrar" name="cadastrar" type="submit" value="Cadastrar">
             </form>

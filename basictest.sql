@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 12-Jan-2023 às 01:06
--- Versão do servidor: 8.0.30
--- versão do PHP: 8.1.10
+-- Tempo de geração: 13-Jan-2023 às 20:02
+-- Versão do servidor: 5.7.33
+-- versão do PHP: 7.4.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,82 +24,119 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `registro`
+-- Estrutura da tabela `codes`
 --
 
-CREATE TABLE `registro` (
-  `registro_id` int NOT NULL,
-  `registro_nome` varchar(255) NOT NULL,
-  `registro_setor` varchar(255) NOT NULL,
-  `registro_servico` varchar(255) NOT NULL,
-  `registro_desc` varchar(255) NOT NULL,
-  `registro_data` varchar(255) NOT NULL
-);
+CREATE TABLE `codes` (
+  `code_id` int(11) NOT NULL,
+  `code_code` varchar(50) COLLATE utf8_bin NOT NULL,
+  `code_desc` varchar(255) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Extraindo dados da tabela `registro`
+-- Extraindo dados da tabela `codes`
 --
 
-INSERT INTO `registro` (`registro_id`, `registro_nome`, `registro_setor`, `registro_servico`, `registro_desc`, `registro_data`) VALUES
-(1, 'Gustavo', 'Administrativo', 'Designar almoço', 'Mandar funcionário comer batata', '2023-01-12 00:35:36'),
-(2, 'Bruno', 'RH', 'Contratação', 'Contratação de funcionarios novos', '2023-01-12 00:55:43'),
-(3, 'Ricardo', 'Financeiro', 'Notas', 'Lançamento de notas de serviço', '2023-01-12 00:37:29');
+INSERT INTO `codes` (`code_id`, `code_code`, `code_desc`) VALUES
+(1, '2000001', 'Diametro interno maior que o especificado'),
+(2, '2000002', 'Diametro externo menor que o especificado'),
+(3, '2000003', 'Diametro externo maior que o especificado'),
+(4, '2000004', 'Dimensão maior que o especificado');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `user`
+-- Estrutura da tabela `records`
 --
 
-CREATE TABLE `user` (
-  `user_id` int NOT NULL,
-  `user_nome` varchar(50) NOT NULL,
-  `user_email` varchar(50) NOT NULL,
-  `user_senha` varchar(255) NOT NULL,
-  `user_nivel` varchar(255) NOT NULL,
-  `user_token` varchar(255) DEFAULT NULL
-);
+CREATE TABLE `records` (
+  `record_id` int(11) NOT NULL,
+  `record_user_id` int(11) NOT NULL,
+  `record_code_id` int(11) NOT NULL,
+  `record_value` int(11) NOT NULL,
+  `record_time` varchar(255) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
 
 --
--- Extraindo dados da tabela `user`
+-- Estrutura da tabela `users`
 --
 
-INSERT INTO `user` (`user_id`, `user_nome`, `user_email`, `user_senha`, `user_nivel`, `user_token`) VALUES
-(2, 'Gustavo', '123@123.com', '601f1889667efaebb33b8c12572835da3f027f78', '', '26a4dd375c9dc352132e6d0845df0cf1069e0e68'),
-(3, 'Admin', 'admin@admin.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'admin', 'f6bd22a3f3388e21150afd908bb7e76bce2def7c');
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL,
+  `user_name` varchar(50) COLLATE utf8_bin NOT NULL,
+  `user_pass` varchar(255) COLLATE utf8_bin NOT NULL,
+  `user_level` varchar(50) COLLATE utf8_bin NOT NULL,
+  `user_token` varchar(255) COLLATE utf8_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Extraindo dados da tabela `users`
+--
+
+INSERT INTO `users` (`user_id`, `user_name`, `user_pass`, `user_level`, `user_token`) VALUES
+(1, 'MAQ001', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'user', ''),
+(2, 'MAQ002', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'user', '');
 
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices para tabela `registro`
+-- Índices para tabela `codes`
 --
-ALTER TABLE `registro`
-  ADD PRIMARY KEY (`registro_id`);
+ALTER TABLE `codes`
+  ADD PRIMARY KEY (`code_id`),
+  ADD UNIQUE KEY `code_code` (`code_code`);
 
 --
--- Índices para tabela `user`
+-- Índices para tabela `records`
 --
-ALTER TABLE `user`
+ALTER TABLE `records`
+  ADD PRIMARY KEY (`record_id`),
+  ADD KEY `record_user_id` (`record_user_id`),
+  ADD KEY `record_code_id` (`record_code_id`);
+
+--
+-- Índices para tabela `users`
+--
+ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
-  ADD UNIQUE KEY `user_email` (`user_email`);
+  ADD UNIQUE KEY `user_name` (`user_name`);
 
 --
 -- AUTO_INCREMENT de tabelas despejadas
 --
 
 --
--- AUTO_INCREMENT de tabela `registro`
+-- AUTO_INCREMENT de tabela `codes`
 --
-ALTER TABLE `registro`
-  MODIFY `registro_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `codes`
+  MODIFY `code_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de tabela `user`
+-- AUTO_INCREMENT de tabela `records`
 --
-ALTER TABLE `user`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `records`
+  MODIFY `record_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Restrições para despejos de tabelas
+--
+
+--
+-- Limitadores para a tabela `records`
+--
+ALTER TABLE `records`
+  ADD CONSTRAINT `records_ibfk_1` FOREIGN KEY (`record_user_id`) REFERENCES `users` (`user_id`),
+  ADD CONSTRAINT `records_ibfk_2` FOREIGN KEY (`record_code_id`) REFERENCES `codes` (`code_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
