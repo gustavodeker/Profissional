@@ -36,35 +36,51 @@ if(isset($_POST['nome']) && isset($_POST['setor']) && isset($_POST['servico']) &
     <?php include_once("header.php") ?>
     
     <div id="corpo">
+
         <div id="div-registro">
-            <h1>Registro de info.</h1>
-            <?php //Erro geral
-                    if(isset($mensagem)){?>
+
+            <form id="form-registro" method="POST">
+                
+                <div class="div-cod">
+                    <label class="cod">Código</label>
+                    <input class="cod" type="text">
+                </div>
+                
+                <div class="div-qtd">
+                    <label>Quantidade</label>
+                    <div class="menos" onclick="menos()">-</div>
+                    <input id="qtd" class="qtd" type="text" value="1" disabled="">
+                    <div class="mais" onclick="mais()">+</div>
+                </div>
+                <input id="enviar" type="submit" value="Enviar">
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
+
+
+
+<script>
+    function menos(){
+        var qtd = document.getElementById("qtd");
+        if(qtd.value > 1){
+            qtd.value--;
+        }
+    }
+    function mais(){
+        var qtd = document.getElementById("qtd");
+        qtd.value++;
+    }
+    
+</script>
+<?php //Erro geral
+if(isset($mensagem)){?>
                         <div class="erro-geral animate__animated animate__headShake">
                             <?php echo $mensagem; ?>
                         </div>
-                <?php }?>
-            <form id="form-registro" method="POST">
-                <div id="input-label">
-                    <label for="">Nome</label>
-                    <input type="text" name="nome">
-                </div>
-                <div id="input-label">
-                    <label for="">Setor</label>
-                    <input type="text"  name="setor">
-                </div>
-                <div id="input-label">
-                    <label for="">Serviço</label>
-                    <input type="text"  name="servico">
-                </div>
-                <div id="input-label">
-                    <label for="">Descrição</label>
-                    <input type="text"  name="desc">
-                </div>
-
-                <input id="enviar" type="submit" value="Enviar">
-            </form>
-        </div>
-    </div>
-</body>
-</html>
+<?php }?>

@@ -1,16 +1,21 @@
 <?php
 session_start();
-/*
+
 $servidor ="localhost";
 $usuario = "root";
 $senha = "";
 $banco = "basictest";
+/*
+$servidor='54.207.211.112:3306';
+$usuario='developer';
+$senha='dev@2023';
+$banco='teste';
 */
-$servidor ="basictest.mysql.dbaas.com.br";
+/*$servidor ="basictest.mysql.dbaas.com.br";
 $usuario='basictest';
 $senha='G8038375Gg@';
 $banco='basictest';
-
+*/
 try{
     $pdo = new PDO("mysql:host=$servidor;dbname=$banco",$usuario,$senha);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -37,7 +42,6 @@ function auth($tokenSessao){
         return $usuario;
     }
 }
-
 function sessionVerif(){
     global $user;
     $user = auth($_SESSION['TOKEN']);
