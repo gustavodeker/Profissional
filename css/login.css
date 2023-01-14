@@ -2,7 +2,7 @@
     margin: 0px;
 }
 body{
-    background-color: darkcyan;
+    background-color: cornflowerblue;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 .main-login{
@@ -32,7 +32,7 @@ body{
 .h1-login{
     width: 100%;
     text-align: center;
-    color: darkcyan;
+    color: cornflowerblue;
 }
 .input-login{
     margin: 2px;
@@ -42,7 +42,7 @@ body{
     padding-left: 5px;
 }
 .input-login:focus{
-    border-color: darkcyan;
+    border-color: cornflowerblue;
 }
 .btn-login {
     margin: 2px;
@@ -51,16 +51,25 @@ body{
     height: 30px;
     cursor: pointer;
     outline: none;
-    background-color: darkcyan;
+    background-color: cornflowerblue;
     border: 1px solid whitesmoke; 
     color: whitesmoke;
     transition: 0.1s;
 }
 .btn-login:hover {
-    background-color: rgba(0, 139, 139, 0.8);
-    border-color: rgba(0, 139, 139, 0.8);
+    background-color: rgba(100, 148, 237, 0.7);
+    border-color: rgba(100, 148, 237, 0.7);
 }
 .btn-login:focus{
-    background-color: rgba(0, 139, 139, 0.8);
-    border-color: rgba(0, 139, 139, 0.8);
+    background-color:rgba(100, 148, 237, 0.7);
+    border-color: rgba(100, 148, 237, 0.7);
+}
+.erro_login{
+    display: block;
+    width: 100%;
+    text-align: center;
+    background-color: red;
+}
+.erro_login p{
+    color: white;
 }

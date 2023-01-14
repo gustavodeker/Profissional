@@ -1,7 +1,7 @@
 <?php
 include("config/conexao.php");
-/*sessionVerif();
-sessionVerifAdmin();*/
+sessionVerif();
+sessionVerifAdmin();
 
 //Verificar se a postagem existe de acordo com os campos
 if(isset($_POST['nome']) && isset($_POST['senha']) && isset($_POST['level'])){
@@ -60,7 +60,7 @@ if(isset($_POST['nome']) && isset($_POST['senha']) && isset($_POST['level'])){
     <link rel="stylesheet" href="css/cadastro.css">
 </head>
 <body>
-    <?php/* include_once("header.php") */?>
+    <?php /* include_once("header.php") */ ?>
     <div id="corpo">
         <div id="div-cadastro">
             <form id="form-cadastro" method="POST">

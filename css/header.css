@@ -37,3 +37,19 @@ header {
 .sair:hover{
     background-color: rgba(202, 219, 252, 0.6);
 }
+p{
+    font-size: 20pt;
+}
+@media(max-width: 450px){
+    header {
+        height: 50px;
+    }
+    .a-menu{
+        padding: 10px 5px;
+        font-size: 15px;
+        width: 50px;
+    }
+    p{
+        font-size: 12pt;
+    }
+}

@@ -2,22 +2,67 @@
 include("config/conexao.php");
 sessionVerif();
 
-if(isset($_POST['nome']) && isset($_POST['setor']) && isset($_POST['servico']) && isset($_POST['desc'])){
-    if(empty($_POST['nome']) or empty($_POST['setor']) or empty($_POST['servico']) or empty($_POST['desc'])){
-        $mensagem = "Todos os campos são obrigatórios!";
+if(isset($_POST['cod']) && isset($_POST['qtd'])){
+    if(empty($_POST['cod']) or empty($_POST['qtd'])){
+        $mensagemerro = "Todos os campos são obrigatórios!";
+        $ultimocode = limpaPost($_POST['cod']);
+        $ultimaqtd = $qtd = limpaPost($_POST['qtd']);
     } else {
-        $nome = limpaPost($_POST['nome']);
-        $setor = limpaPost($_POST['setor']);
-        $servico = limpaPost($_POST['servico']);
-        $desc = limpaPost($_POST['desc']);
-        $data = date("Y-m-d H:i:s");
-        try{
-            $sql = $pdo->prepare("INSERT INTO registro VALUES (null,?,?,?,?,?)");
-            $sql->execute(array($nome, $setor, $servico, $desc, $data));
-            $mensagem = "---------- Registrado com sucesso! ----------";
-        }catch(PDOException $erro){
-            echo "Falha no banco de dados";
+        /* Dados coletados */
+        $code = limpaPost($_POST['cod']);
+        $qtd = limpaPost($_POST['qtd']);
+        
+        /* Coletando code_id */
+        $sql_count = $pdo->prepare("SELECT COUNT(*) FROM codes WHERE code_code = '$code'");
+        $sql_count->execute();
+        $count_code = $sql_count->fetchColumn();
+
+        if($count_code != 1){
+            $mensagemerro = "Código incorreto!";
         }
+        if($qtd < 1 or $qtd > 999){
+            $mensagemerro = "Quantidade de 1 a 999!";
+        }
+        if ($count_code == 1 && $qtd > 0 && $qtd < 1000) {
+            $sql_cod = $pdo->prepare("SELECT * FROM codes WHERE code_code = '$code'");
+            $sql_cod->execute();
+            $row_cod = $sql_cod->fetch(PDO::FETCH_ASSOC);
+            $ultimocode = $row_cod["code_code"];
+
+            /* Coletando user_id */
+            global $user;
+            $user = auth($_SESSION['TOKEN']);
+
+            /* Dados coletados */
+            $user_id = $user['user_id'];
+            $code_id = $row_cod['code_id'];
+            $date = date("Y-m-d H:i:s");
+
+            try{
+                $sqla = $pdo->prepare("INSERT INTO records VALUES (null,?,?,?,?)");
+                $sqla->execute(array($user_id, $code_id, $qtd, $date));
+                $mensagem = "Registrado com sucesso!";
+            }catch(PDOException $erro){
+                $mensagemerro = "Falha no banco de dados, contactar suporte!";
+            }
+        }
+    }
+}
+
+function codTable()
+{
+    global $pdo;
+    $sql = $pdo->prepare("SELECT * FROM codes");
+    $sql->execute();
+    $i = 1;
+    while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+        echo "<tr>";
+        $ide = 'td' . $i;
+        ?>
+        <td class="tdcod" id='<?php echo $ide ?>' onclick="list('<?php echo $ide ?>')"><?php echo $row['code_code'] ?></td>
+        <td class="tddesc" id='<?php echo $ide ?>' onclick="list('<?php echo $ide ?>')"><?php echo $row['code_desc'] ?></td>
+        <?php
+        $i++;
     }
 }
 
@@ -34,58 +79,44 @@ if(isset($_POST['nome']) && isset($_POST['setor']) && isset($_POST['servico']) &
 </head>
 <body>
     <?php include_once("header.php") ?>
+
+    <?php //mensagem
+        if(isset($mensagem)){?>
+            <div id="mensagem" class="mensagem">
+                <?php echo "<p>" . $mensagem . "<p>"; ?>
+            </div>
+    <?php }?>
+
+    <?php //mensagemerro
+        if(isset($mensagemerro)){?>
+            <div id="mensagemerro" class="mensagemerro">
+                <?php echo "<p>" . $mensagemerro . "<p>"; ?>
+            </div>
+    <?php }?>
     
     <div id="corpo">
-
         <div id="div-registro">
+            <p style="background: cornflowerblue; color: whitesmoke; text-align: center;">Selecione o código de problema na tabela</p>
             <table id="table-cod" >
                 <thead>
                     <th>Cod</th>
                     <th class="th-desc">Descrição</th>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td id="td1" onclick="list('td1')">2000001</td>
-                        <td id="td1" onclick="list('td1')">Diametro interno maior que o especificado</td>
-                    </tr>
-                    <tr>
-                        <td id="td2" onclick="list('td2')">2000002</td>
-                        <td id="td2" onclick="list('td2')">Diametro externo menor que o especificado</td>
-                    </tr>
-                    <tr>
-                        <td id="td3" onclick="list('td3')">2000003</td>
-                        <td id="td3" onclick="list('td3')">Diametro externo maior que o especificado</td>
-                    </tr>
-                    <tr>
-                        <td id="td4" onclick="list('td4')">2000004</td>
-                        <td id="td4" onclick="list('td4')">Dimensão maior que o especificado</td>
-                    </tr>
-                    <tr>
-                        <td id="td4" onclick="list('td4')">2000005</td>
-                        <td id="td4" onclick="list('td4')">Dimensão maior que o especificado</td>
-                    </tr>
-                    <tr>
-                        <td id="td4" onclick="list('td4')">2000006</td>
-                        <td id="td4" onclick="list('td4')">Dimensão maior que o especificado</td>
-                    </tr>
-                    <tr>
-                        <td id="td4" onclick="list('td4')">2000007</td>
-                        <td id="td4" onclick="list('td4')">Dimensão maior que o especificado</td>
-                    </tr>
-                    
+                    <?php codTable(); ?>
                 </tbody>
             </table>
 
             <form id="form-registro" method="POST">
                 <div class="div-cod">
                     <label class="codigo">Código</label>
-                    <input id="cod" type="text" value="" disabled="">
+                    <input id="cod" name="cod" type="number"     value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimocode)){echo $ultimocode;} ?>">
                 </div>
                 
                 <div class="div-qtd">
                     <label>Quantidade</label>
                     <div class="menos" onclick="menos()">-</div>
-                    <input id="qtd" class="qtd" type="number" min="1" value="1">
+                    <input id="qtd" name="qtd" class="qtd" type="number" min="1"  value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimaqtd)){echo $ultimaqtd;} ?>" placeholder="">
                     <div class="mais" onclick="mais()">+</div>
                 </div>
                 <input id="enviar" type="submit" value="Enviar">
@@ -98,7 +129,15 @@ if(isset($_POST['nome']) && isset($_POST['setor']) && isset($_POST['servico']) &
 </body>
 </html>
 
+<script>
+	setTimeout(function () {
+		$('#mensagem').hide(); // "foo" é o id do elemento que seja manipular.
+	}, 2500); // O valor é representado em milisegundos.
+    setTimeout(function () {
+		$('#mensagemerro').hide(); // "foo" é o id do elemento que seja manipular.
+	}, 2500); // O valor é representado em milisegundos.
 
+</script>
 <script>
     function menos(){
         var qtd = document.getElementById("qtd");
@@ -108,19 +147,16 @@ if(isset($_POST['nome']) && isset($_POST['setor']) && isset($_POST['servico']) &
     }
     function mais(){
         var qtd = document.getElementById("qtd");
-        qtd.value++;
+        if(qtd.value < 999){
+            qtd.value++;
+        }
     }
     
     function list(td){
         var tede = document.getElementById(td).innerHTML;
-        var input = document.getElementById('cod');
+        var input = document.getElementById("cod");
         input.value = tede;
     }
     
 </script>
-<?php //Erro geral
-if(isset($mensagem)){?>
-                        <div class="erro-geral animate__animated animate__headShake">
-                            <?php echo $mensagem; ?>
-                        </div>
-<?php }?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>

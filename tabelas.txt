@@ -21,3 +21,16 @@ CREATE TABLE records (
     FOREIGN KEY (record_user_id) REFERENCES users(user_id),
     FOREIGN KEY (record_code_id) REFERENCES codes(code_id)
 );
+
+
+INSERT INTO `codes` (`code_id`, `code_code`, `code_desc`) VALUES
+(1, '2000001', 'Diametro interno maior que o especificado'),
+(2, '2000002', 'Diametro externo menor que o especificado'),
+(3, '2000003', 'Diametro externo maior que o especificado'),
+(4, '2000004', 'Dimensão maior que o especificado');
+
+INSERT INTO `users` (`user_id`, `user_name`, `user_pass`, `user_level`, `user_token`) VALUES
+(1, 'MASTER', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'admin', ''),
+(2, 'MAQ001', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'user', ''),
+(3, 'MAQ002', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'user', ''),
+(4, 'MAQ003', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'user', '');

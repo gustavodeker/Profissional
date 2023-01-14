@@ -1,21 +1,50 @@
-*{
-    font-size: 32pt;
-    border-radius: 5px;
-}
 #div-registro{
     display: block;
     max-width: 600px;
     width: 90%;
-    height: 500px;
+    height: 600px;
     border: 1px solid whitesmoke;
     overflow: auto;
 }
-
 #form-registro{
     display: block;
-    margin-top: 20px;
+    margin-top: 10px;
+}
+label{
+    font-size: 30pt;
+    font-family: Arial, Helvetica, sans-serif;
+}
+/******************************/
+
+/***TABLE***/
+table{
+    display: block;
+    max-width: 600px;
+    height: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: auto;
+}
+tbody tr{
+    cursor: pointer;
+}
+tbody tr:hover{
+    background-color: cornflowerblue;
+}
+td, th{
+    vertical-align: middle;
+    text-align: left;
+    font-size: 18pt;
+    padding-left: 2px;
+}
+td{
+    border-bottom: 1px dotted gray;
 }
 /******/
+
+/******************************/
+
+/***COD***/
 .div-cod{
     display: flex;
     flex-wrap: wrap;
@@ -33,12 +62,16 @@
     text-align: center;
 }
 /******/
+
+/******************************/
+
+/***QUANTIDADE***/
 .div-qtd{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding-top: 50px;
-    margin-bottom: 50px;
+    padding-top: 10px;
+    margin-bottom: 10px;
 }
 .div-qtd label{
     margin-bottom: 10px;
@@ -48,14 +81,18 @@
 .div-qtd input{
     width: 20%;
     text-align: center;
+    font-size: 30pt;
+}
+.div-qtd div{
+    font-size: 30pt;
 }
 
 .menos, .mais{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100px;
-    height: 80px;
+    width: 120px;
+    height: 100px;
     border: 1px solid cornflowerblue;
     padding-bottom: 10px;
     cursor: pointer;
@@ -75,19 +112,67 @@
     background-color: red;
     border: 1px solid red;
 }
+/******/
 
+/******************************/
+
+/***BOTÃO ENVIAR***/
 #enviar{
     width: 100%;
     margin-top: 4px;
     background-color: cornflowerblue;
     border: 2px solid cornflowerblue;
     color: whitesmoke;
-    height: 80px;
+    height: 100px;
     transition: 0.1s;
     cursor: pointer;
+    font-size: 32pt;
 
 }
 #enviar:hover{
     background-color: rgb(85, 138, 238);
     color: whitesmoke;
+}
+/******/
+
+/******************************/
+/******/
+
+.mensagem, .mensagemerro{
+    display: block;
+    position: fixed;
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+    
+}
+.mensagem{
+    background-color: green;
+}
+.mensagemerro{
+    background-color: red;
+}
+.mensagem p, .mensagemerro p{
+    color: whitesmoke;
+    font-size: 20pt;
+    text-align: center;
+}
+
+/******/
+
+/******************************/
+@media(max-width: 450px){
+    #enviar{
+        height: 80px;
+    }
+    .menos, .mais{
+        width: 80px;
+        height: 60px;
+    }
+    td, th{
+        font-size: 12pt;
+    }
+    label{
+        font-size: 26pt;
+    }
 }
