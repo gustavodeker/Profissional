@@ -2,7 +2,7 @@
     margin: 0px;
 }
 body{
-    background-color: cornflowerblue;
+    background-color: #004479;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 .main-login{
@@ -20,19 +20,21 @@ body{
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    background-color: rgb(245, 245, 245);
     border-radius: 5px;
 }
 .form-login{
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
-.h1-login{
-    width: 100%;
-    text-align: center;
-    color: cornflowerblue;
+img{
+    width: 300px;
+    margin-bottom: 10px;
+}
+label{
+    color: white;
+    margin-right: 2px;
 }
 .input-login{
     margin: 2px;
@@ -40,29 +42,30 @@ body{
     border: 1px solid rgba(0, 0, 0, 0.5);
     border-radius: 3px;
     padding-left: 5px;
+    width: 77%;
 }
 .input-login:focus{
     border-color: cornflowerblue;
 }
 .btn-login {
-    margin: 2px;
+    margin-top: 10px;
     border-radius: 3px;
-    width: 200px;
+    width: 100%;
     height: 30px;
     cursor: pointer;
     outline: none;
-    background-color: cornflowerblue;
+    background-color: #004479;
     border: 1px solid whitesmoke; 
     color: whitesmoke;
     transition: 0.1s;
 }
 .btn-login:hover {
-    background-color: rgba(100, 148, 237, 0.7);
-    border-color: rgba(100, 148, 237, 0.7);
+    background-color: whitesmoke;
+    color: #004479;
 }
 .btn-login:focus{
-    background-color:rgba(100, 148, 237, 0.7);
-    border-color: rgba(100, 148, 237, 0.7);
+    background-color: whitesmoke;
+    color: #004479;
 }
 .erro_login{
     display: block;

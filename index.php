@@ -48,7 +48,7 @@ if(isset($_POST['name']) && isset($_POST['senha']) && !empty($_POST['name']) && 
     <main class="main-login">
         <div class="div-login">
             <form class="form-login" method="POST">
-                <h1 class="h1-login">System</h1>
+                <img src="img/logo.png" alt="">
 
                 <?php //Erro login
                     if(isset($erro_login)){?>
@@ -56,9 +56,11 @@ if(isset($_POST['name']) && isset($_POST['senha']) && !empty($_POST['name']) && 
                             <?php echo "<p>" . $erro_login . "</p>"; ?>
                         </div>
                 <?php }?>
-
-                <input class="input-login" name="name" placeholder="Nome" type="text">
-                <input class="input-login" name="senha" placeholder="Senha" type="password">
+                
+                <label for="">Login: </label>
+                <input class="input-login" name="name" type="text">
+                <label for="">Senha:</label>
+                <input class="input-login" name="senha" ype="password">
                 <input class="btn-login" name="entrar" type="submit" value="Entrar">
             </form>
         </div>
