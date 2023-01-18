@@ -33,3 +33,9 @@ body{
 #btn-production:hover, #btn-refuse:hover{
     background-color: #004579dd;
 }
+h1{
+    text-align: center;
+    padding-bottom: 5px;
+    font-size:30pt;
+    color: #004479;
+}

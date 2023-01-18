@@ -2,21 +2,35 @@
 include("config/conexao.php");
 sessionVerif();
 
-if(isset($_POST['maquina']) && isset($_POST['motivo']) && isset($_POST['qtd'])){
-    if(empty($_POST['maquina']) or empty($_POST['motivo']) or empty($_POST['qtd'])){
+if(isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['qtd'])){
+    if(empty($_POST['maquina']) or empty($_POST['cod']) or empty($_POST['qtd'])){
         $mensagemerro = "Todos os campos são obrigatórios!";
-        $ultimaqtd = $qtd = limpaPost($_POST['qtd']);
         $ultimachine = limpaPost($_POST['maquina']);
+        $ultimocode = limpaPost($_POST['cod']);
+        $ultimaqtd = $qtd = limpaPost($_POST['qtd']);
     } else {
         /* Dados coletados */
         $machine = limpaPost($_POST['maquina']);
-        $motivo = limpaPost($_POST['motivo']);
+        $code = limpaPost($_POST['cod']);
         $qtd = limpaPost($_POST['qtd']);
         
+        /* Coletando code_id */
+        $sql_count = $pdo->prepare("SELECT COUNT(*) FROM codes WHERE code_code = '$code'");
+        $sql_count->execute();
+        $count_code = $sql_count->fetchColumn();
+
+        if($count_code != 1){
+            $mensagemerro = "Código incorreto!";
+        }
         if($qtd < 1 or $qtd > 999){
             $mensagemerro = "Quantidade de 1 a 999!";
         }
-        if ($qtd > 0 && $qtd < 1000) {
+        if ($count_code == 1 && $qtd > 0 && $qtd < 1000) {
+            $sql_cod = $pdo->prepare("SELECT * FROM codes WHERE code_code = '$code'");
+            $sql_cod->execute();
+            $row_cod = $sql_cod->fetch(PDO::FETCH_ASSOC);
+            $ultimocode = $row_cod["code_code"];
+
             /* Coletando machine_id */
             $sql_machine = $pdo->prepare("SELECT * FROM machines WHERE machine_code = '$machine'");
             $sql_machine->execute();
@@ -30,16 +44,34 @@ if(isset($_POST['maquina']) && isset($_POST['motivo']) && isset($_POST['qtd'])){
 
             /* Dados coletados */
             $user_id = $user['user_id'];
+            $code_id = $row_cod['code_id'];
             $date = date("Y-m-d H:i:s");
 
             try{
-                $sqla = $pdo->prepare("INSERT INTO production VALUES (null,?,?,?,?,?,null,null)");
-                $sqla->execute(array($user_id, $machine_id, $qtd, $motivo, $date));
+                $sqla = $pdo->prepare("INSERT INTO refuse VALUES (null,?,?,?,?,?,null,null)");
+                $sqla->execute(array($user_id, $machine_id, $code_id, $qtd, $date));
                 $mensagem = "Registrado com sucesso!";
             }catch(PDOException $erro){
                 $mensagemerro = "Falha no banco de dados, contactar suporte!".$erro;
             }
         }
+    }
+}
+
+function codTable()
+{
+    global $pdo;
+    $sql = $pdo->prepare("SELECT * FROM codes");
+    $sql->execute();
+    $i = 1;
+    while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+        echo "<tr>";
+        $ide = 'td' . $i;
+        ?>
+        <td class="tdcod" id='<?php echo $ide ?>' onclick="list('<?php echo $ide ?>')"><?php echo $row['code_code'] ?></td>
+        <td class="tddesc" id='<?php echo $ide ?>' onclick="list('<?php echo $ide ?>')"><?php echo $row['code_desc'] ?></td>
+        <?php
+        $i++;
     }
 }
 
@@ -66,8 +98,8 @@ function machineOption()
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/geral.css">
-    <link rel="stylesheet" href="css/producao.css">
-    <title>Próturbo :: Produção</title>
+    <link rel="stylesheet" href="css/refugo.css">
+    <title>Próturbo :: Refugo</title>
 </head>
 <body>
     <?php include_once("header.php") ?>
@@ -93,10 +125,12 @@ function machineOption()
             <a id="btn-refuse" href="refugo.php">Refugo</a>
         </div>
         <!---------------->
-        <!--PRODUCTION-->
-        <div id="div-producao">
-            <h1>PRODUÇÃO - <a href="historico.php">HISTÓRICO</a></h1>
-            <form id="form-producao" method="POST">
+
+        <!--REFUSE-->
+        <div id="div-refuse">
+            <form id="form-refuse" method="POST">
+                <h1>REFUGO - <a href="historico.php">HISTÓRICO</a></h1>
+                
                 <!---------------->
                 <div class="div-maquina">
                     <label class="maquina">Máquina:</label>
@@ -106,21 +140,37 @@ function machineOption()
                     </select>
                 </div>
                 <!---------------->
-                <div class="div-motivo">
-                    <label class="labelmotivo">Motivo:</label>
-                    <textarea name="motivo" id="motivo" cols="auto" rows="5"></textarea>
+                <p style="background: #004479; color: whitesmoke; text-align: center;">Selecione o código na tabela</p>
+                <table id="table-cod" >
+                    <thead>
+                        <th>Cod</th>
+                        <th class="th-desc">Descrição</th>
+                    </thead>
+                    <tbody>
+                        <?php codTable(); ?>
+                    </tbody>
+                </table>
+                <!---------------->
+                <div class="div-cod">
+                    <label class="codigo">Selecionado:</label>
+                    <input id="cod" name="cod" type="number" value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimocode)){echo $ultimocode;} ?>">
                 </div>
                 <!---------------->
-                <div class="div-qtd">
+                <div class="quantidade">
                     <label>Quantidade:</label>
-                    <div class="menos" onclick="menos()">-</div>
-                    <input id="qtd" name="qtd" class="qtd" type="number" min="1"  value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimaqtd)){echo $ultimaqtd;} ?>" placeholder="">
-                    <div class="mais" onclick="mais()">+</div>
+                    <div class="div-qtd">
+                        <div class="menos" onclick="menos()">-</div>
+                        <input id="qtd" name="qtd" class="qtd" type="number" min="1"  value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimaqtd)){echo $ultimaqtd;} ?>" placeholder="">
+                        <div class="mais" onclick="mais()">+</div>
+                    </div>
                 </div>
+                <!---------------->
                 <input id="enviar" type="submit" value="Enviar">
+                <!---------------->
             </form>
         </div>
         <!---------------->
+
     </div>
 
 </body>

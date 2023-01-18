@@ -49,7 +49,8 @@ CREATE TABLE refuse (
 
 INSERT INTO `users` VALUES
 (1, 'MASTER', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'admin', ''),
-(2, 'MAQ001', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'user', '');
+(2, 'CEL001', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'user', ''),
+(3, 'CEL002', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'user', '');
 
 INSERT INTO `codes` (`code_id`, `code_code`, `code_desc`) VALUES
 (1, '2000001', 'Diametro interno maior que o especificado'),

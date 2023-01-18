@@ -1,0 +1,15 @@
+Servidor:  basictest.mysql.dbaas.com.br
+Usuário:   basictest
+Senha:     G8038375Gg@
+
+SELECT m.machine_code as "Máquina", c.code_code as "Código", r.refuse_value as "Quantidade", r.refuse_time as "Horário" FROM refuse r
+JOIN machines m
+on r.refuse_machine_id = m.machine_id
+JOIN codes c
+on r.refuse_code_id = c.code_id;
+
+
+SELECT DISTINCT m.machine_code as "Máquina", SUM(refuse_value) as "Qtd refugo" FROM refuse r
+JOIN machines m
+on r.refuse_machine_id = m.machine_id
+GROUP BY m.machine_code;

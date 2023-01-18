@@ -14,8 +14,8 @@ $banco='teste';
 /*$servidor ="basictest.mysql.dbaas.com.br";
 $usuario='basictest';
 $senha='G8038375Gg@';
-$banco='basictest';
-*/
+$banco='basictest';*/
+
 try{
     $pdo = new PDO("mysql:host=$servidor;dbname=$banco",$usuario,$senha);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -32,7 +32,7 @@ function limpaPost($dados){
 
 function auth($tokenSessao){
     global $pdo;
-    $sql = $pdo->prepare("SELECT * FROM user WHERE user_token=? LIMIT 1");
+    $sql = $pdo->prepare("SELECT * FROM users WHERE user_token=? LIMIT 1");
     $sql->execute(array($tokenSessao));
     $usuario = $sql->fetch(PDO::FETCH_ASSOC);
     //Se não encontrar o usuario
