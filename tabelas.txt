@@ -1,33 +1,55 @@
-CREATE TABLE user (
-    user_id int PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE users (
+    user_id int(11) PRIMARY KEY AUTO_INCREMENT,
     user_name varchar(50) UNIQUE NOT NULL,
     user_pass varchar(255) NOT NULL,
     user_level varchar(10) NOT NULL,
     user_token varchar(255) NULL
 );
 
-CREATE TABLE code (
-    code_id int PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE codes (
+    code_id int(11) PRIMARY KEY AUTO_INCREMENT,
     code_code varchar(50) UNIQUE NOT NULL,
     code_desc varchar(255) NOT NULL
 );
 
-CREATE TABLE machine (
-    machine_id int PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE machines (
+    machine_id int(11) PRIMARY KEY AUTO_INCREMENT,
     machine_code varchar(50) UNIQUE NOT NULL,
-    machine_desc varchar(255) NOT NULL
+    machine_user_id int(11) NOT NULL,
+    machine_desc varchar(255) NULL,
+    FOREIGN KEY (machine_user_id) REFERENCES users(user_id)
 );
 
-CREATE TABLE record (
-    record_id int PRIMARY KEY AUTO_INCREMENT,
-    record_user_id int(11) NOT NULL,
-    record_code_id int(11) NOT NULL,
-    record_value int(11) NOT NULL,
-    record_time varchar(255) NOT NULL,
-    FOREIGN KEY (record_user_id) REFERENCES users(user_id),
-    FOREIGN KEY (record_code_id) REFERENCES codes(code_id)
+CREATE TABLE production (
+    production_id int(11) PRIMARY KEY AUTO_INCREMENT,
+    production_user_id int(11) NOT NULL,
+    production_machine_id int(11) NOT NULL,
+    production_value int(11) NOT NULL,
+    production_reason varchar(255) NOT NULL,
+    production_time varchar(50) NOT NULL,
+    production_altertime varchar(50) NULL,
+    production_alterby int(11) NULL,
+    FOREIGN KEY (production_user_id) REFERENCES users(user_id),
+    FOREIGN KEY (production_machine_id) REFERENCES machines(machine_id)
 );
 
+CREATE TABLE refuse (
+    refuse_id int(11) PRIMARY KEY AUTO_INCREMENT,
+    refuse_user_id int(11) NOT NULL,
+    refuse_machine_id int(11) NOT NULL,
+    refuse_code_id int(11) NOT NULL,
+    refuse_value int(11) NOT NULL,
+    refuse_time varchar(50) NOT NULL,
+    refuse_altertime varchar(50) NULL,
+    refuse_alterby int(11) NULL,
+    FOREIGN KEY (refuse_user_id) REFERENCES users(user_id),
+    FOREIGN KEY (refuse_machine_id) REFERENCES machines(machine_id),
+    FOREIGN KEY (refuse_code_id) REFERENCES codes(code_id)
+);
+
+INSERT INTO `users` VALUES
+(1, 'MASTER', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'admin', ''),
+(2, 'MAQ001', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'user', '');
 
 INSERT INTO `codes` (`code_id`, `code_code`, `code_desc`) VALUES
 (1, '2000001', 'Diametro interno maior que o especificado'),
@@ -35,8 +57,8 @@ INSERT INTO `codes` (`code_id`, `code_code`, `code_desc`) VALUES
 (3, '2000003', 'Diametro externo maior que o especificado'),
 (4, '2000004', 'Dimensão maior que o especificado');
 
-INSERT INTO `users` (`user_id`, `user_name`, `user_pass`, `user_level`, `user_token`) VALUES
-(1, 'MASTER', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'admin', ''),
-(2, 'MAQ001', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'user', ''),
-(3, 'MAQ002', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'user', ''),
-(4, 'MAQ003', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'user', '');
+INSERT INTO `machines` VALUES
+(1, 'MAQ001', 2, ''),
+(2, 'MAQ002', 2, ''),
+(3, 'MAQ003', 2, '');
+

@@ -3,8 +3,9 @@ header {
     justify-content: center;
     flex-wrap: wrap;
     align-items: center;
-    background-color: cornflowerblue;
+    background-color: #004479;
     height: 80px;
+    margin-bottom: 13px;
 }
 .nav-menu {
     display: flex;
@@ -13,14 +14,31 @@ header {
     align-items: center;
     width: 100%;
 }
+.logouser{
+    width: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.imguser{
+    width: 280px;
+}
+.logoadmin{
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.imgadmin{
+    width: 200px;
+}
 .a-menu{
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 0px;
-    padding: 19px 10px;
+    padding: 19px 15px;
     cursor: pointer;
-    width: 130px;
     height: 100%;
     transition: 0.1s;
     font-size: 32px;
@@ -31,7 +49,6 @@ header {
     background-color: rgba(202, 219, 252, 0.6);
 }
 .sair{
-    width: 120px;
     color: whitesmoke;
 }
 .sair:hover{
@@ -45,11 +62,25 @@ p{
         height: 50px;
     }
     .a-menu{
-        padding: 10px 5px;
+        padding: 10px 10px;
         font-size: 15px;
-        width: 50px;
     }
     p{
         font-size: 12pt;
+    }
+    .logouser{
+        width: 200px;
+    }
+    .imguser{
+        width: 200px;
+    }
+}
+
+@media(max-width: 720px){
+    .logoadmin{
+        width: 100px;
+    }
+    .imgadmin{
+        width: 100px;
     }
 }

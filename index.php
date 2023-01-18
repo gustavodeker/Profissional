@@ -41,8 +41,9 @@ if(isset($_POST['name']) && isset($_POST['senha']) && !empty($_POST['name']) && 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Próturbo :: Login</title>
     <link rel="stylesheet" href="css/login.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 </head>
 <body>
     <main class="main-login">
@@ -60,7 +61,7 @@ if(isset($_POST['name']) && isset($_POST['senha']) && !empty($_POST['name']) && 
                 <label for="">Login: </label>
                 <input class="input-login" name="name" type="text">
                 <label for="">Senha:</label>
-                <input class="input-login" name="senha" ype="password">
+                <input class="input-login" name="senha" type="password">
                 <input class="btn-login" name="entrar" type="submit" value="Entrar">
             </form>
         </div>

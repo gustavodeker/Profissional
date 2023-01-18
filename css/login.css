@@ -45,7 +45,7 @@ label{
     width: 77%;
 }
 .input-login:focus{
-    border-color: cornflowerblue;
+    border-color: #004479;
 }
 .btn-login {
     margin-top: 10px;
