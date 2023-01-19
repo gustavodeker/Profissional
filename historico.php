@@ -33,6 +33,32 @@ function historicoTable()
     }
 }
 
+function historicoProducaoTable()
+{
+    global $pdo;
+    global $user;
+    $user = auth($_SESSION['TOKEN']);
+    if($user['user_level'] == 'admin'){
+        $sql = $pdo->prepare("SELECT * FROM production");
+    }else{
+        $sql = $pdo->prepare("SELECT * FROM production WHERE production_user_id = '" . $user['user_id'] . "' ORDER BY production_time DESC LIMIT 10");
+    }
+    $sql->execute();
+    while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+        $sql_machine = $pdo->prepare("SELECT machine_code FROM machines WHERE machine_id = '" . $row['production_machine_id'] . "'");
+        $sql_machine->execute();
+        $row_machine = $sql_machine->fetch(PDO::FETCH_ASSOC);
+        echo "<tr>";
+        echo "<td>" . $row_machine['machine_code'] . "</td>";
+        echo "<td>" . $row['production_value'] . "</td>";
+        echo "<td>" . $row['production_reason'] . "</td>";
+        echo "<td>" . $row['production_time'] . "</td>";
+        echo "<td class='tdeditar'><span class='material-icons' onclick=\"location.href='historico.php?page=historico&id=" . $row['production_id'] . "&prod=1'\">
+        edit
+        </span></td>";
+    }
+}
+
 function codTable()
 {
     global $pdo;
@@ -164,7 +190,24 @@ if (isset($_REQUEST["id"])) {
                 <input type="radio" name="tabs" class="rd_tabs" id="tab2">
                 <label for="tab2">Produção</label>
                 <div class="content">
-                    <h1>Item em desenvolvimento...</h1>
+                    <!---------------------------------------------------------------->
+                    <div id="divt">
+                        <table id="historico-table">
+                            <thead>
+                                <th>Máquina</th>
+                                <th>Qtd</th>
+                                <th>Motivo</th>
+                                <th>Horário</th>
+                                <th id="theditar">Editar</th>
+                            </thead>
+                            <tbody>
+                                <?php
+                                    historicoProducaoTable();
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!---------------------------------------------------------------->
                 </div>
             </li>
         </ul>
@@ -242,6 +285,14 @@ if (isset($_REQUEST["id"])) {
 
 <?php
 if (isset($_REQUEST["id"])) { ?>
+    <script>
+        let modal = document.getElementById('janela-edit');
+        modal.style.display = 'flex';
+    </script>
+<?php } ?>
+
+<?php
+if (isset($_REQUEST["prod"])) { ?>
     <script>
         let modal = document.getElementById('janela-edit');
         modal.style.display = 'flex';
