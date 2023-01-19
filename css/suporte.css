@@ -1,0 +1,11 @@
+.divsup{
+    width: 400px;
+    height: 300px;
+    margin: auto;
+    background-color: #004479;
+    display: block;
+    text-align: center;
+}
+p{
+    color: whitesmoke;
+}

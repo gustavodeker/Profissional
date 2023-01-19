@@ -1,28 +1,62 @@
 <?php
     global $pdo;
     global $user;
-    global $erro_geral;
-    $sql_id = $pdo->prepare("SELECT * FROM registro WHERE registro_id = '".$_REQUEST["id"]."'");
+    global $mensagemerro;
+    $sql_id = $pdo->prepare("SELECT * FROM refuse WHERE refuse_id = '".$_REQUEST["id"]."'");
     $sql_id->execute();
     $row_n = $sql_id->fetch(PDO::FETCH_ASSOC);
 
-    if (isset($_POST['nome']) && isset($_POST['setor']) && isset($_POST['servico']) && isset($_POST['desc'])) {
-        if (empty($_POST['nome']) or empty($_POST['setor']) or empty($_POST['servico']) or empty($_POST['desc'])) {
-            $erro_geral = "Todos os campos são obrigatórios!";
-        } else {
+    $sql_m = $pdo->prepare("SELECT * FROM machines WHERE machine_id = '".$row_n['refuse_machine_id']."'");
+    $sql_m->execute();
+    $row_m = $sql_m->fetch(PDO::FETCH_ASSOC);
+
+    $sql_c = $pdo->prepare("SELECT * FROM codes WHERE code_id = '".$row_n['refuse_code_id']."'");
+    $sql_c->execute();
+    $row_c = $sql_c->fetch(PDO::FETCH_ASSOC);
+
+    if(isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['qtd'])){
+        if(empty($_POST['maquina']) or empty($_POST['cod']) or empty($_POST['qtd'])){
+            $mensagemerro = "Todos os campos são obrigatórios!";
+        } else { 
             global $user;
             $user = auth($_SESSION['TOKEN']);
-            $nome = limpaPost($_POST['nome']); //canal OK
-            $setor = $_POST['setor']; // VERIFICAR LIMPEZA
-            $servico = limpaPost($_POST['servico']); //categ OK
-            $desc = limpaPost($_POST['desc']); //nota OK
+            /* Dados coletados */
+            $machine = limpaPost($_POST['maquina']);
+            $code = limpaPost($_POST['cod']);
+            $qtd = limpaPost($_POST['qtd']);
             $data = date("Y-m-d H:i:s");
-            try {
-                $sqlup = $pdo->prepare("UPDATE registro SET registro_nome =? , registro_setor =? , registro_servico =? , registro_desc =? , registro_data =? WHERE registro_id = ?");
-                $sqlup->execute(array($nome, $setor, $servico, $desc, $data, $_REQUEST["id"]));
-                $sucesso = "Registro atualizado!";
-            } catch (PDOException $erro) {
-                $erro_geral = "Falha ao conectar, ERRO:  " . $erro->getMessage();
+
+            /* Verificando se cod existe */
+            $sql_count = $pdo->prepare("SELECT COUNT(*) FROM codes WHERE code_code = '$code'");
+            $sql_count->execute();
+            $count_code = $sql_count->fetchColumn();
+
+            if($count_code != 1){
+                $mensagemerro = "Código incorreto!";
+            }
+            if($qtd < 1 or $qtd > 999){
+                $mensagemerro = "Quantidade de 1 a 999!";
+            }
+            if ($count_code == 1 && $qtd > 0 && $qtd < 1000) {
+                /* Coletando cod_id */
+                $sql_cod = $pdo->prepare("SELECT * FROM codes WHERE code_code = '$code'");
+                $sql_cod->execute();
+                $row_cod = $sql_cod->fetch(PDO::FETCH_ASSOC);
+                $code_id = $row_cod["code_id"];
+
+                /* Coletando machine_id */
+                $sql_machine = $pdo->prepare("SELECT * FROM machines WHERE machine_code = '$machine'");
+                $sql_machine->execute();
+                $row_machine = $sql_machine->fetch(PDO::FETCH_ASSOC);
+                $machine_id = $row_machine["machine_id"];
+
+                try {
+                    $sqlup = $pdo->prepare("UPDATE refuse SET refuse_machine_id =? , refuse_code_id =? , refuse_value =?, refuse_altertime =? , refuse_alterby =? WHERE refuse_id = ?");
+                    $sqlup->execute(array($machine_id, $code_id, $qtd, $data, $user['user_id'], $_REQUEST["id"]));
+                    $mensagem = "Editado com sucesso!";
+                } catch (PDOException $erro) {
+                    $mensagemerro = "Falha ao conectar! Chamar o suporte!";
+                }
             }
         }
     }

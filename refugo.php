@@ -14,7 +14,7 @@ if(isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['qtd'])){
         $code = limpaPost($_POST['cod']);
         $qtd = limpaPost($_POST['qtd']);
         
-        /* Coletando code_id */
+        /* Verificando se cod existe */
         $sql_count = $pdo->prepare("SELECT COUNT(*) FROM codes WHERE code_code = '$code'");
         $sql_count->execute();
         $count_code = $sql_count->fetchColumn();
@@ -26,6 +26,7 @@ if(isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['qtd'])){
             $mensagemerro = "Quantidade de 1 a 999!";
         }
         if ($count_code == 1 && $qtd > 0 && $qtd < 1000) {
+            /* Coletando code_id */
             $sql_cod = $pdo->prepare("SELECT * FROM codes WHERE code_code = '$code'");
             $sql_cod->execute();
             $row_cod = $sql_cod->fetch(PDO::FETCH_ASSOC);
@@ -50,7 +51,7 @@ if(isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['qtd'])){
             try{
                 $sqla = $pdo->prepare("INSERT INTO refuse VALUES (null,?,?,?,?,?,null,null)");
                 $sqla->execute(array($user_id, $machine_id, $code_id, $qtd, $date));
-                $mensagem = "Registrado com sucesso!";
+                $mensagem = "Registrado com sucesso!"; 
             }catch(PDOException $erro){
                 $mensagemerro = "Falha no banco de dados, contactar suporte!".$erro;
             }
@@ -121,15 +122,15 @@ function machineOption()
     <div id="corpo">
         <!--ALTERNAR-->
         <div id="alternar">
-            <a id="btn-production" href="producao.php">Produção</a>
-            <a id="btn-refuse" href="refugo.php">Refugo</a>
+            <a style="border: 2px solid black" id="btn-refuse" href="refugo.php">Refugo</a>
+            <a style="border: 2px solid whitesmoke" id="btn-production" href="producao.php">Produção</a>
         </div>
         <!---------------->
 
         <!--REFUSE-->
         <div id="div-refuse">
             <form id="form-refuse" method="POST">
-                <h1>REFUGO - <a href="historico.php">HISTÓRICO</a></h1>
+                <h1>REFUGO</h1>
                 
                 <!---------------->
                 <div class="div-maquina">

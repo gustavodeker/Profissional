@@ -89,13 +89,13 @@ function machineOption()
     <div id="corpo">
         <!--ALTERNAR-->
         <div id="alternar">
-            <a id="btn-production" href="producao.php">Produção</a>
-            <a id="btn-refuse" href="refugo.php">Refugo</a>
+            <a style="border: 2px solid whitesmoke" id="btn-refuse" href="refugo.php">Refugo</a>
+            <a style="border: 2px solid black" id="btn-production" href="producao.php">Produção</a>
         </div>
         <!---------------->
         <!--PRODUCTION-->
         <div id="div-producao">
-            <h1>PRODUÇÃO - <a href="historico.php">HISTÓRICO</a></h1>
+            <h1>PRODUÇÃO</h1>
             <form id="form-producao" method="POST">
                 <!---------------->
                 <div class="div-maquina">

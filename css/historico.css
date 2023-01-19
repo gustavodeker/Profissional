@@ -1,17 +1,74 @@
+#divt{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    align-items: top;
+}
+.janela-edit{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;  /*invisível*/
+    align-items: top;
+    justify-content: center;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.fechar{
+    position: relative;
+    float: right;
+    width: 30px;
+    height: 30px;
+    border-radius: 10%;
+    background-color: red;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+.fechar:hover{
+    border: 1px solid red;
+}
+.form-item{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+.form-item input{
+    width: 70%;
+    color: black;
+}
+#submit{
+    width: 100%;
+    height: 30px;
+    color: whitesmoke;
+    border: 1px solid whitesmoke;
+    background: transparent;
+}
+span{
+    cursor: pointer;
+}
+
+/***************************************************************************/
+
 /***REFUSE***/
-#div-producao{
+#div-refuse{
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 20px;
+    margin-top: 50px;
     /*display: none;*/
     max-width: 600px;
     width: 90%;
     height: max-content;
     border: 1px solid whitesmoke;
     overflow: auto;
+    background-color: whitesmoke;
+    padding: 10px;
 }
-#form-producao{
+#form-refuse{
     display: block;
     margin-top: 0px;
 }
@@ -20,6 +77,82 @@ label{
     font-family: Arial, Helvetica, sans-serif;
 }
 /******************************/
+
+/***TABLE***/
+table{
+    display: block;
+    max-width: 600px;
+    height: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: auto;
+}
+tbody tr{
+    cursor: pointer;
+}
+tbody tr:hover{
+    background-color: #004479;
+}
+td, th{
+    vertical-align: middle;
+    text-align: left;
+    font-size: 18pt;
+}
+td{
+    border-bottom: 1px dotted gray;
+}
+/*************HISTÓRICO*****************/
+#historico-table{
+    height: 700px;
+    border-collapse: collapse;
+}
+
+#historico-table thead th{
+    text-align: center;
+    border: 1px solid black;
+    padding: 10px 10px;
+    background-color: #004479;
+    color: whitesmoke;
+}
+#historico-table tbody tr td{
+    font-size: 16pt;
+    text-align: center;
+    border: 1px dotted black;
+}
+#historico-table tbody tr:hover{
+    background-color: #daeefe;
+}
+.tdeditar:hover{
+    background-color: #004479;
+}
+.tdeditar{
+    cursor: pointer;
+}
+.tdeditar:hover span{
+    color: whitesmoke;
+}
+
+/****************************************/
+
+/***COD**/
+.div-cod{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+}
+.div-cod label{
+    margin-bottom: 10px;
+    text-align: center;
+}
+.div-cod input{
+    height: 50px;
+    width: 50%;
+    font-size: 20pt;
+    text-align: center;
+}
+/******/
 
 /******************************/
 
@@ -44,27 +177,23 @@ label{
 /***QUANTIDADE***/
 .quantidade{
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
     flex-wrap: wrap;
-    background-color: red;
 }
 .div-qtd{
     display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    width: 100%;
+    width: 60%;
     justify-content: center;
     margin-bottom: 10px;
 }
 .quantidade label{
     margin-bottom: 10px;
-    text-align: left;
+    text-align: center;
 }
 .div-qtd input{
     width: 40%;
-    height: 105px;
     text-align: center;
     font-size: 30pt;
 }
@@ -97,6 +226,7 @@ label{
     background-color: red;
     border: 1px solid red;
 }
+/******/
 
 /******************************/
 
@@ -121,21 +251,10 @@ label{
 
 /******************************/
 /******/
-.div-motivo{
-    display: block;
-}
-textarea{
-    font-size: 22pt;
-    padding: 5pt;
-    width: 95%;
-}
-/******************************/
-/******/
-/******************************/
-/******/
 
 .mensagem, .mensagemerro{
     display: block;
+    text-align: center;
     position: fixed;
     margin-top: 10px;
     padding: 10px;
@@ -158,7 +277,7 @@ textarea{
 
 /******************************/
 @media(max-width: 450px){
-    #div-producao{
+    #div-refuse{
         margin-top: 0px;
     }
     #enviar{
@@ -167,9 +286,6 @@ textarea{
     .menos, .mais{
         width: 80px;
         height: 60px;
-    }
-    .div-qtd input{
-        height: 66px;
     }
     td, th{
         font-size: 12pt;
@@ -190,5 +306,10 @@ textarea{
         height: 30px;
     }
     
+    /**/
+    #historico-table tbody tr td{
+        font-size: 13pt;
+        padding: 0px;
+    }
     
 }
