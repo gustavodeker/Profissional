@@ -25,7 +25,7 @@
             if($qtd < 1 or $qtd > 999){
                 $mensagemerro = "Quantidade de 1 a 999!";
             }
-            if ($count_code == 1 && $qtd > 0 && $qtd < 1000) {
+            if ($qtd > 0 && $qtd < 1000) {
                 /* Coletando machine_id */
                 $sql_machine = $pdo->prepare("SELECT * FROM machines WHERE machine_code = '$machine'");
                 $sql_machine->execute();
