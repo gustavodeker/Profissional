@@ -35,6 +35,14 @@ if(isset($_POST['maquina']) && isset($_POST['motivo']) && isset($_POST['qtd'])){
             try{
                 $sqla = $pdo->prepare("INSERT INTO production VALUES (null,?,?,?,?,?,null,null)");
                 $sqla->execute(array($user_id, $machine_id, $qtd, $motivo, $date));
+
+                $pesq = $pdo->prepare("SELECT production_id FROM production ORDER BY production_time DESC LIMIT 1");
+                $pesq->execute();
+                $row_pesq = $pesq->fetch(PDO::FETCH_ASSOC);
+                $production_id = $row_pesq['production_id'];
+
+                $sqlb = $pdo->prepare("INSERT INTO gp VALUES (null,?,?,?,?,?,null,null,?)");
+                $sqlb->execute(array($user['user_name'], $row_machine['machine_code'], $motivo, $qtd, $date, $production_id));
                 $mensagem = "Registrado com sucesso!";
             }catch(PDOException $erro){
                 $mensagemerro = "Falha no banco de dados, contactar suporte!".$erro;

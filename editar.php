@@ -53,6 +53,9 @@
                 try {
                     $sqlup = $pdo->prepare("UPDATE refuse SET refuse_machine_id =? , refuse_code_id =? , refuse_value =?, refuse_altertime =? , refuse_alterby =? WHERE refuse_id = ?");
                     $sqlup->execute(array($machine_id, $code_id, $qtd, $data, $user['user_id'], $_REQUEST["id"]));
+
+                    $sqlupb = $pdo->prepare("UPDATE gr SET gr_machine =? , gr_code =? , gr_value =?, gr_altertime =? , gr_alterby =? WHERE gr_refuse_id = ?");
+                    $sqlupb->execute(array($row_machine["machine_code"], $row_cod["code_code"], $qtd, $data, $user['user_name'], $_REQUEST["id"]));
                     $mensagem = "Editado com sucesso!";
                 } catch (PDOException $erro) {
                     $mensagemerro = "Falha ao conectar! Chamar o suporte!";

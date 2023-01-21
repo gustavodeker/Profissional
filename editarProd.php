@@ -35,6 +35,9 @@
                 try {
                     $sqlup = $pdo->prepare("UPDATE production SET production_machine_id =? , production_reason =? , production_value =?, production_altertime =? , production_alterby =? WHERE production_id = ?");
                     $sqlup->execute(array($machine_id, $motivo, $qtd, $data, $user['user_id'], $_REQUEST["id"]));
+
+                    $sqlupb = $pdo->prepare("UPDATE gp SET gp_machine =? , gp_reason =? , gp_value =?, gp_altertime =? , gp_alterby =? WHERE gp_production_id = ?");
+                    $sqlupb->execute(array($row_machine["machine_code"], $motivo, $qtd, $data, $user['user_name'], $_REQUEST["id"]));
                     $mensagem = "Editado com sucesso!";
                 } catch (PDOException $erro) {
                     $mensagemerro = "Falha ao conectar! Chamar o suporte!";

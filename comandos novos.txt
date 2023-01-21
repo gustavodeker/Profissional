@@ -1,0 +1,2 @@
+SELECT DISTINCT gr_machine as "Máquina", SUM(gr_value) as "Qtd refugo" FROM gr 
+GROUP BY gr_machine;

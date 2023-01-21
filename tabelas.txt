@@ -26,8 +26,8 @@ CREATE TABLE production (
     production_machine_id int(11) NOT NULL,
     production_value int(11) NOT NULL,
     production_reason varchar(255) NOT NULL,
-    production_time varchar(50) NOT NULL,
-    production_altertime varchar(50) NULL,
+    production_time datetime NOT NULL,
+    production_altertime datetime NULL,
     production_alterby int(11) NULL,
     FOREIGN KEY (production_user_id) REFERENCES users(user_id),
     FOREIGN KEY (production_machine_id) REFERENCES machines(machine_id)
@@ -39,13 +39,38 @@ CREATE TABLE refuse (
     refuse_machine_id int(11) NOT NULL,
     refuse_code_id int(11) NOT NULL,
     refuse_value int(11) NOT NULL,
-    refuse_time varchar(50) NOT NULL,
-    refuse_altertime varchar(50) NULL,
+    refuse_time datetime NOT NULL,
+    refuse_altertime datetime NULL,
     refuse_alterby int(11) NULL,
     FOREIGN KEY (refuse_user_id) REFERENCES users(user_id),
     FOREIGN KEY (refuse_machine_id) REFERENCES machines(machine_id),
     FOREIGN KEY (refuse_code_id) REFERENCES codes(code_id)
 );
+
+CREATE TABLE gr (
+    gr_id int(11) PRIMARY KEY AUTO_INCREMENT,
+    gr_user varchar(50) NOT NULL,
+    gr_machine varchar(50) NOT NULL,
+    gr_code varchar(50) NOT NULL,
+    gr_value int(11) NOT NULL,
+    gr_time datetime NOT NULL,
+    gr_altertime datetime NULL,
+    gr_alterby varchar(50) NULL,
+    gr_refuse_id int(11)
+);
+
+CREATE TABLE gp (
+    gp_id int(11) PRIMARY KEY AUTO_INCREMENT,
+    gp_user varchar(50) NOT NULL,
+    gp_machine varchar(50) NOT NULL,
+    gp_reason varchar(255) NOT NULL,
+    gp_value int(11) NOT NULL,
+    gp_time datetime NOT NULL,
+    gp_altertime datetime NULL,
+    gp_alterby varchar(50) NULL,
+    gp_production_id int(11)
+);
+
 
 INSERT INTO `users` VALUES
 (1, 'MASTER', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'admin', ''),

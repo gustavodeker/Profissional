@@ -51,7 +51,16 @@ if(isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['qtd'])){
             try{
                 $sqla = $pdo->prepare("INSERT INTO refuse VALUES (null,?,?,?,?,?,null,null)");
                 $sqla->execute(array($user_id, $machine_id, $code_id, $qtd, $date));
-                $mensagem = "Registrado com sucesso!"; 
+
+                $pesq = $pdo->prepare("SELECT refuse_id FROM refuse ORDER BY refuse_time DESC LIMIT 1");
+                $pesq->execute();
+                $row_pesq = $pesq->fetch(PDO::FETCH_ASSOC);
+                $refuse_id = $row_pesq['refuse_id'];
+
+                $sqlb = $pdo->prepare("INSERT INTO gr VALUES (null,?,?,?,?,?,null,null,?)");
+                $sqlb->execute(array($user['user_name'], $row_machine['machine_code'], $row_cod['code_code'], $qtd, $date,$refuse_id));
+                $mensagem = "Registrado com sucesso!";
+
             }catch(PDOException $erro){
                 $mensagemerro = "Falha no banco de dados, contactar suporte!".$erro;
             }
