@@ -43,7 +43,7 @@ if(isset($_POST['name']) && isset($_POST['senha']) && !empty($_POST['name']) && 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Próturbo :: Login</title>
     <link rel="stylesheet" href="css/login.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" /> <!--Animações-->
+    <link rel="stylesheet" href="css/animate.css"> <!--Animações-->
     <link rel="stylesheet" href="css/hover.css"> <!--Animações-->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 </head>

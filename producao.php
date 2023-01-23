@@ -97,8 +97,8 @@ function machineOption()
     <div id="corpo">
         <!--ALTERNAR-->
         <div id="alternar">
-            <a style="border: 2px solid whitesmoke" id="btn-refuse" href="refugo.php">Refugo</a>
-            <a style="border: 2px solid black" id="btn-production" href="producao.php">Produção</a>
+            <a class="hvr-float" style="border: 2px solid whitesmoke" id="btn-refuse" href="refugo.php">Refugo</a>
+            <a class="hvr-float" style="border: 2px solid black" id="btn-production" href="producao.php">Produção</a>
         </div>
         <!---------------->
         <!--PRODUCTION-->
@@ -108,7 +108,7 @@ function machineOption()
                 <!---------------->
                 <div class="div-maquina">
                     <label class="maquina">Máquina:</label>
-                    <select id="maquina" name="maquina">
+                    <select class="hvr-float" id="maquina" name="maquina">
                         <option value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimachine)){echo $ultimachine;} ?>"><?php /* Para deixar último código usado selecionado*/ if (isset($ultimachine)){echo $ultimachine;} ?></option>
                         <?php machineOption(); ?>
                     </select>
@@ -116,16 +116,16 @@ function machineOption()
                 <!---------------->
                 <div class="div-motivo">
                     <label class="labelmotivo">Motivo:</label>
-                    <textarea name="motivo" id="motivo" cols="auto" rows="5"></textarea>
+                    <textarea class="hvr-float" name="motivo" id="motivo" cols="auto" rows="5"></textarea>
                 </div>
                 <!---------------->
                 <div class="div-qtd">
                     <label>Quantidade:</label>
-                    <div class="menos" onclick="menos()">-</div>
-                    <input id="qtd" name="qtd" class="qtd" type="number" min="1"  value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimaqtd)){echo $ultimaqtd;} ?>" placeholder="">
-                    <div class="mais" onclick="mais()">+</div>
+                    <div class="menos hvr-float" onclick="menos()">-</div>
+                    <input id="qtd" name="qtd" class="qtd hvr-float" type="number" min="1"  value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimaqtd)){echo $ultimaqtd;} ?>" placeholder="">
+                    <div class="mais hvr-float" onclick="mais()">+</div>
                 </div>
-                <input id="enviar" type="submit" value="Enviar">
+                <input id="enviar" class="hvr-float" type="submit" value="Enviar">
             </form>
         </div>
         <!---------------->

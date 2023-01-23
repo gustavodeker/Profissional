@@ -117,7 +117,6 @@ td{
 .div-qtd div{
     font-size: 30pt;
 }
-
 .menos, .mais{
     display: flex;
     align-items: center;
@@ -129,8 +128,8 @@ td{
     cursor: pointer;
 }
 .mais{
+    display: flex;
     background-color: #004479;
-    
 }
 .mais:hover {
     background-color: green;
@@ -160,34 +159,9 @@ td{
     font-size: 32pt;
 
 }
-#enviar:hover{
-    background-color: rgb(85, 138, 238);
-    color: whitesmoke;
-}
 /******/
 
 /******************************/
-/******/
-
-.mensagem, .mensagemerro{
-    display: block;
-    position: fixed;
-    margin-top: 10px;
-    padding: 10px;
-    width: 100%;
-    
-}
-.mensagem{
-    background-color: green;
-}
-.mensagemerro{
-    background-color: red;
-}
-.mensagem p, .mensagemerro p{
-    color: whitesmoke;
-    font-size: 20pt;
-    text-align: center;
-}
 
 /******/
 

@@ -23,7 +23,7 @@ function historicoProducaoTable()
         echo "<td>" . $row['production_value'] . "</td>";
         echo "<td>" . $row['production_reason'] . "</td>";
         echo "<td>" . $row['production_time'] . "</td>";
-        echo "<td class='tdeditar'><span class='material-icons' onclick=\"location.href='historicoProd.php?page=historicoProd&id=" . $row['production_id'] . "'\">
+        echo "<td class='tdeditar'><span class='material-icons hvr-float' onclick=\"location.href='historicoProd.php?page=historicoProd&id=" . $row['production_id'] . "'\">
         edit
         </span></td>";
     }
@@ -71,8 +71,8 @@ if (isset($_REQUEST["id"])) {
 
     <!---------------------------------------------------------------->
     <div class="div-alternar">
-        <a class="btn-alternar" href="historico.php">Refugo</a>
-        <a style="border: 2px solid black; border-radius: 3px;" class="btn-alternar" href="historicoProd.php">Produção</a>
+        <a class="btn-alternar hvr-float" href="historico.php">Refugo</a>
+        <a style="border: 2px solid black; border-radius: 3px;" class="btn-alternar hvr-float" href="historicoProd.php">Produção</a>
     </div>
     <!---------------------------------------------------------------->
     <div id="divt" class="animate__animated animate__fadeIn">
@@ -123,7 +123,7 @@ if (isset($_REQUEST["id"])) {
                 <!---------------->
                 <div class="div-maquina">
                     <label class="maquina">Máquina:</label>
-                    <select id="maquina" name="maquina">
+                    <select class="hvr-float" id="maquina" name="maquina">
                         <option value="<?php echo $row_m["machine_code"]; ?>"><?php echo $row_m["machine_code"]; ?></option>
                         <?php machineOption(); ?>
                     </select>
@@ -131,16 +131,16 @@ if (isset($_REQUEST["id"])) {
                 <!---------------->
                 <div class="div-motivo">
                     <label class="labelmotivo">Motivo:</label>
-                    <textarea name="motivo" id="motivo" cols="auto" rows="5"><?php echo $row_n["production_reason"]; ?></textarea>
+                    <textarea class="hvr-float" name="motivo" id="motivo" cols="auto" rows="5"><?php echo $row_n["production_reason"]; ?></textarea>
                 </div>
                 <!---------------->
                 <div class="div-qtd">
                     <label>Quantidade:</label>
-                    <div class="menos" onclick="menos()">-</div>
-                    <input id="qtd" name="qtd" class="qtd" type="number" min="1" value="<?php echo $row_n['production_value'] ?>">
-                    <div class="mais" onclick="mais()">+</div>
+                    <div class="menos hvr-float" onclick="menos()">-</div>
+                    <input id="qtd" name="qtd" class="qtd hvr-float" type="number" min="1" value="<?php echo $row_n['production_value'] ?>">
+                    <div class="mais hvr-float" onclick="mais()">+</div>
                 </div>
-                <input id="enviar" type="submit" value="Enviar">
+                <input id="enviar" class="hvr-float" type="submit" value="Enviar">
             </form>
         </div>
         <!---------------->

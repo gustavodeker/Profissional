@@ -28,7 +28,7 @@ function historicoTable()
         echo "<td>" . $row_code['code_code'] . "</td>";
         echo "<td>" . $row['refuse_value'] . "</td>";
         echo "<td>" . $row['refuse_time'] . "</td>";
-        echo "<td class='tdeditar'><span class='material-icons' onclick=\"location.href='historico.php?page=historico&id=" . $row['refuse_id'] . "'\">
+        echo "<td class='tdeditar'><span class='material-icons hvr-float' onclick=\"location.href='historico.php?page=historico&id=" . $row['refuse_id'] . "'\">
         edit
         </span></td>";
     }
@@ -93,8 +93,8 @@ if (isset($_REQUEST["id"]) && !isset($_REQUEST["prod"])) {
 
     <!---------------------------------------------------------------->
     <div class="div-alternar">
-        <a style="border: 2px solid black; border-radius: 3px;" class="btn-alternar" href="historico.php">Refugo</a>
-        <a class="btn-alternar" href="historicoProd.php">Produção</a>
+        <a style="border: 2px solid black; border-radius: 3px;" class="btn-alternar hvr-float" href="historico.php">Refugo</a>
+        <a class="btn-alternar hvr-float" href="historicoProd.php">Produção</a>
     </div>
     <!---------------------------------------------------------------->
     <div id="divt" class="animate__animated animate__fadeIn">
@@ -144,7 +144,7 @@ if (isset($_REQUEST["id"]) && !isset($_REQUEST["prod"])) {
 
                 <div class="div-maquina">
                     <label class="maquina">Máquina:</label>
-                    <select id="maquina" name="maquina">
+                    <select class="hvr-float" id="maquina" name="maquina">
                         <option value="<?php echo $row_m["machine_code"] ?>"><?php echo $row_m["machine_code"] ?></option>
                         <?php machineOption(); ?>
                     </select>
@@ -163,19 +163,19 @@ if (isset($_REQUEST["id"]) && !isset($_REQUEST["prod"])) {
                 <!---------------->
                 <div class="div-cod">
                     <label class="codigo">Selecionado:</label>
-                    <input id="cod" name="cod" type="number" value="<?php echo $row_c['code_code'] ?>">
+                    <input id="cod" class="hvr-float" name="cod" type="number" value="<?php echo $row_c['code_code'] ?>">
                 </div>
                 <!---------------->
                 <div class="quantidade">
                     <label>Quantidade:</label>
                     <div class="div-qtd">
-                        <div class="menos" onclick="menos()">-</div>
-                        <input id="qtd" name="qtd" class="qtd" type="number" min="1" value="<?php echo $row_n['refuse_value']  ?>">
-                        <div class="mais" onclick="mais()">+</div>
+                        <div class="menos hvr-float" onclick="menos()"><p>-</p></div>
+                        <input id="qtd" name="qtd" class="qtd hvr-float" type="number" min="1" value="<?php echo $row_n['refuse_value']  ?>">
+                        <div class="mais hvr-float" onclick="mais()">+</div>
                     </div>
                 </div>
                 <!---------------->
-                <input id="enviar" type="submit" value="Enviar">
+                <input id="enviar" class="hvr-float" type="submit" value="Enviar">
                 <!---------------->
             </form>
         </div>

@@ -45,15 +45,11 @@ header {
     border-radius: 2px;
     color: whitesmoke;
 }
-.a-menu:hover{
-    background-color: rgba(202, 219, 252, 0.6);
-}
+
 .sair{
     color: whitesmoke;
 }
-.sair:hover{
-    background-color: rgba(202, 219, 252, 0.6);
-}
+
 p{
     font-size: 20pt;
 }
