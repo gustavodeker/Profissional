@@ -86,60 +86,6 @@ if (isset($_REQUEST["id"]) && !isset($_REQUEST["prod"])) {
     <link rel="stylesheet" href="css/historico.css">
     <link rel="stylesheet" href="css/datatable.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    
-
-
-
-    <style>
-        .nav_tabs {
-            max-width: 500px;
-            height: 700px;
-            margin: auto;
-            display: flex;
-            justify-content: center;
-            position: relative;
-        }
-
-        .nav_tabs ul {
-            list-style: none;
-        }
-
-        .nav_tabs ul li {
-            float: left;
-        }
-
-        .nav_tabs label {
-            cursor: pointer;
-            padding: 10px;
-            background-color: #004479;
-            display: block;
-            text-align: center;
-            color: whitesmoke;
-            border: 2px solid whitesmoke;
-        }
-
-        .rd_tabs:checked~label {
-            background-color: #004486;
-            border: 2px solid black;
-        }
-
-        .rd_tabs {
-            display: none;
-        }
-
-        .content {
-            display: none;
-            justify-content: center;
-            position: absolute;
-            height: 600px;
-            max-width: 600px;
-            left: 0;
-        }
-
-        .rd_tabs:checked~.content {
-            display: flex;
-        }
-    </style>
 </head>
 
 <body>
@@ -151,7 +97,7 @@ if (isset($_REQUEST["id"]) && !isset($_REQUEST["prod"])) {
         <a class="btn-alternar" href="historicoProd.php">Produção</a>
     </div>
     <!---------------------------------------------------------------->
-    <div id="divt">
+    <div id="divt" class="animate__animated animate__fadeIn">
         <h2>Histórico Refugo</h2>
         <table id="<?php if ($user['user_level'] == 'admin') {
         echo "historico-tableAdmin";}else{ echo "historico-table";} ?>">
@@ -174,7 +120,7 @@ if (isset($_REQUEST["id"]) && !isset($_REQUEST["prod"])) {
     <!---------------------------------------------------------------->
 
 
-    <div class="janela-edit" id="janela-edit">
+    <div class="janela-edit animate__animated animate__fadeIn" id="janela-edit">
         <!---------------->
         <?php //mensagem
         if (isset($mensagem)) { ?>

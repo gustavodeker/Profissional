@@ -43,11 +43,13 @@ if(isset($_POST['name']) && isset($_POST['senha']) && !empty($_POST['name']) && 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Próturbo :: Login</title>
     <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" /> <!--Animações-->
+    <link rel="stylesheet" href="css/hover.css"> <!--Animações-->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 </head>
 <body>
     <main class="main-login">
-        <div class="div-login">
+        <div class="div-login animate__animated animate__fadeIn">
             <form class="form-login" method="POST">
                 <img src="img/logo.png" alt="">
 
@@ -59,10 +61,10 @@ if(isset($_POST['name']) && isset($_POST['senha']) && !empty($_POST['name']) && 
                 <?php }?>
                 
                 <label for="">Login: </label>
-                <input class="input-login" name="name" type="text">
+                <input class="input-login hvr-grow" name="name" type="text">
                 <label for="">Senha:</label>
-                <input class="input-login" name="senha" type="password">
-                <input class="btn-login" name="entrar" type="submit" value="Entrar">
+                <input class="input-login hvr-grow" name="senha" type="password">
+                <input class="btn-login hvr-grow" name="entrar" type="submit" value="Entrar">
             </form>
         </div>
     </main>

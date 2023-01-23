@@ -59,6 +59,7 @@ label{
     color: whitesmoke;
     transition: 0.1s;
 }
+
 .btn-login:hover {
     background-color: whitesmoke;
     color: #004479;

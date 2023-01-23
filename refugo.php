@@ -137,7 +137,7 @@ function machineOption()
         <!---------------->
 
         <!--REFUSE-->
-        <div id="div-refuse">
+        <div id="div-refuse" class="animate__animated animate__fadeIn">
             <form id="form-refuse" method="POST">
                 <h1>REFUGO</h1>
                 

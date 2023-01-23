@@ -75,7 +75,7 @@ if (isset($_REQUEST["id"])) {
         <a style="border: 2px solid black; border-radius: 3px;" class="btn-alternar" href="historicoProd.php">Produção</a>
     </div>
     <!---------------------------------------------------------------->
-    <div id="divt">
+    <div id="divt" class="animate__animated animate__fadeIn">
         <h2>Histórico Produção</h2>
         <table id="<?php if ($user['user_level'] == 'admin') {
         echo "historico-tableAdmin";}else{ echo "historico-table";} ?>">
@@ -98,7 +98,7 @@ if (isset($_REQUEST["id"])) {
     <!---------------------------------------------------------------->
 
 
-    <div class="janela-editProd" id="janela-editProd">
+    <div class="janela-editProd animate__animated animate__fadeIn" id="janela-editProd">
         <!---------------->
         <?php //mensagem
         if (isset($mensagem)) { ?>

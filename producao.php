@@ -102,7 +102,7 @@ function machineOption()
         </div>
         <!---------------->
         <!--PRODUCTION-->
-        <div id="div-producao">
+        <div id="div-producao" class="animate__animated animate__fadeIn">
             <h1>PRODUÇÃO</h1>
             <form id="form-producao" method="POST">
                 <!---------------->
