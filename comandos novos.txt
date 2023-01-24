@@ -1,2 +1,5 @@
 SELECT DISTINCT gr_machine as "Máquina", SUM(gr_value) as "Qtd refugo" FROM gr 
 GROUP BY gr_machine;
+
+SELECT DISTINCT gr_machine, SUM(gr_value) AS gr_value FROM gr 
+GROUP BY gr_machine ORDER BY SUM(gr_value);
