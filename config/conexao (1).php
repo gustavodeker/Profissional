@@ -14,7 +14,7 @@ $banco='teste';
 /*$servidor ="basictest.mysql.dbaas.com.br";
 $usuario='basictest';
 $senha='G8038375Gg@';
-$banco='basictest';*/   
+$banco='basictest';*/
 
 try{
     $pdo = new PDO("mysql:host=$servidor;dbname=$banco",$usuario,$senha);
@@ -52,7 +52,7 @@ function sessionVerif(){
 function sessionVerifAdmin(){
     global $user;
     $user = auth($_SESSION['TOKEN']);
-    if($user['user_level'] != "admin"){
+    if($user['user_nivel'] != "admin"){
         header('location: ./index.php');
     }
 }
