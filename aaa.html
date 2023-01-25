@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+.nav-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-list {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  width: 100%;
+  left: -100%;
+  top: 0;
+  height: 100%;
+  background: white;
+  transition: all 0.5s ease;
+}
+
+.menu-open {
+    left: 0;
+}
+
+.menu-item {
+  margin-right: 10px;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+@media (max-width: 400px) {
+  .menu-list {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+    </style>
+</head>
+
+<body>
+    <nav class='nav-menu'>
+        <button class="menu-toggle">Menu</button>
+        <ul class="menu-list">
+            <li class="menu-item"><a class='a-menu hvr-grow' id='botaologin' href='acompanhamento.php'>Acompanhameto</a>
+            </li>
+            <li class="menu-item"><a class='a-menu hvr-grow' id='botaologin' href='historico.php'>Histórico</a></li>
+            <li class="menu-item"><a class='a-menu hvr-grow' id='botaologin' href='suporte.php'>Suporte</a></li>
+            <li class="menu-item"><a class='a-menu hvr-grow sair' id='botaologin' href='logout.php'>Sair</a></li>
+        </ul>
+    </nav>
+</body>
+
+</html>
+
+<script>
+    var menuToggle = document.querySelector(".menu-toggle");
+    var menuList = document.querySelector(".menu-list");
+
+    menuToggle.addEventListener("click", function () {
+        menuList.classList.toggle("menu-open");
+    });
+</script>
