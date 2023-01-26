@@ -93,7 +93,7 @@ function machineOption()
     if($user['user_level'] == 'admin'){
         $sql = $pdo->prepare("SELECT * FROM machines");
     } else{
-        $sql = $pdo->prepare("SELECT * FROM machines WHERE machine_user_id = '".$user['user_id']."'");
+        $sql = $pdo->prepare("SELECT * FROM machines WHERE machine_user_id LIKE '%,".$user['user_id'].",%'");
     }
     $sql->execute();
     while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {

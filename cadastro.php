@@ -1,7 +1,7 @@
 <?php
 include("config/conexao.php");
-sessionVerif();
-sessionVerifAdmin();
+/*sessionVerif();
+sessionVerifAdmin();*/
 
 //Verificar se a postagem existe de acordo com os campos
 if(isset($_POST['nome']) && isset($_POST['senha']) && isset($_POST['level'])){
@@ -11,6 +11,7 @@ if(isset($_POST['nome']) && isset($_POST['senha']) && isset($_POST['level'])){
     }else{
         //Receber e limpar dados do post
         $nome = limpaPost($_POST['nome']);
+        $user = limpaPost($_POST['user']);
         $senha = limpaPost($_POST['senha']);
         $level = limpaPost($_POST['level']);
         $senha_cript = sha1($senha);
@@ -31,14 +32,13 @@ if(isset($_POST['nome']) && isset($_POST['senha']) && isset($_POST['level'])){
 
         if(!isset($erro_geral) && !isset($erro_nome) && !isset($erro_senha) && !isset($erro_level)){
             //Verificar se o usuário já está cadastrado
-            $sql = $pdo->prepare("SELECT * FROM users WHERE user_name=? ");
+            $sql = $pdo->prepare("SELECT * FROM users WHERE user_name=? or user_login=? ");
             $sql->execute(array($nome));
             $usuario = $sql->fetch();
 
             if(!$usuario){
-                $token="";
-                $sql = $pdo->prepare("INSERT INTO users VALUES (null,?,?,?,?)");
-                $sql->execute(array($nome, $senha_cript, $level, $token));
+                $sql = $pdo->prepare("INSERT INTO users VALUES (null,?,?,?,null)");
+                $sql->execute(array($nome, $senha_cript, $level));
                 $erro_geral = "Cadastrado com sucesso !";
             }else{
                 $erro_geral = "Nome de máquina já cadastrado!";
@@ -82,6 +82,11 @@ if(isset($_POST['nome']) && isset($_POST['senha']) && isset($_POST['level'])){
                 <div id="input-label">
                     <label for="">Nome: </label>
                     <input name="nome" placeholder="Nome" type="text">
+                </div>
+
+                <div id="input-label">
+                    <label for="">User: </label>
+                    <input name="user" placeholder="User" type="text">
                 </div>
 
                 <?php //Erro $erro_senha
