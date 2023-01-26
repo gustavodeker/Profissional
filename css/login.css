@@ -1,8 +1,14 @@
+:root{
+    --azul-empresa: #004479;
+    --back-claro: whitesmoke;
+    --text-claro: whitesmoke;
+    --text-escuro: black;
+}
 *{
     margin: 0px;
 }
 body{
-    background-color: #004479;
+    background-color: var(--azul-empresa);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 .main-login{
@@ -45,7 +51,7 @@ label{
     width: 77%;
 }
 .input-login:focus{
-    border-color: #004479;
+    border-color: var(--azul-empresa);
 }
 .btn-login {
     margin-top: 10px;
@@ -54,19 +60,19 @@ label{
     height: 30px;
     cursor: pointer;
     outline: none;
-    background-color: #004479;
-    border: 1px solid whitesmoke; 
-    color: whitesmoke;
+    background-color: var(--azul-empresa);
+    border: 1px solid var(--text-claro); 
+    color: var(--text-claro);
     transition: 0.1s;
 }
 
 .btn-login:hover {
-    background-color: whitesmoke;
-    color: #004479;
+    background-color: var(--text-claro);
+    color: var(--azul-empresa);
 }
 .btn-login:focus{
-    background-color: whitesmoke;
-    color: #004479;
+    background-color: var(--text-claro);
+    color: var(--azul-empresa);
 }
 .erro_login{
     display: block;

@@ -4,7 +4,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    border: 1px solid whitesmoke;
+    border: 1px solid var(--text-claro);
 }
 #form-cadastro{
     display: flex;
@@ -20,12 +20,12 @@
 }
 #input-label input{
     width: 75%;
-    color: black;
+    color: var(--text-escuro);
 }
 #cadastrar{
     width: 100%;
     margin-top: 4px;
-    background-color: whitesmoke;
+    background-color: var(--text-claro);
     color:darkcyan;
     border: none;
     height: 30px;
@@ -34,6 +34,6 @@
 }
 #cadastrar:hover{
     background-color:darkcyan;
-    color: whitesmoke;
-    border: 1px solid whitesmoke;
+    color: var(--text-claro);
+    border: 1px solid var(--text-claro);
 }

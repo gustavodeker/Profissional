@@ -2,10 +2,10 @@
     width: 400px;
     height: 300px;
     margin: auto;
-    background-color: #004479;
+    background-color: var(--azul-empresa);
     display: block;
     text-align: center;
 }
 p{
-    color: whitesmoke;
+    color: var(--text-claro);
 }

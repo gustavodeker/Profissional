@@ -1,4 +1,3 @@
-
 /***REFUSE***/
 #div-refuse{
     display: block;
@@ -9,7 +8,7 @@
     max-width: 600px;
     width: 90%;
     height: max-content;
-    border: 1px solid whitesmoke;
+    border: 1px solid var(--text-claro);
     overflow: auto;
 }
 #form-refuse{
@@ -35,7 +34,7 @@ tbody tr{
     cursor: pointer;
 }
 tbody tr:hover{
-    background-color: #004479;
+    background-color: var(--azul-empresa);
 }
 td, th{
     vertical-align: middle;
@@ -97,7 +96,7 @@ td{
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 .div-qtd{
     display: flex;
@@ -107,15 +106,17 @@ td{
 }
 .quantidade label{
     margin-bottom: 10px;
-    text-align: center;
 }
 .div-qtd input{
-    width: 40%;
+    width: 50%;
     text-align: center;
-    font-size: 30pt;
+    font-size: 20pt;
 }
-.div-qtd div{
-    font-size: 30pt;
+.div-qtd div{ 
+    font-size: 20pt;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .menos, .mais{
     display: flex;
@@ -123,20 +124,19 @@ td{
     justify-content: center;
     width: 100px;
     height: 100px;
-    border: 1px solid #004479;
-    padding-bottom: 10px;
+    border: 1px solid var(--azul-empresa);
     cursor: pointer;
 }
 .mais{
     display: flex;
-    background-color: #004479;
+    background-color: var(--azul-empresa);
 }
 .mais:hover {
     background-color: green;
     border: 1px solid green;
 }
 .menos{
-    background-color: #004479;
+    background-color: var(--azul-empresa);
 }
 .menos:hover{
     background-color: red;
@@ -150,9 +150,9 @@ td{
 #enviar{
     width: 100%;
     margin-top: 4px;
-    background-color: #004479;
-    border: 2px solid #004479;
-    color: whitesmoke;
+    background-color: var(--azul-empresa);
+    border: 2px solid var(--azul-empresa);
+    color: var(--text-claro);
     height: 100px;
     transition: 0.1s;
     cursor: pointer;
@@ -188,8 +188,8 @@ td{
         padding: 8px 20px;
         font-size: 20pt;
         cursor: pointer;
-        background-color: #004479;
-        color: whitesmoke;
+        background-color: var(--azul-empresa);
+        color: var(--text-claro);
         border: none;
     }
     .div-cod input, .div-maquina input{

@@ -56,13 +56,13 @@ h2{
 }
 .form-item input{
     width: 70%;
-    color: black;
+    color: var(--text-escuro);
 }
 #submit{
     width: 100%;
     height: 30px;
-    color: whitesmoke;
-    border: 1px solid whitesmoke;
+    color: var(--text-claro);
+    border: 1px solid var(--text-claro);
     background: transparent;
 }
 span{
@@ -77,13 +77,13 @@ span{
     justify-content: center;
 }
 .btn-alternar{
-    background-color: #004479;
-    color: whitesmoke;
+    background-color: var(--azul-empresa);
+    color: var(--text-claro);
     padding: 5px 20px;
     margin: 2px;
     font-size: 20pt;
     cursor: pointer;
-    border: 2px solid whitesmoke;
+    border: 2px solid var(--text-claro);
 }
 
 
@@ -97,9 +97,9 @@ span{
     max-width: 600px;
     width: 90%;
     height: max-content;
-    border: 1px solid whitesmoke;
+    border: 1px solid var(--text-claro);
     overflow: auto;
-    background-color: whitesmoke;
+    background-color: var(--text-claro);
     padding: 10px;
 }
 #form-refuse{
@@ -121,9 +121,9 @@ label{
     max-width: 600px;
     width: 90%;
     height: max-content;
-    border: 1px solid whitesmoke;
+    border: 1px solid var(--text-claro);
     overflow: auto;
-    background-color: whitesmoke;
+    background-color: var(--text-claro);
     padding: 10px;
 }
 #form-producao{
@@ -154,7 +154,7 @@ tbody tr{
     cursor: pointer;
 }
 tbody tr:hover{
-    background-color: #004479;
+    background-color: var(--azul-empresa);
 }
 td, th{
     vertical-align: middle;
@@ -172,27 +172,27 @@ td{
 
 #historico-table thead th{
     text-align: center;
-    border: 1px solid black;
+    border: 1px solid var(--text-escuro);
     padding: 10px 10px;
-    background-color: #004479;
-    color: whitesmoke;
+    background-color: var(--azul-empresa);
+    color: var(--text-claro);
 }
 #historico-table tbody tr td{
     font-size: 16pt;
     text-align: center;
-    border: 1px dotted black;
+    border: 1px dotted var(--text-escuro);
 }
 #historico-table tbody tr:hover{
     background-color: #daeefe;
 }
 .tdeditar:hover{
-    background-color: #004479;
+    background-color: var(--azul-empresa);
 }
 .tdeditar{
     cursor: pointer;
 }
 .tdeditar:hover span{
-    color: whitesmoke;
+    color: var(--text-claro);
 }
 
 /****************************************/
@@ -203,28 +203,28 @@ td{
 
 #historico-tableAdmin thead th{
     text-align: center;
-    border: 1px solid black;
+    border: 1px solid var(--text-escuro);
     padding: 5px 5px;
-    background-color: #004479;
-    color: whitesmoke;
+    background-color: var(--azul-empresa);
+    color: var(--text-claro);
 }
 #historico-tableAdmin tbody tr td{
     font-size: 12pt;
     padding: 0px;
     text-align: center;
-    border: 1px dotted black;
+    border: 1px dotted var(--text-escuro);
 }
 #historico-tableAdmin tbody tr:hover{
     background-color: #daeefe;
 }
 .tdeditar:hover{
-    background-color: #004479;
+    background-color: var(--azul-empresa);
 }
 .tdeditar{
     cursor: pointer;
 }
 .tdeditar:hover span{
-    color: whitesmoke;
+    color: var(--text-claro);
 }
 /****************************************/
 /****************************************/
@@ -304,12 +304,12 @@ td{
     align-items: center;
     width: 150px;
     height: 100px;
-    border: 1px solid #004479;
+    border: 1px solid var(--azul-empresa);
     padding-bottom: 10px;
     cursor: pointer;
 }
 .mais{
-    background-color: #004479;
+    background-color: var(--azul-empresa);
     justify-content: right;
     
 }
@@ -318,7 +318,7 @@ td{
     border: 1px solid green;
 }
 .menos{
-    background-color: #004479;
+    background-color: var(--azul-empresa);
 }
 .menos:hover{
     background-color: red;
@@ -332,9 +332,9 @@ td{
 #enviar{
     width: 100%;
     margin-top: 4px;
-    background-color: #004479;
-    border: 2px solid #004479;
-    color: whitesmoke;
+    background-color: var(--azul-empresa);
+    border: 2px solid var(--azul-empresa);
+    color: var(--text-claro);
     height: 100px;
     transition: 0.1s;
     cursor: pointer;
@@ -369,8 +369,8 @@ td{
         padding: 8px 20px;
         font-size: 20pt;
         cursor: pointer;
-        background-color: #004479;
-        color: whitesmoke;
+        background-color: var(--azul-empresa);
+        color: var(--text-claro);
         border: none;
     }
     .div-cod input, .div-maquina input{

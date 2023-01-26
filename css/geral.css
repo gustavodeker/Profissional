@@ -1,17 +1,23 @@
+:root{
+    --azul-empresa: #004479;
+    --back-claro: whitesmoke;
+    --text-claro: whitesmoke;
+    --text-escuro: black;
+}
 *{
     margin: 0px;
     text-decoration: none;
-    color: black;
+    color: var(--text-escuro);
 }
 body{
-    background-color: ghostwhite;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #corpo{
     width: 100%;
-    height: 80vh;
+    height: calc(100vh - 4rem);
     display: block;
+    background-color: var(--back-claro);
 }
 
 #alternar{
@@ -26,8 +32,8 @@ body{
     padding: 10px 50px;
     font-size: 20pt;
     cursor: pointer;
-    background-color: #004479;
-    color: whitesmoke;
+    background-color: var(--azul-empresa);
+    color: var(--text-claro);
     border: none;
 }
 
@@ -35,7 +41,7 @@ h1{
     text-align: center;
     padding-bottom: 5px;
     font-size:30pt;
-    color: #004479;
+    color: var(--azul-empresa);
 }
 
 .mensagem, .mensagemerro{
@@ -54,7 +60,7 @@ h1{
     background-color: red;
 }
 .mensagem p, .mensagemerro p{
-    color: whitesmoke;
+    color: var(--text-claro);
     font-size: 20pt;
     text-align: center;
 }

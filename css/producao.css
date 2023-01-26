@@ -1,4 +1,4 @@
-/***REFUSE***/
+/***Produção***/
 #div-producao{
     display: block;
     margin-left: auto;
@@ -19,8 +19,6 @@ label{
     font-size: 30pt;
     font-family: Arial, Helvetica, sans-serif;
 }
-/******************************/
-
 /******************************/
 
 /***MAQUINA***/
@@ -44,15 +42,14 @@ label{
 /***QUANTIDADE***/
 .quantidade{
     display: flex;
-    justify-content: right;
+    justify-content: center;
     align-items: center;
     width: 100%;
-    flex-wrap: wrap;
-    background-color: red;
+    flex-wrap: nowrap;
 }
 .div-qtd{
+    margin-top: 10px;
     display: flex;
-    flex-wrap: nowrap;
     align-items: center;
     width: 100%;
     justify-content: center;
@@ -60,52 +57,51 @@ label{
 }
 .quantidade label{
     margin-bottom: 10px;
-    text-align: left;
 }
 .div-qtd input{
-    width: 40%;
-    height: 105px;
+    width: 50%;
     text-align: center;
-    font-size: 30pt;
+    font-size: 20pt;
+    height: 60px;
 }
-.div-qtd div{
-    font-size: 30pt;
+.div-qtd div{ 
+    font-size: 20pt;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-
 .menos, .mais{
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100px;
     height: 100px;
-    border: 1px solid #004479;
-    padding-bottom: 10px;
+    border: 1px solid var(--azul-empresa);
     cursor: pointer;
 }
 .mais{
-    background-color: #004479;
-    
+    display: flex;
+    background-color: var(--azul-empresa);
 }
 .mais:hover {
     background-color: green;
     border: 1px solid green;
 }
 .menos{
-    background-color: #004479;
+    background-color: var(--azul-empresa);
 }
 .menos:hover{
     background-color: red;
     border: 1px solid red;
 }
-
-/******************************/
+/******/
 
 /***BOTÃO ENVIAR***/
 #enviar{
     width: 100%;
     margin-top: 4px;
-    background-color: #004479;
-    border: 2px solid #004479;
+    background-color: var(--azul-empresa);
+    border: 2px solid var(--azul-empresa);
     color: whitesmoke;
     height: 100px;
     transition: 0.1s;
@@ -140,12 +136,10 @@ textarea{
         height: 60px;
     }
     .menos, .mais{
-        width: 80px;
+        width: 150px;
         height: 60px;
     }
-    .div-qtd input{
-        height: 66px;
-    }
+
     td, th{
         font-size: 12pt;
     }
@@ -157,7 +151,7 @@ textarea{
         padding: 8px 20px;
         font-size: 20pt;
         cursor: pointer;
-        background-color: #004479;
+        background-color: var(--azul-empresa);
         color: whitesmoke;
         border: none;
     }
