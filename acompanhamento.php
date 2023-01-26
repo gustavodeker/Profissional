@@ -1,6 +1,7 @@
 <?php
 include("config/conexao.php");
 sessionVerif();
+header("Refresh: 20;");
 ?>
 
 <!DOCTYPE html>
