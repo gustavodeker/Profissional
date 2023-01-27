@@ -1,5 +1,13 @@
-SELECT DISTINCT gr_machine as "Máquina", SUM(gr_value) as "Qtd refugo" FROM gr 
-GROUP BY gr_machine;
-
 SELECT DISTINCT gr_machine, SUM(gr_value) AS gr_value FROM gr 
-GROUP BY gr_machine ORDER BY SUM(gr_value);
+GROUP BY gr_machine ORDER BY SUM(gr_value) DESC;
+
+SELECT DISTINCT gr_code, SUM(gr_value) AS gr_value FROM gr 
+GROUP BY gr_code ORDER BY SUM(gr_value) DESC;
+
+SELECT code_code AS "Código", code_desc AS "Descrição" FROM codes
+ORDER BY code_code;
+
+SELECT gr_machine, gr_code, SUM(gr_value) as 'total'
+FROM gr
+GROUP BY gr_machine, gr_code
+ORDER BY total DESC;

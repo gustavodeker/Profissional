@@ -46,19 +46,18 @@ if(isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['qtd'])){
             /* Dados coletados */
             $user_id = $user['user_id'];
             $code_id = $row_cod['code_id'];
-            $date = date("Y-m-d H:i:s");
 
             try{
-                $sqla = $pdo->prepare("INSERT INTO refuse VALUES (null,?,?,?,?,?,null,null)");
-                $sqla->execute(array($user_id, $machine_id, $code_id, $qtd, $date));
+                $sqla = $pdo->prepare("INSERT INTO refuse VALUES (null,?,?,?,?,default,null,null)");
+                $sqla->execute(array($user_id, $machine_id, $code_id, $qtd));
 
                 $pesq = $pdo->prepare("SELECT refuse_id FROM refuse ORDER BY refuse_time DESC LIMIT 1");
                 $pesq->execute();
                 $row_pesq = $pesq->fetch(PDO::FETCH_ASSOC);
                 $refuse_id = $row_pesq['refuse_id'];
 
-                $sqlb = $pdo->prepare("INSERT INTO gr VALUES (null,?,?,?,?,?,null,null,?)");
-                $sqlb->execute(array($user['user_name'], $row_machine['machine_code'], $row_cod['code_code'], $qtd, $date,$refuse_id));
+                $sqlb = $pdo->prepare("INSERT INTO gr VALUES (null,?,?,?,?,default,?)");
+                $sqlb->execute(array($user['user_name'], $row_machine['machine_code'], $row_cod['code_code'], $qtd, $refuse_id));
                 $mensagem = "Registrado com sucesso!";
 
             }catch(PDOException $erro){
@@ -93,13 +92,14 @@ function machineOption()
     if($user['user_level'] == 'admin'){
         $sql = $pdo->prepare("SELECT * FROM machines");
     } else{
-        $sql = $pdo->prepare("SELECT * FROM machines WHERE machine_user_id LIKE '%,".$user['user_id'].",%'");
+        $sql = $pdo->prepare("SELECT * FROM machines WHERE machine_users LIKE '%,".$user['user_id'].",%'");
     }
     $sql->execute();
     while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
         echo "<option value='". $row['machine_code']."'>". $row['machine_code']."</option>";
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="pr-br">
@@ -212,7 +212,7 @@ function machineOption()
     function list(td){
         var tede = document.getElementById(td).innerHTML;
         var input = document.getElementById("cod");
-        input.value = tede;
+        input.value = tede; 
     }
     
 </script>

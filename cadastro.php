@@ -11,14 +11,14 @@ if(isset($_POST['nome']) && isset($_POST['senha']) && isset($_POST['level'])){
     }else{
         //Receber e limpar dados do post
         $nome = limpaPost($_POST['nome']);
-        $user = limpaPost($_POST['user']);
+        $login = limpaPost($_POST['login']);
         $senha = limpaPost($_POST['senha']);
         $level = limpaPost($_POST['level']);
         $senha_cript = sha1($senha);
 
         //Verificação individual de campos
-        //Nome
-        if (!preg_match('/^[A-Za-z0-9-]+$/',$nome)) {
+        //login
+        if (!preg_match('/^[A-Za-z0-9-]+$/',$login)) {
             $erro_nome = "Apenas letras e números";
         }
         //Senha
@@ -33,12 +33,12 @@ if(isset($_POST['nome']) && isset($_POST['senha']) && isset($_POST['level'])){
         if(!isset($erro_geral) && !isset($erro_nome) && !isset($erro_senha) && !isset($erro_level)){
             //Verificar se o usuário já está cadastrado
             $sql = $pdo->prepare("SELECT * FROM users WHERE user_name=? or user_login=? ");
-            $sql->execute(array($nome));
+            $sql->execute(array($nome,$login));
             $usuario = $sql->fetch();
 
             if(!$usuario){
-                $sql = $pdo->prepare("INSERT INTO users VALUES (null,?,?,?,null)");
-                $sql->execute(array($nome, $senha_cript, $level));
+                $sql = $pdo->prepare("INSERT INTO users VALUES (null,?,?,?,?,null)");
+                $sql->execute(array($nome,$login,$senha_cript, $level));
                 $erro_geral = "Cadastrado com sucesso !";
             }else{
                 $erro_geral = "Nome de máquina já cadastrado!";
@@ -86,7 +86,7 @@ if(isset($_POST['nome']) && isset($_POST['senha']) && isset($_POST['level'])){
 
                 <div id="input-label">
                     <label for="">User: </label>
-                    <input name="user" placeholder="User" type="text">
+                    <input name="login" placeholder="Login" type="text">
                 </div>
 
                 <?php //Erro $erro_senha
