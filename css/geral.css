@@ -16,7 +16,8 @@ body{
 #corpo{
     width: 100%;
     height: calc(100vh - 4rem);
-    display: block;
+    display: flex;
+    align-items: center;
     background-color: var(--back-claro);
 }
 

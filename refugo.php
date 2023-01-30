@@ -36,7 +36,7 @@ if(isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['qtd'])){
             $sql_machine = $pdo->prepare("SELECT * FROM machines WHERE machine_name = '$machine'");
             $sql_machine->execute();
             $row_machine = $sql_machine->fetch(PDO::FETCH_ASSOC);
-            $machine_id = $row_machine['machine_id'];
+            $machine_name = $row_machine['machine_name'];
             $ultimachine = $row_machine["machine_name"];
 
             /* Coletando user_id */
@@ -44,12 +44,12 @@ if(isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['qtd'])){
             $user = auth($_SESSION['TOKEN']);
 
             /* Dados coletados */
-            $user_id = $user['user_id'];
-            $code_id = $row_cod['code_id'];
+            $user_name = $user['user_name'];
+            $code_code = $row_cod['code_code'];
 
             try{
                 $sqla = $pdo->prepare("INSERT INTO refuse VALUES (null,?,?,?,?,default,null,null)");
-                $sqla->execute(array($user_id, $machine_id, $code_id, $qtd));
+                $sqla->execute(array($user_name, $machine_name, $code_code, $qtd));
 
                 $pesq = $pdo->prepare("SELECT refuse_id FROM refuse ORDER BY refuse_time DESC LIMIT 1");
                 $pesq->execute();

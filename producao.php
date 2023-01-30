@@ -29,11 +29,11 @@ if(isset($_POST['maquina']) && isset($_POST['motivo']) && isset($_POST['qtd'])){
             $user = auth($_SESSION['TOKEN']);
 
             /* Dados coletados */
-            $user_login = $user['user_login'];
+            $user_name = $user['user_name'];
 
             try{
                 $sqla = $pdo->prepare("INSERT INTO prod VALUES (null,?,?,?,?,default,null,null)");
-                $sqla->execute(array($user_login, $machine_name, $qtd, $motivo));
+                $sqla->execute(array($user_name, $machine_name, $qtd, $motivo));
 
                 $pesq = $pdo->prepare("SELECT prod_id FROM prod ORDER BY prod_datetime DESC LIMIT 1");
                 $pesq->execute();
