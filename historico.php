@@ -15,7 +15,7 @@ function historicoTable()
     }
     $sql->execute();
     while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
-        $sql_machine = $pdo->prepare("SELECT machine_code FROM machines WHERE machine_id = '" . $row['refuse_machine_id'] . "'");
+        $sql_machine = $pdo->prepare("SELECT machine_name FROM machines WHERE machine_id = '" . $row['refuse_machine_id'] . "'");
         $sql_machine->execute();
         $row_machine = $sql_machine->fetch(PDO::FETCH_ASSOC);
 
@@ -24,46 +24,13 @@ function historicoTable()
         $row_code = $sql_code->fetch(PDO::FETCH_ASSOC);
 
         echo "<tr>";
-        echo "<td>" . $row_machine['machine_code'] . "</td>";
+        echo "<td>" . $row_machine['machine_name'] . "</td>";
         echo "<td>" . $row_code['code_code'] . "</td>";
         echo "<td>" . $row['refuse_value'] . "</td>";
         echo "<td>" . $row['refuse_time'] . "</td>";
         echo "<td class='tdeditar'><span class='material-icons hvr-float' onclick=\"location.href='historico.php?page=historico&id=" . $row['refuse_id'] . "'\">
         edit
         </span></td>";
-    }
-}
-
-function codTable()
-{
-    global $pdo;
-    $sql = $pdo->prepare("SELECT * FROM codes");
-    $sql->execute();
-    $i = 1;
-    while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
-        echo "<tr>";
-        $ide = 'td' . $i;
-?>
-        <td class="tdcod" id='<?php echo $ide ?>' onclick="list('<?php echo $ide ?>')"><?php echo $row['code_code'] ?></td>
-        <td class="tddesc" id='<?php echo $ide ?>' onclick="list('<?php echo $ide ?>')"><?php echo $row['code_desc'] ?></td>
-<?php
-        $i++;
-    }
-}
-
-function machineOption()
-{
-    global $user;
-    $user = auth($_SESSION['TOKEN']);
-    global $pdo;
-    if ($user['user_level'] == 'admin') {
-        $sql = $pdo->prepare("SELECT * FROM machines");
-    } else {
-        $sql = $pdo->prepare("SELECT * FROM machines WHERE machine_user_id = '" . $user['user_id'] . "'");
-    }
-    $sql->execute();
-    while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
-        echo "<option value='" . $row['machine_code'] . "'>" . $row['machine_code'] . "</option>";
     }
 }
 
@@ -145,7 +112,7 @@ if (isset($_REQUEST["id"]) && !isset($_REQUEST["prod"])) {
                 <div class="div-maquina">
                     <label class="maquina">Máquina:</label>
                     <select class="hvr-float" id="maquina" name="maquina">
-                        <option value="<?php echo $row_m["machine_code"] ?>"><?php echo $row_m["machine_code"] ?></option>
+                        <option value="<?php echo $row_m["machine_name"] ?>"><?php echo $row_m["machine_name"] ?></option>
                         <?php machineOption(); ?>
                     </select>
                 </div>

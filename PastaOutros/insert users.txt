@@ -5,7 +5,8 @@
 
 
 INSERT INTO `users` VALUES
-(1, 'Administrador','master000', '7c222fb2927d828af22f592134e8932480637c0d', 'admin', ''),
-(2, '704070','704070', '9cb948343154b143d025db2c5876268311257057', 'user', ''),
-(3, 'Gaiolas Valeo 1','gaiolasvoleo1', '96c2c085110e085713fa2d4b7ee29571381eecf6', 'user', ''),
-(4, 'Gaiolas Valeo 2','gaiolasvoleo2', '6666a95c81320c5b9efe9a781e334dd26745bea4', 'user', '');
+(1, 'Desenvolvedor','master000', '7c222fb2927d828af22f592134e8932480637c0d', 'admin', ''),
+(2, 'Administrador','master001', '7c222fb2927d828af22f592134e8932480637c0d', 'admin', ''),
+(3, '704070','704070', '9cb948343154b143d025db2c5876268311257057', 'user', ''),
+(4, 'Gaiolas Valeo 1','gaiolasvoleo1', '96c2c085110e085713fa2d4b7ee29571381eecf6', 'user', ''),
+(5, 'Gaiolas Valeo 2','gaiolasvoleo2', '6666a95c81320c5b9efe9a781e334dd26745bea4', 'user', '');

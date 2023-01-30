@@ -33,11 +33,11 @@ if(isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['qtd'])){
             $ultimocode = $row_cod["code_code"];
 
             /* Coletando machine_id */
-            $sql_machine = $pdo->prepare("SELECT * FROM machines WHERE machine_code = '$machine'");
+            $sql_machine = $pdo->prepare("SELECT * FROM machines WHERE machine_name = '$machine'");
             $sql_machine->execute();
             $row_machine = $sql_machine->fetch(PDO::FETCH_ASSOC);
             $machine_id = $row_machine['machine_id'];
-            $ultimachine = $row_machine["machine_code"];
+            $ultimachine = $row_machine["machine_name"];
 
             /* Coletando user_id */
             global $user;
@@ -57,46 +57,13 @@ if(isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['qtd'])){
                 $refuse_id = $row_pesq['refuse_id'];
 
                 $sqlb = $pdo->prepare("INSERT INTO gr VALUES (null,?,?,?,?,default,?)");
-                $sqlb->execute(array($user['user_name'], $row_machine['machine_code'], $row_cod['code_code'], $qtd, $refuse_id));
+                $sqlb->execute(array($user['user_name'], $row_machine['machine_name'], $row_cod['code_code'], $qtd, $refuse_id));
                 $mensagem = "Registrado com sucesso!";
 
             }catch(PDOException $erro){
                 $mensagemerro = "Falha no banco de dados, contactar suporte!".$erro;
             }
         }
-    }
-}
-
-function codTable()
-{
-    global $pdo;
-    $sql = $pdo->prepare("SELECT * FROM codes");
-    $sql->execute();
-    $i = 1;
-    while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
-        echo "<tr>";
-        $ide = 'td' . $i;
-        ?>
-        <td class="tdcod" id='<?php echo $ide ?>' onclick="list('<?php echo $ide ?>')"><?php echo $row['code_code'] ?></td>
-        <td class="tddesc" id='<?php echo $ide ?>' onclick="list('<?php echo $ide ?>')"><?php echo $row['code_desc'] ?></td>
-        <?php
-        $i++;
-    }
-}
-
-function machineOption()
-{   
-    global $user;
-    $user = auth($_SESSION['TOKEN']);
-    global $pdo;
-    if($user['user_level'] == 'admin'){
-        $sql = $pdo->prepare("SELECT * FROM machines");
-    } else{
-        $sql = $pdo->prepare("SELECT * FROM machines WHERE machine_users LIKE '%,".$user['user_id'].",%'");
-    }
-    $sql->execute();
-    while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
-        echo "<option value='". $row['machine_code']."'>". $row['machine_code']."</option>";
     }
 }
 
@@ -129,17 +96,11 @@ function machineOption()
     <?php }?>
     
     <div id="corpo">
-        <!--ALTERNAR-->
-        <div id="alternar">
-            <a class="hvr-float" style="border: 2px solid black" id="btn-refuse" href="refugo.php">Refugo</a>
-            <a class="hvr-float" style="border: 2px solid whitesmoke" id="btn-production" href="producao.php">Produção</a>
-        </div>
-        <!---------------->
 
         <!--REFUSE-->
         <div id="div-refuse" class="animate__animated animate__fadeIn">
             <form id="form-refuse" method="POST">
-                <h1>REFUGO</h1>
+                <h1>REFUGO</h1> 
                 
                 <!---------------->
                 <div class="div-maquina">

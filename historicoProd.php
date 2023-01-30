@@ -9,39 +9,23 @@ function historicoProducaoTable()
     global $user;
     $user = auth($_SESSION['TOKEN']);
     if ($user['user_level'] == 'admin') {
-        $sql = $pdo->prepare("SELECT * FROM production");
+        $sql = $pdo->prepare("SELECT * FROM prod");
     } else {
-        $sql = $pdo->prepare("SELECT * FROM production WHERE production_user_id = '" . $user['user_id'] . "' ORDER BY production_time DESC LIMIT 10");
+        $sql = $pdo->prepare("SELECT * FROM prod WHERE prod_user_login = '" . $user['user_login'] . "' ORDER BY prod_datetime DESC LIMIT 10");
     }
     $sql->execute();
     while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
-        $sql_machine = $pdo->prepare("SELECT machine_code FROM machines WHERE machine_id = '" . $row['production_machine_id'] . "'");
+        $sql_machine = $pdo->prepare("SELECT machine_name FROM machines WHERE machine_name = '" . $row['prod_machine_name'] . "'");
         $sql_machine->execute();
         $row_machine = $sql_machine->fetch(PDO::FETCH_ASSOC);
         echo "<tr>";
-        echo "<td>" . $row_machine['machine_code'] . "</td>";
-        echo "<td>" . $row['production_value'] . "</td>";
-        echo "<td>" . $row['production_reason'] . "</td>";
-        echo "<td>" . $row['production_time'] . "</td>";
-        echo "<td class='tdeditar'><span class='material-icons hvr-float' onclick=\"location.href='historicoProd.php?page=historicoProd&id=" . $row['production_id'] . "'\">
+        echo "<td>" . $row_machine['machine_name'] . "</td>";
+        echo "<td>" . $row['prod_value'] . "</td>";
+        echo "<td>" . $row['prod_reason'] . "</td>";
+        echo "<td>" . $row['prod_datetime'] . "</td>";
+        echo "<td class='tdeditar'><span class='material-icons hvr-float' onclick=\"location.href='historicoProd.php?page=historicoProd&id=" . $row['prod_id'] . "'\">
         edit
         </span></td>";
-    }
-}
-
-function machineOption()
-{
-    global $user;
-    $user = auth($_SESSION['TOKEN']);
-    global $pdo;
-    if ($user['user_level'] == 'admin') {
-        $sql = $pdo->prepare("SELECT * FROM machines");
-    } else {
-        $sql = $pdo->prepare("SELECT * FROM machines WHERE machine_user_id = '" . $user['user_id'] . "'");
-    }
-    $sql->execute();
-    while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
-        echo "<option value='" . $row['machine_code'] . "'>" . $row['machine_code'] . "</option>";
     }
 }
 
@@ -114,7 +98,7 @@ if (isset($_REQUEST["id"])) {
             </div>
         <?php } ?>
         <!---------------->
-        <!--PRODUCTION-->
+        <!--prod-->
         <div id="div-producao">
         <button class="fechar" id="fechar" onclick="fecharEditProd()">X</button>
 
@@ -124,20 +108,20 @@ if (isset($_REQUEST["id"])) {
                 <div class="div-maquina">
                     <label class="maquina">Máquina:</label>
                     <select class="hvr-float" id="maquina" name="maquina">
-                        <option value="<?php echo $row_m["machine_code"]; ?>"><?php echo $row_m["machine_code"]; ?></option>
+                        <option value="<?php echo $row_m["machine_name"]; ?>"><?php echo $row_m["machine_name"]; ?></option>
                         <?php machineOption(); ?>
                     </select>
                 </div>
                 <!---------------->
                 <div class="div-motivo">
                     <label class="labelmotivo">Motivo:</label>
-                    <textarea class="hvr-float" name="motivo" id="motivo" cols="auto" rows="5"><?php echo $row_n["production_reason"]; ?></textarea>
+                    <textarea class="hvr-float" name="motivo" id="motivo" cols="auto" rows="5"><?php echo $row_n["prod_reason"]; ?></textarea>
                 </div>
                 <!---------------->
                 <div class="div-qtd">
                     <label>Quantidade:</label>
                     <div class="menos hvr-float" onclick="menos()">-</div>
-                    <input id="qtd" name="qtd" class="qtd hvr-float" type="number" min="1" value="<?php echo $row_n['production_value'] ?>">
+                    <input id="qtd" name="qtd" class="qtd hvr-float" type="number" min="1" value="<?php echo $row_n['prod_value'] ?>">
                     <div class="mais hvr-float" onclick="mais()">+</div>
                 </div>
                 <input id="enviar" class="hvr-float" type="submit" value="Enviar">

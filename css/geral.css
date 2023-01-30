@@ -20,13 +20,6 @@ body{
     background-color: var(--back-claro);
 }
 
-#alternar{
-    width: 100%;
-    display: inline-block;
-    text-align: center;
-    margin-bottom: 10px;
-    height: max-content;
-}
 #btn-production, #btn-refuse{
     margin-top: 3px;
     padding: 10px 50px;

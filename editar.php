@@ -24,7 +24,6 @@
             $machine = limpaPost($_POST['maquina']);
             $code = limpaPost($_POST['cod']);
             $qtd = limpaPost($_POST['qtd']);
-            $data = date("Y-m-d H:i:s");
 
             /* Verificando se cod existe */
             $sql_count = $pdo->prepare("SELECT COUNT(*) FROM codes WHERE code_code = '$code'");
@@ -45,20 +44,20 @@
                 $code_id = $row_cod["code_id"];
 
                 /* Coletando machine_id */
-                $sql_machine = $pdo->prepare("SELECT * FROM machines WHERE machine_code = '$machine'");
+                $sql_machine = $pdo->prepare("SELECT * FROM machines WHERE machine_name = '$machine'");
                 $sql_machine->execute();
                 $row_machine = $sql_machine->fetch(PDO::FETCH_ASSOC);
                 $machine_id = $row_machine["machine_id"];
 
                 try {
-                    $sqlup = $pdo->prepare("UPDATE refuse SET refuse_machine_id =? , refuse_code_id =? , refuse_value =?, refuse_altertime =? , refuse_alterby =? WHERE refuse_id = ?");
-                    $sqlup->execute(array($machine_id, $code_id, $qtd, $data, $user['user_id'], $_REQUEST["id"]));
+                    $sqlup = $pdo->prepare("UPDATE refuse SET refuse_machine_id =? , refuse_code_id =? , refuse_value =?, refuse_altertime = default , refuse_alterby =? WHERE refuse_id = ?");
+                    $sqlup->execute(array($machine_id, $code_id, $qtd, $user['user_id'], $_REQUEST["id"]));
 
-                    $sqlupb = $pdo->prepare("UPDATE gr SET gr_machine =? , gr_code =? , gr_value =?, gr_altertime =? , gr_alterby =? WHERE gr_refuse_id = ?");
-                    $sqlupb->execute(array($row_machine["machine_code"], $row_cod["code_code"], $qtd, $data, $user['user_name'], $_REQUEST["id"]));
+                    $sqlupb = $pdo->prepare("UPDATE gr SET gr_machine =? , gr_code =? , gr_value =? WHERE gr_refuse_id = ?");
+                    $sqlupb->execute(array($row_machine["machine_name"], $row_cod["code_code"], $qtd, $_REQUEST["id"]));
                     $mensagem = "Editado com sucesso!";
                 } catch (PDOException $erro) {
-                    $mensagemerro = "Falha ao conectar! Chamar o suporte!";
+                    $mensagemerro = "Falha ao conectar! Chamar o suporte!".$erro;
                 }
             }
         }

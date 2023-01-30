@@ -30,7 +30,8 @@ label{
     margin-bottom: 10px;
 }
 .div-maquina select{
-    width: 70%;
+    margin-left: 5px;
+    width: 60%;
     height: 50px;
     font-size: 20pt;
     text-align: center;
@@ -62,7 +63,7 @@ label{
     width: 50%;
     text-align: center;
     font-size: 20pt;
-    height: 60px;
+    height: 100px;
 }
 .div-qtd div{ 
     font-size: 20pt;
@@ -146,18 +147,12 @@ textarea{
     label{
         font-size: 18pt;
     }
-    #btn-production, #btn-refuse{
-        margin-top: 2px;
-        padding: 8px 20px;
-        font-size: 20pt;
-        cursor: pointer;
-        background-color: var(--azul-empresa);
-        color: whitesmoke;
-        border: none;
-    }
+
     .div-cod input, .div-maquina input{
         height: 30px;
     }
-    
+    .div-qtd input{
+        height: 60px;
+    }
     
 }

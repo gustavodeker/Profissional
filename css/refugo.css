@@ -81,7 +81,8 @@ td{
     margin-bottom: 10px;
 }
 .div-maquina select{
-    width: 70%;
+    margin-left: 5px;
+    width: 60%;
     height: 50px;
     font-size: 20pt;
     text-align: center;
@@ -182,15 +183,6 @@ td{
     }
     label{
         font-size: 18pt;
-    }
-    #btn-production, #btn-refuse{
-        margin-top: 2px;
-        padding: 8px 20px;
-        font-size: 20pt;
-        cursor: pointer;
-        background-color: var(--azul-empresa);
-        color: var(--text-claro);
-        border: none;
     }
     .div-cod input, .div-maquina input{
         height: 30px;

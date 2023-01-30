@@ -29,12 +29,16 @@
 
                 <ul class="menu" id="menu" role="menu">
                     <a id='botaologin' href='acompanhamento.php'>Acompanhameto</a>
+                    <a id='botaologin' href='refugo.php'>Refugo</a>
+                    <a id='botaologin' href='producao.php'>Produção</a>
                     <a id='botaologin' href='historico.php'>Histórico</a>
                     <a id='botaologin' href='suporte.php'>Suporte</a>
                     <a id='botaologin' href='logout.php'>Sair</a>
                 </ul>
             <?php } else { ?>
                 <ul class="menu" id="menu" role="menu">
+                    <a id='botaologin' href='refugo.php'>Refugo</a>
+                    <a id='botaologin' href='producao.php'>Produção</a>
                     <a id='botaologin' href='historico.php'>Histórico</a>
                     <a id='botaologin' href='logout.php'>Sair</a>
                 </ul>

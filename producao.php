@@ -18,31 +18,30 @@ if(isset($_POST['maquina']) && isset($_POST['motivo']) && isset($_POST['qtd'])){
         }
         if ($qtd > 0 && $qtd < 1000) {
             /* Coletando machine_id */
-            $sql_machine = $pdo->prepare("SELECT * FROM machines WHERE machine_code = '$machine'");
+            $sql_machine = $pdo->prepare("SELECT * FROM machines WHERE machine_name = '$machine'");
             $sql_machine->execute();
             $row_machine = $sql_machine->fetch(PDO::FETCH_ASSOC);
-            $machine_id = $row_machine['machine_id'];
-            $ultimachine = $row_machine["machine_code"];
+            $machine_name = $row_machine['machine_name'];
+            $ultimachine = $row_machine["machine_name"];
 
             /* Coletando user_id */
             global $user;
             $user = auth($_SESSION['TOKEN']);
 
             /* Dados coletados */
-            $user_id = $user['user_id'];
-            $date = date("Y-m-d H:i:s");
+            $user_login = $user['user_login'];
 
             try{
-                $sqla = $pdo->prepare("INSERT INTO production VALUES (null,?,?,?,?,?,null,null)");
-                $sqla->execute(array($user_id, $machine_id, $qtd, $motivo, $date));
+                $sqla = $pdo->prepare("INSERT INTO prod VALUES (null,?,?,?,?,default,null,null)");
+                $sqla->execute(array($user_login, $machine_name, $qtd, $motivo));
 
-                $pesq = $pdo->prepare("SELECT production_id FROM production ORDER BY production_time DESC LIMIT 1");
+                $pesq = $pdo->prepare("SELECT prod_id FROM prod ORDER BY prod_datetime DESC LIMIT 1");
                 $pesq->execute();
                 $row_pesq = $pesq->fetch(PDO::FETCH_ASSOC);
-                $production_id = $row_pesq['production_id'];
+                $prod_id = $row_pesq['prod_id'];
 
-                $sqlb = $pdo->prepare("INSERT INTO gp VALUES (null,?,?,?,?,?,null,null,?)");
-                $sqlb->execute(array($user['user_name'], $row_machine['machine_code'], $motivo, $qtd, $date, $production_id));
+                $sqlb = $pdo->prepare("INSERT INTO gp VALUES (null,?,?,?,?,default,?)");
+                $sqlb->execute(array($user['user_name'], $row_machine['machine_name'], $motivo, $qtd, $prod_id));
                 $mensagem = "Registrado com sucesso!";
             }catch(PDOException $erro){
                 $mensagemerro = "Falha no banco de dados, contactar suporte!".$erro;
@@ -51,21 +50,7 @@ if(isset($_POST['maquina']) && isset($_POST['motivo']) && isset($_POST['qtd'])){
     }
 }
 
-function machineOption()
-{   
-    global $user;
-    $user = auth($_SESSION['TOKEN']);
-    global $pdo;
-    if($user['user_level'] == 'admin'){
-        $sql = $pdo->prepare("SELECT * FROM machines");
-    } else{
-        $sql = $pdo->prepare("SELECT * FROM machines WHERE machine_users LIKE '%,".$user['user_id'].",%'");
-    }
-    $sql->execute();
-    while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
-        echo "<option value='". $row['machine_code']."'>". $row['machine_code']."</option>";
-    }
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="pr-br">
@@ -95,15 +80,16 @@ function machineOption()
     <?php }?>
     
     <div id="corpo">
-        <!--ALTERNAR-->
+        <!--ALTERNAR
         <div id="alternar">
             <a class="hvr-float" style="border: 2px solid whitesmoke" id="btn-refuse" href="refugo.php">Refugo</a>
             <a class="hvr-float" style="border: 2px solid black" id="btn-production" href="producao.php">Produção</a>
         </div>
-        <!---------------->
-        <!--PRODUCTION-->
+        -------------->
+        <!--prod-->
         <div id="div-producao" class="animate__animated animate__fadeIn">
             <h1>PRODUÇÃO</h1>
+            <p style="text-align: center; margin: 10px;">O formulário de produção manual deve ser utilizado apenas quando for relatado problema no sistema automatizado.</p>
             <form id="form-producao" method="POST">
                 <!---------------->
                 <div class="div-maquina">

@@ -1,20 +1,21 @@
 <?php
 session_start();
+include("funcoes.php");
 
 $servidor ="localhost";
 $usuario = "root";
 $senha = "";
 $banco = "basictest";
-/*
-$servidor='54.207.211.112:3306';
+
+/*$servidor='54.207.211.112';
 $usuario='developer';
 $senha='dev@2023';
-$banco='teste';
-*/
+$banco='proturbo';*/
+
 /*$servidor ="basictest.mysql.dbaas.com.br";
 $usuario='basictest';
 $senha='G8038375Gg@';
-$banco='basictest';*/   
+$banco = 'basictest'; */
 
 try{
     $pdo = new PDO("mysql:host=$servidor;dbname=$banco",$usuario,$senha);

@@ -5,6 +5,8 @@
     background-color: var(--azul-empresa);
     display: block;
     text-align: center;
+    margin-top: 50px;
+    padding: 50px;
 }
 p{
     color: var(--text-claro);

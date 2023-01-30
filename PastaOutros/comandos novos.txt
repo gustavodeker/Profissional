@@ -11,3 +11,12 @@ SELECT gr_machine, gr_code, SUM(gr_value) as 'total'
 FROM gr
 GROUP BY gr_machine, gr_code
 ORDER BY total DESC;
+
+SELECT DISTINCT gp_machine, SUM(gp_value) AS gp_value FROM gp 
+GROUP BY gp_machine ORDER BY SUM(gp_value) DESC;
+
+SELECT machines.machine_name AS "Máquina",
+    (SELECT SUM(gp.gp_value) FROM gp WHERE gp.gp_machine = machines.machine_name) AS "Produção",
+    (SELECT SUM(gr.gr_value) FROM gr WHERE gr.gr_machine = machines.machine_name) AS "Refugo"
+FROM machines
+ORDER BY Produção;
