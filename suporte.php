@@ -12,12 +12,20 @@ sessionVerif();
     <link rel="stylesheet" href="css/geral.css">
     <link rel="stylesheet" href="css/suporte.css">
     <title>Próturbo :: Suporte</title>
+    <style>
+        p{
+            color: black;
+        }
+    </style>
 </head>
 <body>
 <?php include_once("header.php") ?>
 
 <div class="divsup">
-    <p>Página em desenvolvimento...</p>
+    <p>Aplicação desenvolvida por Highpot Tech, para dúvidas ou problemas tecnicos entre em contato por um dos seguintes meios de comunicação:</p>
+    <p>Email: suporte@highpottech.com.br</p>
+    <p>Whatsapp: (11) 97285-9138</p>
+    <img src="img/highpot.png">
 </div>
 
 </body>

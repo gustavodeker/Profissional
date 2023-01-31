@@ -47,3 +47,22 @@
         ?>
     </nav>
 </header>
+
+<style>
+    footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 5px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    text-align: center;
+}
+.prodape{
+    color: gray;
+}
+</style>
+<footer>
+    <p class="prodape">Created by Highpot Tech.</p>
+</footer>

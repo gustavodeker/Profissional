@@ -2,7 +2,7 @@
 session_start();
 include("funcoes.php");
 
-$servidor ="localhost";
+/*$servidor ="localhost";
 $usuario = "root";
 $senha = "";
 $banco = "basictest";
@@ -12,16 +12,16 @@ $usuario='developer';
 $senha='dev@2023';
 $banco='proturbo';*/
 
-/*$servidor ="basictest.mysql.dbaas.com.br";
+$servidor ="basictest.mysql.dbaas.com.br";
 $usuario='basictest';
 $senha='G8038375Gg@';
-$banco = 'basictest'; */
+$banco = 'basictest';
 
 try{
-    $pdo = new PDO("mysql:host=$servidor;dbname=$banco",$usuario,$senha);
+    $pdo = new PDO("mysql:host=$servidor;dbname=$banco;charset=utf8",$usuario,$senha);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }catch(PDOException $erro){
-    echo "Falha ao conectar. ".$erro->getMessage();
+    echo "Falha ao conectar.";
 }
 
 function limpaPost($dados){

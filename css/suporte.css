@@ -1,13 +1,16 @@
 .divsup{
-    width: 400px;
-    height: 300px;
+    width: 90%;
     margin: auto;
-    background-color: var(--azul-empresa);
     display: block;
     text-align: center;
     margin-top: 50px;
     padding: 50px;
+    box-shadow: 0px 0px 10px #cecece;
+}
+img{
+    margin-top: 10px;
+    width: 250px;
 }
 p{
-    color: var(--text-claro);
+    color: black;
 }

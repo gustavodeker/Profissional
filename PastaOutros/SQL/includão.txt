@@ -6,14 +6,14 @@ INSERT INTO `users` VALUES
 (5, 'Gaiolas Valeo 2','gaiolasvoleo2', '6666a95c81320c5b9efe9a781e334dd26745bea4', 'user', '');
 
 INSERT INTO `machines` VALUES
-(1, 'CF338','Marca', '#,3,#'),
-(2, 'CF428','Marca', '#,3,#'),
-(3, 'CF309','Marca', '#,3,#'),
-(4, 'CF310','Marca', '#,3,#'),
-(5, 'CU311','Marca', '#,4,#'),
-(6, 'CF174','Marca', '#,4,#'),
-(7, 'CF395','Marca', '#,5,#'),
-(8, 'CF383','Marca', '#,5,#');
+(1, 'CF338','Marca', '#,704070,#'),
+(2, 'CF428','Marca', '#,704070,#'),
+(3, 'CF309','Marca', '#,704070,#'),
+(4, 'CF310','Marca', '#,704070,#'),
+(5, 'CU311','Marca', '#,Gaiolas Valeo 1,#'),
+(6, 'CF174','Marca', '#,Gaiolas Valeo 1,#'),
+(7, 'CF395','Marca', '#,Gaiolas Valeo 2,#'),
+(8, 'CF383','Marca', '#,Gaiolas Valeo 2,#');
 
 INSERT INTO codes VALUES				
 (null,"200001","Diametro interno maior que o especificado"),

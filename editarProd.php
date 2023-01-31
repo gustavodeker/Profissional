@@ -36,7 +36,7 @@
                     $sqlup->execute(array($machine_name, $motivo, $qtd, $user['user_id'], $_REQUEST["id"]));
 
                     $sqlupb = $pdo->prepare("UPDATE gp SET gp_machine =? , gp_reason =? , gp_value =? WHERE gp_prod_id = ?");
-                    $sqlupb->execute(array($row_machine["machine_name"], $motivo, $qtd, $_REQUEST["id"]));
+                    $sqlupb->execute(array($machine, $motivo, $qtd, $_REQUEST["id"]));
                     $mensagem = "Editado com sucesso!";
                 } catch (PDOException $erro) {
                     $mensagemerro = "Falha ao conectar! Chamar o suporte!";
