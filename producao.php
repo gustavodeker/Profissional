@@ -89,7 +89,7 @@ if(isset($_POST['maquina']) && isset($_POST['motivo']) && isset($_POST['qtd'])){
         <!--prod-->
         <div id="div-producao" class="animate__animated animate__fadeIn">
             <h1>PRODUÇÃO</h1>
-            <p style="text-align: center; margin: 10px;">O formulário de produção manual deve ser utilizado apenas quando for relatado problema no sistema automatizado.</p>
+            <p style="text-align: center; margin: 10px; font-size: 20px;">O formulário de produção manual deve ser utilizado apenas quando for relatado problema no sistema automatizado.</p>
             <form id="form-producao" method="POST">
                 <!---------------->
                 <div class="div-maquina">

@@ -156,3 +156,10 @@ textarea{
     }
     
 }
+
+@media(max-height: 750px){
+    #corpo{
+        align-items: flex-start;
+        padding-top: 10px;
+    }
+}

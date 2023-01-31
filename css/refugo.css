@@ -7,7 +7,6 @@
     max-width: 600px;
     width: 90%;
     height: 90%;
-    border: 1px solid var(--text-claro);
     overflow: auto;
 }
 #form-refuse{
@@ -187,4 +186,14 @@ td{
         height: 30px;
     }
     
+}
+
+@media(max-height: 750px){
+    table{
+        height: 200px;
+    }
+    #corpo{
+        align-items: flex-start;
+        padding-top: 10px;
+    }
 }
