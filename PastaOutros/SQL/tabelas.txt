@@ -38,7 +38,7 @@ CREATE TABLE refuse (
     refuse_machine_name varchar(50) NOT NULL,
     refuse_code_code varchar(50) NOT NULL,
     refuse_value int(11) NOT NULL,
-    refuse_time datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    refuse_datetime datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     refuse_altertime datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     refuse_alterby varchar(50) NULL,
     FOREIGN KEY (refuse_user_name) REFERENCES users(user_name),

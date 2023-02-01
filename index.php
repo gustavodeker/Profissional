@@ -15,28 +15,29 @@ function verificaLogin()
     $sql->execute(array($name, $senha_cript));
     $usuario = $sql->fetch(PDO::FETCH_ASSOC); //Para vir como matriz associativa, como tabela
 
-    if($usuario){
+    if ($usuario) {
         //Existe usuario
-            //Criar um token
-            $token = sha1(uniqid().date('d-m-Y-H-i-s'));
-            //Atualizar o token deste usuario no banco
-            $sql = $pdo->prepare("UPDATE users SET user_token=? WHERE user_login=? AND user_pass=?");
-            if($sql->execute(array($token,$name,$senha_cript))){
+        //Criar um token
+        $token = sha1(uniqid() . date('d-m-Y-H-i-s'));
+        //Atualizar o token deste usuario no banco
+        $sql = $pdo->prepare("UPDATE users SET user_token=? WHERE user_login=? AND user_pass=?");
+        if ($sql->execute(array($token, $name, $senha_cript))) {
             //Armazenar este token na sessão
             $_SESSION['TOKEN'] = $token;
             header('location: refugo.php'); ?>
-            <?php }
-    }else{
+        <?php }
+    } else {
         $erro_login = "Dados incorretos!";
     }
 }
 
-if(isset($_POST['login']) && isset($_POST['senha']) && !empty($_POST['login']) && !empty($_POST['senha'])){
+if (isset($_POST['login']) && isset($_POST['senha']) && !empty($_POST['login']) && !empty($_POST['senha'])) {
     verificaLogin();
 }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,7 +47,9 @@ if(isset($_POST['login']) && isset($_POST['senha']) && !empty($_POST['login']) &
     <link rel="stylesheet" href="css/animate.css"> <!--Animações-->
     <link rel="stylesheet" href="css/hover.css"> <!--Animações-->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
 </head>
+
 <body>
     <main class="main-login">
         <div class="div-login animate__animated animate__fadeIn">
@@ -54,19 +57,49 @@ if(isset($_POST['login']) && isset($_POST['senha']) && !empty($_POST['login']) &
                 <img src="img/logo.png" alt="">
 
                 <?php //Erro login
-                    if(isset($erro_login)){?>
-                        <div class="erro_login">
-                            <?php echo "<p>" . $erro_login . "</p>"; ?>
-                        </div>
-                <?php }?>
-                
+                if (isset($erro_login)) { ?>
+                    <div class="erro_login">
+                        <?php echo "<p>" . $erro_login . "</p>"; ?>
+                    </div>
+                <?php } ?>
+
                 <label for="">Login: </label>
                 <input class="input-login hvr-grow" name="login" type="text">
                 <label for="">Senha:</label>
                 <input class="input-login hvr-grow" name="senha" type="password">
                 <input class="btn-login hvr-grow" name="entrar" type="submit" value="Entrar">
+
             </form>
+            
         </div>
     </main>
+
+
+    <style>
+        footer {
+            position: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 0px;
+            text-align: center;
+        }
+        .hot {
+            width: 100px;
+            opacity: 0.9;
+            margin-left: 5px;
+        }
+        .prodape {
+            color: whitesmoke;
+            padding-bottom: 18px;
+        }
+    </style>
+    <footer>
+        <p class="prodape">Created by</p><img class="hot" src="img/high.png" alt="">
+    </footer>
 </body>
+
 </html>

@@ -1,27 +1,6 @@
 <?php
 include("config/conexao.php");
 sessionVerif();
-
-if(isset($_POST["empresa"]) && isset($_POST["pessoa"]) && isset($_POST["email"]) && isset($_POST["desc"])){
-    if (empty($_POST['empresa']) or empty($_POST['pessoa']) or empty($_POST['email']) or empty($_POST['desc'])) {
-        echo "Todos os campos são obrigatórios !";
-    } else {
-        global $user;
-        $user = auth($_SESSION['TOKEN']);
-        $empresa = limpaPost($_POST['empresa']);
-        $pessoa = limpaPost($_POST['pessoa']);
-        $email = limpaPost($_POST['email']);
-        $desc = limpaPost($_POST['desc']);
-
-        try{  /*   MEXENDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO  */
-            $sql = $pdo->prepare("INSERT INTO chamados VALUES (null,?,?,?,?,?,default,'Aberto')");
-            $sql->execute(array($empresa, $user['user_name'], $pessoa, $email, $desc));
-            $mensagem = "Registrado com sucesso!";
-        }catch(PDOException $erro){
-            $mensagemerro = "Falha no banco de dados, contactar suporte!".$erro;
-        }
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -37,12 +16,6 @@ if(isset($_POST["empresa"]) && isset($_POST["pessoa"]) && isset($_POST["email"])
         p{
             color: black;
         }
-        #novochamado{
-            display: inline-block;
-        }
-        label,input,textarea{
-            width: 100%;
-        }
     </style>
 </head>
 <body>
@@ -54,22 +27,6 @@ if(isset($_POST["empresa"]) && isset($_POST["pessoa"]) && isset($_POST["email"])
     <p>Whatsapp: (11) 97285-9138</p>
     <img src="img/highpot.png">
 </div>
-
-<form id="novochamado" class="novochamado" method="POST">
-    <label for="empresa">Nome da empresa: </label>    
-    <input name="empresa" type="text">
-
-    <label for="pessoa">Seu nome: </label>    
-    <input name="pessoa" type="text">
-
-    <label for="email">E-mail: </label>    
-    <input name="email" type="email">
-
-    <label for="desc">Descrição do problema ou dúvida: </label>    
-    <textarea name="desc" type="text"></textarea>
-
-    <input type="submit" value="Abrir chamado">
-</form>
 
 </body>
 </html>
