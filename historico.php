@@ -11,7 +11,7 @@ function historicoTable()
     if ($user['user_level'] == 'admin') {
         $sql = $pdo->prepare("SELECT * FROM refuse");
     } else {
-        $sql = $pdo->prepare("SELECT * FROM refuse WHERE refuse_user_name = '" . $user['user_name'] . "' ORDER BY refuse_time DESC LIMIT 10");
+        $sql = $pdo->prepare("SELECT * FROM refuse WHERE refuse_user_name = '" . $user['user_name'] . "' ORDER BY refuse_datetime DESC LIMIT 10");
     }
     $sql->execute();
     while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
@@ -27,7 +27,7 @@ function historicoTable()
         echo "<td>" . $row['refuse_machine_name'] . "</td>";
         echo "<td>" . $row['refuse_code_code'] . "</td>";
         echo "<td>" . $row['refuse_value'] . "</td>";
-        echo "<td>" . $row['refuse_time'] . "</td>";
+        echo "<td>" . $row['refuse_datetime'] . "</td>";
         echo "<td class='tdeditar'><span class='material-icons hvr-float' onclick=\"location.href='historico.php?page=historico&id=" . $row['refuse_id'] . "'\">
         edit
         </span></td>";

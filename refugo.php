@@ -51,7 +51,7 @@ if(isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['qtd'])){
                 $sqla = $pdo->prepare("INSERT INTO refuse VALUES (null,?,?,?,?,default,null,null)");
                 $sqla->execute(array($user_name, $machine_name, $code_code, $qtd));
 
-                $pesq = $pdo->prepare("SELECT refuse_id FROM refuse ORDER BY refuse_time DESC LIMIT 1");
+                $pesq = $pdo->prepare("SELECT refuse_id FROM refuse ORDER BY refuse_datetime DESC LIMIT 1");
                 $pesq->execute();
                 $row_pesq = $pesq->fetch(PDO::FETCH_ASSOC);
                 $refuse_id = $row_pesq['refuse_id'];

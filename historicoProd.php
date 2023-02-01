@@ -11,7 +11,7 @@ function historicoProducaoTable()
     if ($user['user_level'] == 'admin') {
         $sql = $pdo->prepare("SELECT * FROM prod");
     } else {
-        $sql = $pdo->prepare("SELECT * FROM prod WHERE prod_user_login = '" . $user['user_login'] . "' ORDER BY prod_datetime DESC LIMIT 10");
+        $sql = $pdo->prepare("SELECT * FROM prod WHERE prod_user_name = '" . $user['user_name'] . "' ORDER BY prod_datetime DESC LIMIT 10");
     }
     $sql->execute();
     while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
