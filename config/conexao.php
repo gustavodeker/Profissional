@@ -5,22 +5,22 @@ include("funcoes.php");
 /*$servidor ="localhost";
 $usuario = "root";
 $senha = "";
-$banco = "basictest";
+$banco = "basictest";*/
 
-/*$servidor='54.207.211.112';
+$servidor='54.207.211.112';
 $usuario='developer';
 $senha='dev@2023';
-$banco='proturbo';*/
+$banco='proturbo';
 
 /*$servidor ="basictest.mysql.dbaas.com.br";
 $usuario='basictest';
 $senha='G8038375Gg@';
 $banco = 'basictest';*/
 
-$servidor ="sql642.main-hosting.eu";
+/*$servidor ="sql642.main-hosting.eu";
 $usuario='u273458796_gustavosantos';
 $senha='@8038375Gg?';
-$banco = 'u273458796_proturbo';
+$banco = 'u273458796_proturbo';*/
 
 try{
     $pdo = new PDO("mysql:host=$servidor;dbname=$banco;charset=utf8",$usuario,$senha);
