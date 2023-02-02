@@ -80,11 +80,10 @@ if (isset($_POST['login']) && isset($_POST['senha']) && !empty($_POST['login']) 
             position: fixed;
             display: flex;
             align-items: center;
-            justify-content: center;;
+            justify-content: center;
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 0px;
             text-align: center;
         }
         .hot {

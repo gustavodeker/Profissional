@@ -5,7 +5,7 @@ include("funcoes.php");
 /*$servidor ="localhost";
 $usuario = "root";
 $senha = "";
-$banco = "basictest";
+$banco = "basictest";*/
 
 /*$servidor='54.207.211.112';
 $usuario='developer';

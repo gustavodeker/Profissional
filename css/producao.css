@@ -3,20 +3,22 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 20px;
     /*display: none;*/
-    max-width: 600px;
+    max-width: 700px;
     width: 90%;
     height: max-content;
     border: 1px solid whitesmoke;
     overflow: auto;
+    padding: 15px;
+    background-color: whitesmoke;
+    border-radius: 5px;
 }
-#form-producao{
+#form-refuse{
     display: block;
     margin-top: 0px;
 }
 label{
-    font-size: 30pt;
+    font-size: 20pt;
     font-family: Arial, Helvetica, sans-serif;
 }
 /******************************/
@@ -27,43 +29,37 @@ label{
     flex-wrap: wrap;
     justify-content: left;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 .div-maquina select{
     margin-left: 5px;
     width: 60%;
-    height: 50px;
-    font-size: 20pt;
+    height: 30px;
+    font-size: 18pt;
     text-align: center;
+    border-radius: 5px;
 }
 /******/
 
 /******************************/
 
 /***QUANTIDADE***/
-.quantidade{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    flex-wrap: nowrap;
-}
 .div-qtd{
-    margin-top: 10px;
     display: flex;
     align-items: center;
     width: 100%;
     justify-content: center;
-    margin-bottom: 10px;
+    margin: 10px 0px;
 }
-.quantidade label{
+.div-qtd label{
     margin-bottom: 10px;
+    margin-right: 5px;
 }
 .div-qtd input{
-    width: 50%;
+    width: 25%;
     text-align: center;
     font-size: 20pt;
-    height: 100px;
+    height: 50px;
 }
 .div-qtd div{ 
     font-size: 20pt;
@@ -76,13 +72,15 @@ label{
     align-items: center;
     justify-content: center;
     width: 100px;
-    height: 100px;
+    height: 50px;
     border: 1px solid var(--azul-empresa);
     cursor: pointer;
 }
 .mais{
     display: flex;
     background-color: var(--azul-empresa);
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
 }
 .mais:hover {
     background-color: green;
@@ -90,6 +88,8 @@ label{
 }
 .menos{
     background-color: var(--azul-empresa);
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
 }
 .menos:hover{
     background-color: red;
@@ -108,7 +108,7 @@ label{
     transition: 0.1s;
     cursor: pointer;
     font-size: 32pt;
-
+    border-radius: 5px;
 }
 
 /******/
@@ -117,20 +117,32 @@ label{
 /******/
 .div-motivo{
     display: block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.div-motivo label{
+    position: relative;
+    float: left;
 }
 textarea{
     font-size: 22pt;
-    padding: 5pt;
-    width: 95%;
+    width: 100%;
+    border-radius: 5px;
 }
 /******************************/
 /******/
 /******************************/
-
+.pform{
+    text-align: center;
+    margin: 10px;
+    font-size: 20px;
+}
 
 /******************************/
 @media(max-width: 450px){
     #div-producao{
+        padding: 15px;
         margin-top: 0px;
     }
     #enviar{
@@ -152,6 +164,7 @@ textarea{
         height: 30px;
     }
     .div-qtd input{
+        width: 50%;
         height: 60px;
     }
     
@@ -161,5 +174,8 @@ textarea{
     #corpo{
         align-items: flex-start;
         padding-top: 10px;
+    }
+    .pform{
+        font-size: 12pt;
     }
 }

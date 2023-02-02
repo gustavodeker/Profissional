@@ -28,11 +28,11 @@
                 <!-- <p><php echo "Administrador: ".$user['user_name'] ?></p> -->
 
                 <ul class="menu" id="menu" role="menu">
-                    <a id='botaologin' href='acompanhamento.php'>Acompanhameto</a>
+                    <a id='botaologin' href='acompanhamento.php'>Acompanhamento</a>
                     <a id='botaologin' href='refugo.php'>Refugo</a>
                     <a id='botaologin' href='producao.php'>Produção</a>
                     <a id='botaologin' href='historico.php'>Histórico</a>
-                    <a id='botaologin' href='suporte.php'>Suporte</a>
+                    <a id='botaologin' href='https://suporte.highpot.tech/' target="_blank">Suporte</a>
                     <a id='botaologin' href='logout.php'>Sair</a>
                 </ul>
             <?php } else { ?>
@@ -48,7 +48,7 @@
     </nav>
 </header>
 
-<style>
+<!--<style>
     footer {
     position: fixed;
     bottom: 0;
@@ -65,4 +65,33 @@
 </style>
 <footer>
     <p class="prodape">Created by Highpot Tech.</p>
-</footer>
+</footer>-->
+
+<style>
+        footer {
+            position: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3rem;
+            padding-top: 3px;
+            text-align: center;
+            border-top: 1px solid rgba(245,245,245,0.3);
+            background-color: #004479;
+        }
+        .hot {
+            width: 100px;
+            opacity: 0.9;
+            margin-left: 5px;
+        }
+        .prodape {
+            color: whitesmoke;
+            padding-bottom: 14px;
+        }
+    </style>
+    <footer>
+        <p class="prodape">Created by</p><img class="hot" src="img/high.png" alt="">
+    </footer>

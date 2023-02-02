@@ -4,17 +4,20 @@
     margin-left: auto;
     margin-right: auto;
     /*display: none;*/
-    max-width: 600px;
+    max-width: 700px;
     width: 90%;
-    height: 90%;
     overflow: auto;
+    padding: 15px;
+    background-color: whitesmoke;
+    border-radius: 5px;
 }
+
 #form-refuse{
     display: block;
     margin-top: 0px;
 }
 label{
-    font-size: 30pt;
+    font-size: 20pt;
     font-family: Arial, Helvetica, sans-serif;
 }
 /******************************/
@@ -23,7 +26,7 @@ label{
 table{
     display: block;
     max-width: 600px;
-    height: 300px;
+    height: 250px;
     margin-left: auto;
     margin-right: auto;
     overflow: auto;
@@ -37,8 +40,8 @@ tbody tr:hover{
 td, th{
     vertical-align: middle;
     text-align: left;
-    font-size: 18pt;
-    padding-left: 2px;
+    font-size: 16pt;
+    padding-left: 5px;
 }
 td{
     border-bottom: 1px dotted gray;
@@ -51,20 +54,21 @@ td{
 .div-cod{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: baseline;
-    margin-bottom: 5%;
+    margin-bottom: 5px;
 }
 .div-cod label{
-    margin-bottom: 5%;
+    margin-bottom: 5px;
     text-align: center;
 }
 .div-cod input{
-    height: 50px;
+    height: 30px;
     width: 50%;
     font-size: 20pt;
-    margin-top: 5%;
+    margin-top: 5px;
     text-align: center;
+    border-radius: 5px;
 }
 /******/
 
@@ -74,16 +78,17 @@ td{
 .div-maquina{
     display: flex;
     flex-wrap: wrap;
-    justify-content: left;
+    justify-content: space-around;
     align-items: center;
-    margin-bottom: 5%;
+    margin-bottom: 5px;
 }
 .div-maquina select{
     margin-left: 5px;
     width: 60%;
-    height: 50px;
-    font-size: 20pt;
+    height: 30px;
+    font-size: 18pt;
     text-align: center;
+    border-radius: 5px;
 }
 /******/
 
@@ -92,7 +97,7 @@ td{
 /***QUANTIDADE***/
 .quantidade{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     width: 100%;
     flex-wrap: nowrap;
@@ -123,13 +128,15 @@ td{
     align-items: center;
     justify-content: center;
     width: 100px;
-    height: 100px;
+    height: 50px;
     border: 1px solid var(--azul-empresa);
     cursor: pointer;
 }
 .mais{
     display: flex;
     background-color: var(--azul-empresa);
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
 }
 .mais:hover {
     background-color: green;
@@ -137,6 +144,8 @@ td{
 }
 .menos{
     background-color: var(--azul-empresa);
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
 }
 .menos:hover{
     background-color: red;
@@ -157,6 +166,7 @@ td{
     transition: 0.1s;
     cursor: pointer;
     font-size: 32pt;
+    border-radius: 5px;
 }
 /******/
 
@@ -167,7 +177,9 @@ td{
 /******************************/
 @media(max-width: 450px){
     #div-refuse{
+        height: 90%;
         margin-top: 0px;
+        padding: 5px;
     }
     #enviar{
         height: 80px;
