@@ -148,6 +148,14 @@ if(isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['qtd'])){
 </html>
 
 <script>
+  document.getElementById('form-refuse').addEventListener('submit', function(event) {
+    event.preventDefault();
+    document.getElementById('enviar').setAttribute('disabled', 'disabled');
+    this.submit();
+  });
+</script>
+
+<script>
 	setTimeout(function () {
 		$('#mensagem').hide(); // "foo" é o id do elemento que seja manipular.
 	}, 2500); // O valor é representado em milisegundos.
