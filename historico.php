@@ -57,98 +57,101 @@ if (isset($_REQUEST["id"]) && !isset($_REQUEST["prod"])) {
 
 <body>
     <?php include_once("header.php") ?>
-
-    <!---------------------------------------------------------------->
-    <div class="div-alternar">
-        <a style="border: 2px solid black; border-radius: 3px;" class="btn-alternar hvr-float" href="historico.php">Refugo</a>
-        <a class="btn-alternar hvr-float" href="historicoProd.php">Produção</a>
-    </div>
-    <!---------------------------------------------------------------->
-    <div id="divt" class="animate__animated animate__fadeIn">
-        <h2>Histórico Refugo</h2>
-        <table id="<?php if ($user['user_level'] == 'admin') {
-        echo "historico-tableAdmin";}else{ echo "historico-table";} ?>">
-            <thead>
-                <th>Máquina</th>
-                <th>Código</th>
-                <th>Qtd</th>
-                <th>Horário</th>
-                <th id="theditar">Editar</th>
-            </thead>
-            <tbody>
-                <?php
-                    historicoTable();
-                ?>
-            </tbody>
-        </table>
-    </div>
-    <!---------------------------------------------------------------->
-
-    <!---------------------------------------------------------------->
-
-
-    <div class="janela-edit animate__animated animate__fadeIn" id="janela-edit">
-        <!---------------->
-        <?php //mensagem
-        if (isset($mensagem)) { ?>
-            <div id="mensagem" class="mensagem">
-                <?php echo "<p>" . $mensagem . "<p>"; ?>
-            </div>
-        <?php } ?>
-
-        <?php //mensagemerro
-        if (isset($mensagemerro)) { ?>
-            <div id="mensagemerro" class="mensagemerro">
-                <?php echo "<p>" . $mensagemerro . "<p>"; ?>
-            </div>
-        <?php } ?>
-        <!---------------->
-        <div id="div-refuse">
-            <button class="fechar" id="fechar" onclick="fecharEdit()">X</button>
-
-            <form id="form-refuse" method="POST">
-                <h1>EDITAR</a></h1>
-
-                <div class="div-maquina">
-                    <label class="maquina">Máquina:</label>
-                    <select class="hvr-float" id="maquina" name="maquina">
-                        <option value="<?php echo $row_m['machine_name'] ?>"><?php echo $row_m['machine_name'] ?></option>
-                        <?php machineOption(); ?>
-                    </select>
-                </div>
-                <!---------------->
-                <p style="background: #004479; color: whitesmoke; text-align: center;">Selecione o código na tabela</p>
-                <table id="table-cod">
-                    <thead>
-                        <th>Cod</th> 
-                        <th class="th-desc">Descrição</th>
-                    </thead>
-                    <tbody>
-                        <?php codTable(); ?>
-                    </tbody>
-                </table>
-                <!---------------->
-                <div class="div-cod">
-                    <label class="codigo">Selecionado:</label>
-                    <input id="cod" class="hvr-float" name="cod" type="number" value="<?php echo $row_c['code_code'] ?>">
-                </div>
-                <!---------------->
-                <div class="quantidade">
-                    <label>Quantidade:</label>
-                    <div class="div-qtd">
-                        <div class="menos hvr-float" onclick="menos()"><p>-</p></div>
-                        <input id="qtd" name="qtd" class="qtd hvr-float" type="number" min="1" value="<?php echo $row_n['refuse_value']  ?>">
-                        <div class="mais hvr-float" onclick="mais()">+</div>
-                    </div>
-                </div>
-                <!---------------->
-                <input id="enviar" class="hvr-float" type="submit" value="Enviar">
-                <!---------------->
-            </form>
+    <div class="main">
+        <!---------------------------------------------------------------->
+        <div class="div-alternar">
+            <a style="border: 2px solid whitesmoke; border-radius: 3px;" class="btn-alternar hvr-float" href="historico.php">Refugo</a>
+            <a class="btn-alternar hvr-float" href="historicoProd.php">Produção</a>
         </div>
-        <!---------------->
+        <!---------------------------------------------------------------->
+        <div id="divt" class="animate__animated animate__fadeIn">
+            <table id="historico-tableAdmin">
+                <thead>
+                    <th>Máquina</th>
+                    <th>Código</th>
+                    <th>Qtd</th>
+                    <th>Horário</th>
+                    <th id="theditar">Editar</th>
+                </thead>
+                <tbody>
+                    <?php
+                    historicoTable();
+                    ?>
+                </tbody>
+            </table>
+        </div>
+        <!---------------------------------------------------------------->
+
+        <!---------------------------------------------------------------->
+
+
+        <div class="janela-edit animate__animated animate__fadeIn" id="janela-edit">
+            <!---------------->
+            <?php //mensagem
+            if (isset($mensagem)) { ?>
+                <div id="mensagem" class="mensagem">
+                    <?php echo "<p>" . $mensagem . "<p>"; ?>
+                </div>
+            <?php } ?>
+
+            <?php //mensagemerro
+            if (isset($mensagemerro)) { ?>
+                <div id="mensagemerro" class="mensagemerro">
+                    <?php echo "<p>" . $mensagemerro . "<p>"; ?>
+                </div>
+            <?php } ?>
+            <!---------------->
+            <div id="div-refuse">
+                <button class="fechar" id="fechar" onclick="fecharEdit()">X</button>
+
+                <form id="form-refuse" method="POST">
+                    <h1>EDITAR</a></h1>
+
+                    <div class="div-maquina">
+                        <label class="maquina">Máquina:</label>
+                        <select class="hvr-float" id="maquina" name="maquina">
+                            <option value="<?php echo $row_m['machine_name'] ?>"><?php echo $row_m['machine_name'] ?></option>
+                            <?php machineOption(); ?>
+                        </select>
+                    </div>
+                    <!---------------->
+                    <p style="background: #004479; color: whitesmoke; text-align: center;">Selecione o código na tabela</p>
+                    <table id="table-cod">
+                        <thead>
+                            <th>Cod</th>
+                            <th class="th-desc">Descrição</th>
+                        </thead>
+                        <tbody>
+                            <?php codTable(); ?>
+                        </tbody>
+                    </table>
+                    <!---------------->
+                    <div class="div-cod">
+                        <label class="codigo">Selecionado:</label>
+                        <input id="cod" class="hvr-float" name="cod" type="number" value="<?php echo $row_c['code_code'] ?>">
+                    </div>
+                    <!---------------->
+                    <div class="quantidade">
+                        <label>Quantidade:</label>
+                        <div class="div-qtd">
+                            <div class="menos hvr-float" onclick="menos()">
+                                <p>-</p>
+                            </div>
+                            <input id="qtd" name="qtd" class="qtd hvr-float" type="number" min="1" value="<?php echo $row_n['refuse_value']  ?>">
+                            <div class="mais hvr-float" onclick="mais()">+</div>
+                        </div>
+                    </div>
+                    <!---------------->
+                    <input id="enviar" class="hvr-float" type="submit" value="Enviar">
+                    <!---------------->
+                </form>
+            </div>
+            <!---------------->
+        </div>
+        <!---------------------------------------------------------------->
+
+
     </div>
-    <!---------------------------------------------------------------->
 </body>
 
 </html>
@@ -203,12 +206,16 @@ if (isset($_REQUEST["id"]) && !isset($_REQUEST["prod"])) { ?>
     }, 2500); // O valor é representado em milisegundos.
 </script>
 
+
+
+
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="js/datatable.js"></script>
 
-
-<script> /* Datatable Admin com edições necessárias*/
-    $(document).ready(function () {
+<script>
+    $(document).ready(function() {
         //Com responsividade e tradução
         $('#historico-tableAdmin').DataTable({
             responsive: true,
@@ -229,10 +236,10 @@ if (isset($_REQUEST["id"]) && !isset($_REQUEST["prod"])) { ?>
                     "first": "Primeiro",
                     "last": "Último"
                 }
-            }, "order": [[3, 'desc']]
+            },
+            "order": [
+                [3, 'desc']
+            ]
         });
     });
 </script>
-
-
-

@@ -1,11 +1,53 @@
-#divt{
-    width: 100%;
+html{
+    background-color: #004479;
+}
+.main{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    padding-top: 20px;
-    align-items: top;
+    background-color: #004479;
 }
+#divt{
+    display: flex;
+    justify-content: center;
+    align-items: top;
+    height: 550px;
+    width: 700px;
+    overflow-y: auto;
+    background-color: whitesmoke;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+@media(max-width: 620px){
+    #divt{
+        width: 100%;
+    }
+}
+#table-cod{
+    display: block;
+    max-width: 600px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: auto;
+}
+#table-cod tbody tr{
+    cursor: pointer;
+}
+#table-cod tbody tr:hover{
+    background-color: var(--azul-empresa);
+}
+#table-cod td, th{
+    vertical-align: middle;
+    text-align: left;
+    font-size: 12pt;
+    padding-left: 5px;
+}
+#table-cod td{
+    border-bottom: 1px dotted gray;
+}
+
 h2{
     width: 100%;
     text-align: center;
@@ -75,6 +117,7 @@ span{
     width: 100%;
     display: flex;
     justify-content: center;
+    background-color: #004479;
 }
 .btn-alternar{
     background-color: var(--azul-empresa);
@@ -83,7 +126,7 @@ span{
     margin: 2px;
     font-size: 20pt;
     cursor: pointer;
-    border: 2px solid var(--text-claro);
+    border-radius: 50px;
 }
 
 
@@ -95,7 +138,7 @@ span{
     margin-top: 50px;
     /*display: none;*/
     max-width: 600px;
-    width: 90%;
+    width: 98%;
     height: max-content;
     border: 1px solid var(--text-claro);
     overflow: auto;
@@ -125,6 +168,7 @@ label{
     overflow: auto;
     background-color: var(--text-claro);
     padding: 10px;
+    border-radius: 5px;
 }
 #form-producao{
     display: block;
@@ -141,7 +185,7 @@ label{
 }
 /******************************/
 
-/***TABLE***/
+/***TABLE***//*
 table{
     display: block;
     max-width: 600px;
@@ -163,7 +207,7 @@ td, th{
 }
 td{
     border-bottom: 1px dotted gray;
-}
+}*/
 /*************HISTÓRICO*****************/
 #historico-table{
     height: 700px;
@@ -197,10 +241,10 @@ td{
 
 /****************************************/
 #historico-tableAdmin{
-    height: 700px;
-    border-collapse: collapse;
+    height: 300px !important;
+    overflow-y: auto;
 }
-
+/*
 #historico-tableAdmin thead th{
     text-align: center;
     border: 1px solid var(--text-escuro);
@@ -225,7 +269,7 @@ td{
 }
 .tdeditar:hover span{
     color: var(--text-claro);
-}
+}*/
 /****************************************/
 /****************************************/
 
@@ -272,46 +316,49 @@ td{
 /***QUANTIDADE***/
 .quantidade{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     width: 100%;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    margin: 0px;
 }
 .div-qtd{
     display: flex;
-    width: 100%;
+    width: 60%;
     justify-content: center;
-    align-items: center;
     margin-bottom: 10px;
 }
 .quantidade label{
     margin-bottom: 10px;
-    text-align: center;
 }
 .div-qtd input{
-    width: 40%;
+    width: 50%;
     text-align: center;
-    font-size: 30pt;
-    height: 105px;
+    font-size: 20pt;
 }
-.div-qtd div{
-    font-size: 30pt;
+#qtd{
+    height: 50px;
 }
-
+.div-qtd div{ 
+    font-size: 20pt;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .menos, .mais{
     display: flex;
-    justify-content: center;
     align-items: center;
-    width: 150px;
-    height: 100px;
+    justify-content: center;
+    width: 100px;
+    height: 50px;
     border: 1px solid var(--azul-empresa);
-    padding-bottom: 10px;
     cursor: pointer;
 }
 .mais{
+    display: flex;
     background-color: var(--azul-empresa);
-    justify-content: right;
-    
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
 }
 .mais:hover {
     background-color: green;
@@ -319,6 +366,8 @@ td{
 }
 .menos{
     background-color: var(--azul-empresa);
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
 }
 .menos:hover{
     background-color: red;
@@ -339,6 +388,7 @@ td{
     transition: 0.1s;
     cursor: pointer;
     font-size: 32pt;
+    border-radius: 5px;
 
 }
 
@@ -384,5 +434,8 @@ td{
     }
     .div-qtd input{
         height: 67px;
+    }
+    #qtd{
+        height: 60px;
     }
 }

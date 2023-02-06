@@ -52,17 +52,15 @@ if (isset($_REQUEST["id"])) {
 
 <body>
     <?php include_once("header.php") ?>
-
+    <div class="main">
     <!---------------------------------------------------------------->
     <div class="div-alternar">
         <a class="btn-alternar hvr-float" href="historico.php">Refugo</a>
-        <a style="border: 2px solid black; border-radius: 3px;" class="btn-alternar hvr-float" href="historicoProd.php">Produção</a>
+        <a style="border: 2px solid whitesmoke; border-radius: 3px;" class="btn-alternar hvr-float" href="historicoProd.php">Produção</a>
     </div>
     <!---------------------------------------------------------------->
     <div id="divt" class="animate__animated animate__fadeIn">
-        <h2>Histórico Produção</h2>
-        <table id="<?php if ($user['user_level'] == 'admin') {
-        echo "historico-tableAdmin";}else{ echo "historico-table";} ?>">
+        <table id="historico-tableAdmin">
             <thead>
                 <th>Máquina</th>
                 <th>Qtd</th>
@@ -118,12 +116,16 @@ if (isset($_REQUEST["id"])) {
                     <textarea class="hvr-float" name="motivo" id="motivo" cols="auto" rows="5"><?php echo $row_n["prod_reason"]; ?></textarea>
                 </div>
                 <!---------------->
-                <div class="div-qtd">
-                    <label>Quantidade:</label>
-                    <div class="menos hvr-float" onclick="menos()">-</div>
-                    <input id="qtd" name="qtd" class="qtd hvr-float" type="number" min="1" value="<?php echo $row_n['prod_value'] ?>">
-                    <div class="mais hvr-float" onclick="mais()">+</div>
-                </div>
+                <div class="quantidade">
+                        <label>Quantidade:</label>
+                        <div class="div-qtd">
+                            <div class="menos hvr-float" onclick="menos()">
+                                <p>-</p>
+                            </div>
+                            <input id="qtd" name="qtd" class="qtd hvr-float" type="number" min="1" value="<?php echo $row_n['prod_value']  ?>">
+                            <div class="mais hvr-float" onclick="mais()">+</div>
+                        </div>
+                    </div>
                 <input id="enviar" class="hvr-float" type="submit" value="Enviar">
             </form>
         </div>
@@ -132,6 +134,9 @@ if (isset($_REQUEST["id"])) {
     </div>
     <!---------------------------------------------------------------->
 
+
+
+    </div>
 </body>
 
 </html>
