@@ -1,0 +1,19 @@
+E-mail: guuhsrdeker@gmail.com
+Usuário: technologyclass
+Senha: G8038375Gg@
+
+
+https://webftp.locaweb.com.br/
+Host: ftp.technologyclass.net
+Usuário de FTP: technologyclass1
+Senha: Locaweb102030@
+
+Banco de dados: tyclass
+$servidor='tyclass.mysql.dbaas.com.br';
+$usuario='tyclass';
+$senha='G8038375Gg@';
+$banco='tyclass';
+
+
+E-mail: nao-responda@technologyclass.net
+8038375Gg?
