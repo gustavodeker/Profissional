@@ -4,9 +4,10 @@ Developer
 Gustavo123@
 
 Grafana: http://54.207.211.112:3000/
+admin
+admin123
+
+Grafana: http://54.207.211.112:3000/
 gustavo.santos
 Highpot123@
 
-Grafana: http://54.207.211.112:3000/
-admin
-admin123

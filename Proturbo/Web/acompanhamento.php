@@ -35,18 +35,34 @@ header("Refresh: 20;");
             box-shadow: 0px 0px 10px #cecece;
             overflow: auto;
         }
+        .linkgrafana{
+            padding: 10px;
+            background-color: #004479;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bolder;
+        }
+        .linkgrafana:hover{
+            background-color: #004470;
+        }
+        p{
+            text-align: center;
+            margin-top: 30px;
+        }
     </style>
 </head>
 
 <body>
     <?php include_once("header.php") ?>
-    <h1>Gráficos</h1>
+    <h1>Gráficos </h1>
 
     <div class="corpo">
         <div id="refugo" style="width: 320px;"></div>
 
         <div id="producao" style="width: 320px;"></div>
     </div>
+
+    <p>Acesse: <a class="linkgrafana hvr-float"href="http://54.207.211.112:3000/d/ra73L20Vk" target="_blank">GRÁFICOS COMPLETOS</a> </p>
 
 </body>
 
