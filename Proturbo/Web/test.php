@@ -35,34 +35,37 @@ $labels_json = json_encode($labels);
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
     .out {
-        max-width: 1000px;
-        max-height: 500px;
+        max-width: 600px;
+        max-height: 600px;
         overflow: auto;
         margin-left: auto;
         margin-right: auto;
     }
+    .in{
+      width: 100px;
+        height: 1000px;
+    }
+    #myChart {
+        width: 100px;
+        height: 1000px;
+    }
 
     .linkgrafana {
-        padding: 10px;
-        background-color: #004479;
-        border-radius: 5px;
-        cursor: pointer;
-        font-weight: bolder;
-    }
-
-    .linkgrafana:hover {
-        background-color: #004470;
-    }
-
-    p {
-        text-align: center;
-        margin-top: 30px;
-    }
-    @media(max-width: 1000px){
-        .out {
-            margin-top: 100px;
+            padding: 10px;
+            background-color: #004479;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bolder;
         }
-    }
+
+        .linkgrafana:hover {
+            background-color: #004470;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 30px;
+        }
     </style>
 </head>
 
@@ -75,8 +78,7 @@ $labels_json = json_encode($labels);
         </div>
     </div>
 
-    <p>Acesse: <a class="linkgrafana hvr-float" href="http://54.207.211.112:3000/d/ra73L20Vk" target="_blank">GRÁFICOS
-            COMPLETOS</a> </p>
+    <p>Acesse: <a class="linkgrafana hvr-float" href="http://54.207.211.112:3000/d/ra73L20Vk" target="_blank">GRÁFICOS COMPLETOS</a> </p>
     <script>
     const ctx = document.getElementById('myChart');
 
@@ -84,19 +86,16 @@ $labels_json = json_encode($labels);
         type: 'bar',
         data: {
             labels: <?php echo $labels_json; ?>,
-            datasets: [{
-                    label: 'Produção',
-                    data: <?php echo $data_json; ?>,
-                    borderWidth: 0,
-                    backgroundColor: 'rgba(0, 68, 121, 0.8)'
-                },
-                {
-                    label: 'Refugo',
-                    data: <?php echo $data2_json; ?>,
-                    borderWidth: 0,
-                    backgroundColor: 'rgba(255, 0, 0, 0.8)'
-                }
-            ]
+            datasets: [{  
+                label: 'Produção',
+                data: <?php echo $data_json; ?>,
+                borderWidth: 1
+            },
+            {  
+                label: 'Refugo',
+                data: <?php echo $data2_json; ?>,
+                borderWidth: 1
+            }]
         },
         options: {
             indexAxis: 'y',
@@ -111,6 +110,11 @@ $labels_json = json_encode($labels);
                     labels: <?php echo $labels_json; ?>
                 }]
             },
+            elements: {
+                rectangle: {
+                    borderWidth: 30,
+                }
+            }
         }
     });
     </script>
