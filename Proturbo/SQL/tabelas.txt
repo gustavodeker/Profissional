@@ -10,7 +10,24 @@ CREATE TABLE users (
 CREATE TABLE codes (
     code_id int(11) PRIMARY KEY AUTO_INCREMENT,
     code_code varchar(50) UNIQUE NOT NULL,
-    code_desc varchar(255) NOT NULL
+    code_desc varchar(255) NOT NULL,
+    code_processo varchar(4) NOT NULL
+);
+
+CREATE TABLE itens (
+    item_id int(11) PRIMARY KEY AUTO_INCREMENT,
+    item_pn varchar(50) UNIQUE NOT NULL,
+    item_desc varchar(255) NOT NULL,
+    item_setor varchar(50) NOT NULL,
+    item_prodtotal int(11),
+    item_refugototal int(11),
+    item_ppm DECIMAL(11,0) AS ((NULLIF(item_refugototal, 0) / NULLIF(item_prodtotal, 0)) * 1000000) STORED
+);
+
+CREATE TABLE setores (
+    setor_id int(11) PRIMARY KEY AUTO_INCREMENT,
+    setor_cod varchar(4) UNIQUE NOT NULL,
+    setor_nome varchar(50) NOT NULL,
 );
 
 CREATE TABLE machines (
@@ -22,48 +39,43 @@ CREATE TABLE machines (
 
 CREATE TABLE prod (
     prod_id int(11) PRIMARY KEY AUTO_INCREMENT,
-    prod_user_name varchar(50) NULL,
     prod_machine_name varchar(50) NOT NULL,
+    prod_item_pn varchar(50) NOT NULL,
+    prod_item_pn_desc varchar(255) NOT NULL,
+    prod_setor_cod varchar(4) UNIQUE NOT NULL,
+    prod_setor_name varchar(50) NOT NULL,
     prod_value int(11) NOT NULL,
-    prod_reason varchar(255) NULL,
     prod_datetime datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    prod_user_name varchar(50) NULL,
+    prod_reason varchar(255) NULL,
     prod_altertime datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     prod_alterby varchar(50) NULL,
-    FOREIGN KEY (prod_machine_name) REFERENCES machines(machine_name)
+    FOREIGN KEY (prod_machine_name) REFERENCES machines(machine_name),
+    FOREIGN KEY (prod_item_pn) REFERENCES itens(item_pn),
+    FOREIGN KEY (prod_setor_cod) REFERENCES setores(setor_cod)
 );
 
 CREATE TABLE refuse (
     refuse_id int(11) PRIMARY KEY AUTO_INCREMENT,
-    refuse_user_name varchar(50) NOT NULL,
     refuse_machine_name varchar(50) NOT NULL,
+    refuse_item_pn varchar(50) NOT NULL,
+    refuse_item_pn_desc varchar(255) NOT NULL,
+    refuse_setor_cod varchar(4) UNIQUE NOT NULL,
+    refuse_setor_name varchar(50) NOT NULL,
     refuse_code_code varchar(50) NOT NULL,
+    refuse_code_desc varchar(255) NOT NULL,
+    refuse_code_processo varchar(4) NOT NULL,
+    refuse_setor_area varchar(255) AS (CONCAT(refuse_setor_name, ' - ', refuse_code_processo)),
     refuse_value int(11) NOT NULL,
     refuse_datetime datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    refuse_user_name varchar(50) NOT NULL,
     refuse_altertime datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     refuse_alterby varchar(50) NULL,
     FOREIGN KEY (refuse_user_name) REFERENCES users(user_name),
     FOREIGN KEY (refuse_machine_name) REFERENCES machines(machine_name),
+    FOREIGN KEY (refuse_item_pn) REFERENCES itens(item_pn),
+    FOREIGN KEY (refuse_setor_cod) REFERENCES setores(setor_cod),
     FOREIGN KEY (refuse_code_code) REFERENCES codes(code_code)
-);
-
-CREATE TABLE gr (
-    gr_id int(11) PRIMARY KEY AUTO_INCREMENT,
-    gr_user varchar(50) NOT NULL,
-    gr_machine varchar(50) NOT NULL,
-    gr_code varchar(50) NOT NULL,
-    gr_value int(11) NOT NULL,
-    gr_time datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    gr_refuse_id int(11)
-);
-
-CREATE TABLE gp (
-    gp_id int(11) PRIMARY KEY AUTO_INCREMENT,
-    gp_user varchar(50) NOT NULL,
-    gp_machine varchar(50) NOT NULL,
-    gp_reason varchar(255) NOT NULL,
-    gp_value int(11) NOT NULL,
-    gp_time datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    gp_prod_id int(11)
 );
 
 
