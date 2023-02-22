@@ -1,5 +1,5 @@
 <?php
-include("config/conexao.php");
+include("conexao.php");
 /*sessionVerif();
 sessionVerifAdmin();*/
 

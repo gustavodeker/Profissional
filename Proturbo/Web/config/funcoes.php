@@ -14,7 +14,8 @@ function machineOption()
         echo "<option value='". $row['machine_name']."'>". $row['machine_name']."</option>";
     }
 }
-function codTable()
+ 
+function codTable() //exibe a tabela
 {
     global $pdo;
     $sql = $pdo->prepare("SELECT * FROM codes");
@@ -28,6 +29,23 @@ function codTable()
         <td class="tddesc" id='<?php echo $ide ?>' onclick="list('<?php echo $ide ?>')"><?php echo $row['code_desc'] ?></td>
         <?php
         $i++;
+    }
+}
+
+function itemTable() //exibe a tabela
+{
+    global $pdo;
+    $sql = $pdo->prepare("SELECT * FROM itens");
+    $sql->execute();
+    $u = 1000;
+    while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+        echo "<tr>";
+        $ide2 = 'td' . $u;
+        ?>
+        <td class="tdcod" id='<?php echo $ide2 ?>' onclick="list2('<?php echo $ide2 ?>')"><?php echo $row['item_pn'] ?></td>
+        <td class="tddesc" id='<?php echo $ide2 ?>' onclick="list2('<?php echo $ide2 ?>')"><?php echo $row['item_desc'] ?></td>
+        <?php
+        $u++;
     }
 }
 

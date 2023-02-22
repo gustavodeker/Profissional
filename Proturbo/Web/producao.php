@@ -117,6 +117,7 @@ if(isset($_POST['maquina']) && isset($_POST['motivo']) && isset($_POST['qtd'])){
         <!---------------->
     </div>
 
+    <?php include('footer.php'); ?>
 </body>
 </html>
 

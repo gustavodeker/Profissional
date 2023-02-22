@@ -67,31 +67,3 @@
     <p class="prodape">Created by Highpot Tech.</p>
 </footer>-->
 
-<style>
-        footer {
-            position: fixed;
-            display: flex;
-            align-items: center;
-            justify-content: center;;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 3rem;
-            padding-top: 3px;
-            text-align: center;
-            border-top: 1px solid rgba(245,245,245,0.3);
-            background-color: #004479;
-        }
-        .hot {
-            width: 100px;
-            opacity: 0.9;
-            margin-left: 5px;
-        }
-        .prodape {
-            color: whitesmoke;
-            padding-bottom: 14px;
-        }
-    </style>
-    <footer>
-        <p class="prodape">Created by</p><img class="hot" src="img/high.png" alt="">
-    </footer>

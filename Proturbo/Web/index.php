@@ -75,30 +75,8 @@ if (isset($_POST['login']) && isset($_POST['senha']) && !empty($_POST['login']) 
     </main>
 
 
-    <style>
-        footer {
-            position: fixed;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            text-align: center;
-        }
-        .hot {
-            width: 100px;
-            opacity: 0.9;
-            margin-left: 5px;
-        }
-        .prodape {
-            color: whitesmoke;
-            padding-bottom: 18px;
-        }
     </style>
-    <footer>
-        <p class="prodape">Created by</p><img class="hot" src="img/high.png" alt="">
-    </footer>
+<?php include('footer.php'); ?>
 </body>
 
 </html>

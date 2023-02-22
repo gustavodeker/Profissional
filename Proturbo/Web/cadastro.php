@@ -117,5 +117,7 @@ if(isset($_POST['nome']) && isset($_POST['senha']) && isset($_POST['level'])){
             </form>
         </div>
     </div>
+
+    <?php include('footer.php'); ?>
 </body>
 </html>

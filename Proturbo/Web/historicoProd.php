@@ -137,6 +137,8 @@ if (isset($_REQUEST["id"])) {
 
 
     </div>
+
+    <?php include('footer.php'); ?>
 </body>
 
 </html>

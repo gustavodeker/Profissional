@@ -152,6 +152,8 @@ if (isset($_REQUEST["id"]) && !isset($_REQUEST["prod"])) {
 
 
     </div>
+
+    <?php include('footer.php'); ?>
 </body>
 
 </html>

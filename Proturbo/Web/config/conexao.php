@@ -1,11 +1,12 @@
 <?php
 session_start();
 include("funcoes.php");
+include("funcoes_csv.php");
 
-/*$servidor ="localhost";
+$servidor ="localhost";
 $usuario = "root";
 $senha = "";
-$banco = "basictest";*/
+$banco = "basictest";
 
 /*$servidor='54.207.211.112';
 $usuario='developer';
@@ -17,10 +18,10 @@ $usuario='basictest';
 $senha='G8038375Gg@';
 $banco = 'basictest';*/
 
-$servidor ="sql642.main-hosting.eu";
+/*$servidor ="sql642.main-hosting.eu";
 $usuario='u273458796_gustavosantos';
 $senha='@8038375Gg?';
-$banco = 'u273458796_proturbo';
+$banco = 'u273458796_proturbo';*/
 
 try{
     $pdo = new PDO("mysql:host=$servidor;dbname=$banco;charset=utf8",$usuario,$senha);

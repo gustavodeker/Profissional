@@ -14,20 +14,10 @@ CREATE TABLE codes (
     code_processo varchar(4) NOT NULL
 );
 
-CREATE TABLE itens (
-    item_id int(11) PRIMARY KEY AUTO_INCREMENT,
-    item_pn varchar(50) UNIQUE NOT NULL,
-    item_desc varchar(255) NOT NULL,
-    item_setor varchar(50) NOT NULL,
-    item_prodtotal int(11),
-    item_refugototal int(11),
-    item_ppm DECIMAL(11,0) AS ((NULLIF(item_refugototal, 0) / NULLIF(item_prodtotal, 0)) * 1000000) STORED
-);
-
 CREATE TABLE setores (
     setor_id int(11) PRIMARY KEY AUTO_INCREMENT,
     setor_cod varchar(4) UNIQUE NOT NULL,
-    setor_nome varchar(50) NOT NULL,
+    setor_nome varchar(50) UNIQUE NOT NULL
 );
 
 CREATE TABLE machines (
@@ -35,6 +25,17 @@ CREATE TABLE machines (
     machine_name varchar(50) UNIQUE NOT NULL,
     machine_marca varchar(255) NOT NULL,
     machine_users varchar(255) NULL
+);
+
+CREATE TABLE itens (
+    item_id int(11) PRIMARY KEY AUTO_INCREMENT,
+    item_pn varchar(50) UNIQUE NOT NULL,
+    item_desc varchar(255) NOT NULL,
+    item_setor_nome varchar(50) NOT NULL,
+    item_prodtotal int(11),
+    item_refugototal int(11),
+    item_ppm DECIMAL(11,0) AS ((NULLIF(item_refugototal, 0) / NULLIF(item_prodtotal, 0)) * 1000000) STORED,
+    FOREIGN KEY (item_setor_nome) REFERENCES setores(setor_nome)
 );
 
 CREATE TABLE prod (
