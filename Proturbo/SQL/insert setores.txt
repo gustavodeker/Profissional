@@ -1,0 +1,9 @@
+INSERT INTO setores VALUES
+(null,"340",'Acabamento Coquilha'),
+(null,"210",'Fundição Ferro'),
+(null,"520",'Injeção'),
+(null,"110",'Precision'),
+(null,"410",'Usinagem coquilhados'),
+(null,"220",'Usinagem Ferro'),
+(null,"610",'Usinagem injetados'),
+(null,"330",'Vazamento Coquilha');
