@@ -2,16 +2,18 @@
 include("config/conexao.php");
 sessionVerif();
 
-if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['qtd'])) {
-    if (empty($_POST['maquina']) or empty($_POST['cod']) or empty($_POST['qtd'])) {
+if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && isset($_POST['qtd'])) {
+    if (empty($_POST['maquina']) or empty($_POST['cod']) or empty($_POST['pn']) or empty($_POST['qtd'])) {
         $mensagemerro = "Todos os campos são obrigatórios!";
         $ultimachine = limpaPost($_POST['maquina']);
         $ultimocode = limpaPost($_POST['cod']);
+        $ultimopn = limpaPost($_POST['pn']);
         $ultimaqtd = $qtd = limpaPost($_POST['qtd']);
     } else {
-        /* Dados coletados */
+        /* Limpando entrada */
         $machine = limpaPost($_POST['maquina']);
         $code = limpaPost($_POST['cod']);
+        $pn = limpaPost($_POST['pn']);
         $qtd = limpaPost($_POST['qtd']);
 
         /* Verificando se cod existe */
@@ -19,45 +21,60 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['qtd'])) {
         $sql_count->execute();
         $count_code = $sql_count->fetchColumn();
 
+        /* Verificando se pn existe */
+        $sql_count = $pdo->prepare("SELECT COUNT(*) FROM itens WHERE item_pn = '$pn'");
+        $sql_count->execute();
+        $count_pn = $sql_count->fetchColumn();
+
         if ($count_code != 1) {
             $mensagemerro = "Código incorreto!";
+        }
+        if ($count_pn != 1) {
+            $mensagemerro = "Partnumber incorreto!";
         }
         if ($qtd < 1 or $qtd > 999) {
             $mensagemerro = "Quantidade de 1 a 999!";
         }
-        if ($count_code == 1 && $qtd > 0 && $qtd < 1000) {
-            /* Coletando code_id */
-            $sql_cod = $pdo->prepare("SELECT * FROM codes WHERE code_code = '$code'");
-            $sql_cod->execute();
-            $row_cod = $sql_cod->fetch(PDO::FETCH_ASSOC);
-            $ultimocode = $row_cod["code_code"];
+        if ($count_code == 1 && $count_pn == 1 && $qtd > 0 && $qtd < 1000) {
 
-            /* Coletando machine_id */
-            $sql_machine = $pdo->prepare("SELECT * FROM machines WHERE machine_name = '$machine'");
-            $sql_machine->execute();
-            $row_machine = $sql_machine->fetch(PDO::FETCH_ASSOC);
-            $machine_name = $row_machine['machine_name'];
-            $ultimachine = $row_machine["machine_name"];
-
-            /* Coletando user_id */
+            /* Coletando user */
             global $user;
             $user = auth($_SESSION['TOKEN']);
 
+            /* Coletando codes */
+            $sql_cod = $pdo->prepare("SELECT * FROM codes WHERE code_code = '$code'");
+            $sql_cod->execute();
+            $row_cod = $sql_cod->fetch(PDO::FETCH_ASSOC);
+
+            /* Coletando itens/pn */
+            $sql_pn = $pdo->prepare("SELECT * FROM itens WHERE item_pn = '$pn'");
+            $sql_pn->execute();
+            $row_pn = $sql_pn->fetch(PDO::FETCH_ASSOC);
+
+            /* ultimos dados */
+            $ultimachine = $machine;
+            $ultimocode = $code;
+            /*$ultimopn*/
+
             /* Dados coletados */
+            /*refuse_id*/
+            $machine_name = $machine;
+            $pn_pn = $pn;
+            $pn_desc = $row_pn['item_pn_desc'];
+            $pn_setor_cod = $row_pn['item_setor_cod'];
+            $pn_setor_name = $row_pn['item_setor_name'];
+            $code_code = $code;
+            $code_desc = $row_cod["code_desc"];
+            $code_processo = $row_cod["code_processo"];
+            /*refuse_setor_area*/
+            /*$qtd */
+            /*refuse_datetime*/
             $user_name = $user['user_name'];
-            $code_code = $row_cod['code_code'];
 
             try {
-                $sqla = $pdo->prepare("INSERT INTO refuse VALUES (null,?,?,?,?,default,null,null)");
-                $sqla->execute(array($user_name, $machine_name, $code_code, $qtd));
+                $sqla = $pdo->prepare("INSERT INTO refuse VALUES (null,?,?,?,?,?,?,?,?,default,?,default,?)");
+                $sqla->execute(array($machine_name, $pn_pn, $pn_desc, $pn_setor_cod, $pn_setor_name, $code_code, $code_desc, $code_processo, $qtd, $user_name));
 
-                $pesq = $pdo->prepare("SELECT refuse_id FROM refuse ORDER BY refuse_datetime DESC LIMIT 1");
-                $pesq->execute();
-                $row_pesq = $pesq->fetch(PDO::FETCH_ASSOC);
-                $refuse_id = $row_pesq['refuse_id'];
-
-                $sqlb = $pdo->prepare("INSERT INTO gr VALUES (null,?,?,?,?,default,?)");
-                $sqlb->execute(array($user['user_name'], $row_machine['machine_name'], $row_cod['code_code'], $qtd, $refuse_id));
                 $mensagem = "Registrado com sucesso!";
             } catch (PDOException $erro) {
                 $mensagemerro = "Falha no banco de dados, contactar suporte!" . $erro;
@@ -110,13 +127,13 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['qtd'])) {
                         <option value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimachine)) {
                                             echo $ultimachine;
                                         } ?>"><?php /* Para deixar último código usado selecionado*/ if (isset($ultimachine)) {
-                                                                                                                                                    echo $ultimachine;
-                                                                                                                                                } ?></option>
+                                                    echo $ultimachine;
+                                                } ?></option>
                         <?php machineOption(); ?>
                     </select>
                 </div>
                 <!---------------->
-                <p style="background: #004479; color: whitesmoke; text-align: center;">Selecione o código na tabela</p>
+                <p style="background: #004479; color: whitesmoke; text-align: center;">Selecione o motivo do refugo:</p>
                 <table id="table-cod">
                     <thead>
                         <th>Cod</th>
@@ -134,16 +151,9 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['qtd'])) {
                                                                                         } ?>">
                 </div>
                 <!---------------->
-                                <!---------------->
-                                <div class="div-cod">
-                    <label class="codigo">Selecionado:</label>
-                    <input class="hvr-float" id="pn" name="pn" type="number" value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimocode)) {
-                                                                                            echo $ultimocode;
-                                                                                        } ?>">
-                </div>
+
                 <!---------------->
-                <!---------------->
-                <p style="background: #004479; color: whitesmoke; text-align: center;">Selecione o código na tabela</p>
+                <p style="background: #004479; color: whitesmoke; text-align: center;">Selecione o Partnumber:</p>
                 <table id="tabled">
                     <thead>
                         <th>PN</th>
@@ -153,6 +163,14 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['qtd'])) {
                         <?php itemTable(); ?>
                     </tbody>
                 </table>
+                <!---------------->
+                <!---------------->
+                <div class="div-cod">
+                    <label class="codigo">Selecionado:</label>
+                    <input class="hvr-float" id="pn" name="pn" type="number" value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimopn)) {
+                                                                                        echo $ultimopn;
+                                                                                    } ?>">
+                </div>
                 <!---------------->
                 <div class="quantidade">
                     <label>Quantidade:</label>
@@ -214,6 +232,7 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['qtd'])) {
         var input = document.getElementById("cod");
         input.value = tede;
     }
+
     function list2(td) {
         var tede = document.getElementById(td).innerHTML;
         var input = document.getElementById("pn");

@@ -43,7 +43,7 @@ function itemTable() //exibe a tabela
         $ide2 = 'td' . $u;
         ?>
         <td class="tdcod" id='<?php echo $ide2 ?>' onclick="list2('<?php echo $ide2 ?>')"><?php echo $row['item_pn'] ?></td>
-        <td class="tddesc" id='<?php echo $ide2 ?>' onclick="list2('<?php echo $ide2 ?>')"><?php echo $row['item_desc'] ?></td>
+        <td class="tddesc" id='<?php echo $ide2 ?>' onclick="list2('<?php echo $ide2 ?>')"><?php echo $row['item_pn_desc'] ?></td>
         <?php
         $u++;
     }

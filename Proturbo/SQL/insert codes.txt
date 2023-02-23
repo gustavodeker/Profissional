@@ -123,6 +123,3 @@ INSERT INTO codes VALUES
 (null,'300041','Pino extrator avançado - E','FE'),
 (null,'300042','Pino extrator recuado - E','FE'),
 (null,'300043','Estanqueidade fora (refugo) - E','FE');
-
-
-
