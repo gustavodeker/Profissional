@@ -37,10 +37,6 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && i
         }
         if ($count_code == 1 && $count_pn == 1 && $qtd > 0 && $qtd < 1000) {
 
-            /* Coletando user */
-            global $user;
-            $user = auth($_SESSION['TOKEN']);
-
             /* Coletando codes */
             $sql_cod = $pdo->prepare("SELECT * FROM codes WHERE code_code = '$code'");
             $sql_cod->execute();
@@ -51,12 +47,16 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && i
             $sql_pn->execute();
             $row_pn = $sql_pn->fetch(PDO::FETCH_ASSOC);
 
+            /* Coletando user */
+            global $user;
+            $user = auth($_SESSION['TOKEN']);
+
             /* ultimos dados */
             $ultimachine = $machine;
             $ultimocode = $code;
-            /*$ultimopn*/
+            $ultimopn = limpaPost($_POST['pn']);
 
-            /* Dados coletados */
+            /* Todos os dados coletados */
             /*refuse_id*/
             $machine_name = $machine;
             $pn_pn = $pn;
@@ -74,7 +74,6 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && i
             try {
                 $sqla = $pdo->prepare("INSERT INTO refuse VALUES (null,?,?,?,?,?,?,?,?,default,?,default,?)");
                 $sqla->execute(array($machine_name, $pn_pn, $pn_desc, $pn_setor_cod, $pn_setor_name, $code_code, $code_desc, $code_processo, $qtd, $user_name));
-
                 $mensagem = "Registrado com sucesso!";
             } catch (PDOException $erro) {
                 $mensagemerro = "Falha no banco de dados, contactar suporte!" . $erro;
@@ -124,11 +123,11 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && i
                 <div class="div-maquina">
                     <label class="maquina">Máquina:</label>
                     <select class="hvr-float" id="maquina" name="maquina">
-                        <option value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimachine)) {
-                                            echo $ultimachine;
-                                        } ?>"><?php /* Para deixar último código usado selecionado*/ if (isset($ultimachine)) {
-                                                    echo $ultimachine;
-                                                } ?></option>
+                        <option value="<?php /* Para deixar último código usado selecionado*/if (isset($ultimachine)) {
+                            echo $ultimachine;
+                        } ?>"><?php /* Para deixar último código usado selecionado*/if (isset($ultimachine)) {
+                             echo $ultimachine;
+                         } ?></option>
                         <?php machineOption(); ?>
                     </select>
                 </div>
@@ -146,9 +145,9 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && i
                 <!---------------->
                 <div class="div-cod">
                     <label class="codigo">Selecionado:</label>
-                    <input class="hvr-float" id="cod" name="cod" type="number" value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimocode)) {
-                                                                                            echo $ultimocode;
-                                                                                        } ?>">
+                    <input class="hvr-float" id="cod" name="cod" type="number" value="<?php /* Para deixar último código usado selecionado*/if (isset($ultimocode)) {
+                        echo $ultimocode;
+                    } ?>">
                 </div>
                 <!---------------->
 
@@ -167,18 +166,19 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && i
                 <!---------------->
                 <div class="div-cod">
                     <label class="codigo">Selecionado:</label>
-                    <input class="hvr-float" id="pn" name="pn" type="number" value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimopn)) {
-                                                                                        echo $ultimopn;
-                                                                                    } ?>">
+                    <input class="hvr-float" id="pn" name="pn" type="number" value="<?php /* Para deixar último código usado selecionado*/if (isset($ultimopn)) {
+                        echo $ultimopn;
+                    } ?>">
                 </div>
                 <!---------------->
                 <div class="quantidade">
                     <label>Quantidade:</label>
                     <div class="div-qtd">
                         <div class="menos hvr-float" onclick="menos()">-</div>
-                        <input id="qtd" name="qtd" class="qtd hvr-float" type="number" min="1" value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimaqtd)) {
-                                                                                                            echo $ultimaqtd;
-                                                                                                        } ?>" placeholder="">
+                        <input id="qtd" name="qtd" class="qtd hvr-float" type="number" min="1" value="<?php /* Para deixar último código usado selecionado*/if (isset($ultimaqtd)) {
+                            echo $ultimaqtd;
+                        } ?>"
+                            placeholder="">
                         <div class="mais hvr-float" onclick="mais()">+</div>
                     </div>
                 </div>
@@ -197,7 +197,7 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && i
 </html>
 
 <script>
-    document.getElementById('form-refuse').addEventListener('submit', function(event) {
+    document.getElementById('form-refuse').addEventListener('submit', function (event) {
         event.preventDefault();
         document.getElementById('enviar').setAttribute('disabled', 'disabled');
         this.submit();
@@ -205,10 +205,10 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && i
 </script>
 
 <script>
-    setTimeout(function() {
+    setTimeout(function () {
         $('#mensagem').hide(); // "foo" é o id do elemento que seja manipular.
     }, 2500); // O valor é representado em milisegundos.
-    setTimeout(function() {
+    setTimeout(function () {
         $('#mensagemerro').hide(); // "foo" é o id do elemento que seja manipular.
     }, 2500); // O valor é representado em milisegundos.
 </script>
