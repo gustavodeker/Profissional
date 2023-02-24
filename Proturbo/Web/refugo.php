@@ -92,6 +92,7 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && i
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/geral.css">
     <link rel="stylesheet" href="css/refugo.css">
+    <link rel="stylesheet" href="css/datatablePesquisa.css">
     <title>Próturbo :: Refugo</title>
 </head>
 
@@ -116,22 +117,36 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && i
 
         <!--REFUSE-->
         <div id="div-refuse" class="animate__animated animate__fadeIn">
+            <h1>REFUGO</h1>
             <form id="form-refuse" method="POST">
                 <!---------------->
                 <div class="div-maquina">
                     <label class="maquina">Máquina:</label>
                     <select class="hvr-float" id="maquina" name="maquina">
-                        <option value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimachine)) {
-                                            echo $ultimachine;
-                                        } ?>"><?php /* Para deixar último código usado selecionado*/ if (isset($ultimachine)) {
-                                                    echo $ultimachine;
-                                                } ?></option>
+                        <option value="<?php /* Para deixar último código usado selecionado*/if (isset($ultimachine)) {
+                            echo $ultimachine;
+                        } ?>"><?php /* Para deixar último código usado selecionado*/if (isset($ultimachine)) {
+                             echo $ultimachine;
+                         } ?></option>
                         <?php machineOption(); ?>
                     </select>
                 </div>
                 <!---------------->
+                <div class="quantidade">
+                    <label>Quantidade:</label>
+                    <div class="div-qtd">
+                        <div class="menos hvr-float" onclick="menos()">-</div>
+                        <input id="qtd" name="qtd" class="qtd hvr-float" type="number" min="1" value="<?php /* Para deixar último código usado selecionado*/if (isset($ultimaqtd)) {
+                            echo $ultimaqtd;
+                        } ?>"
+                            placeholder="">
+                        <div class="mais hvr-float" onclick="mais()">+</div>
+                    </div>
+                </div>
+                <!---------------->
+                <!---------------->
                 <div class="divCod">
-                    <p style="background: #004479; color: whitesmoke; text-align: center;">MOTIVO DO REFUGO:</p>
+                    <p class="titulo-tabela">MOTIVO DO REFUGO:</p>
                     <table id="table-cod">
                         <thead>
                             <th>Cod</th>
@@ -143,9 +158,9 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && i
                     </table>
                     <div class="div-cod">
                         <label class="codigo">Motivo selecionado:</label>
-                        <input class="hvr-float" id="cod" name="cod" type="number" value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimocode)) {
-                                                                                                echo $ultimocode;
-                                                                                            } ?>">
+                        <input class="hvr-float" id="cod" name="cod" type="number" value="<?php /* Para deixar último código usado selecionado*/if (isset($ultimocode)) {
+                            echo $ultimocode;
+                        } ?>">
                     </div>
                 </div>
 
@@ -155,7 +170,7 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && i
                 <!---------------->
                 <div class="divPn">
                     <table id="table-pn">
-                        <p style="background: #004479; color: whitesmoke; text-align: center;">PARTNUMBER:</p>
+                        <p class="titulo-tabela">PARTNUMBER:</p>
                         <thead>
                             <th>PN</th>
                             <th class="th">Descrição</th>
@@ -168,20 +183,9 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && i
                     <!---------------->
                     <div class="div-cod">
                         <label class="codigo">Partnumber selecionado:</label>
-                        <input class="hvr-float" id="pn" name="pn" type="number" value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimopn)) {
-                                                                                            echo $ultimopn;
-                                                                                        } ?>">
-                    </div>
-                </div>
-                <!---------------->
-                <div class="quantidade">
-                    <label>Quantidade:</label>
-                    <div class="div-qtd">
-                        <div class="menos hvr-float" onclick="menos()">-</div>
-                        <input id="qtd" name="qtd" class="qtd hvr-float" type="number" min="1" value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimaqtd)) {
-                                                                                                            echo $ultimaqtd;
-                                                                                                        } ?>" placeholder="">
-                        <div class="mais hvr-float" onclick="mais()">+</div>
+                        <input class="hvr-float" id="pn" name="pn" type="number" value="<?php /* Para deixar último código usado selecionado*/if (isset($ultimopn)) {
+                            echo $ultimopn;
+                        } ?>">
                     </div>
                 </div>
                 <!---------------->
@@ -199,7 +203,7 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && i
 </html>
 
 <script>
-    document.getElementById('form-refuse').addEventListener('submit', function(event) {
+    document.getElementById('form-refuse').addEventListener('submit', function (event) {
         event.preventDefault();
         document.getElementById('enviar').setAttribute('disabled', 'disabled');
         this.submit();
@@ -207,10 +211,10 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && i
 </script>
 
 <script>
-    setTimeout(function() {
+    setTimeout(function () {
         $('#mensagem').hide(); // "foo" é o id do elemento que seja manipular.
     }, 2500); // O valor é representado em milisegundos.
-    setTimeout(function() {
+    setTimeout(function () {
         $('#mensagemerro').hide(); // "foo" é o id do elemento que seja manipular.
     }, 2500); // O valor é representado em milisegundos.
 </script>
@@ -242,3 +246,64 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && i
     }
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="js/datatable.js"></script>
+
+<script>
+    $(document).ready(function () {
+        //Com responsividade e tradução
+        $('#table-cod').DataTable({
+            responsive: true,
+            "language": {
+                "emptyTable": "Nenhum registro encontrado",
+                "info": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "infoEmpty": "Mostrando 0 até 0 de 0 registros",
+                "infoFiltered": "(Filtrados de _MAX_ registros)",
+                "infoThousands": ".",
+                "loadingRecords": "Carregando...",
+                "processing": "Processando...",
+                "zeroRecords": "Nenhum registro encontrado",
+                "search": "Pesquisar",
+                "lengthMenu": "Exibir _MENU_ resultados por página",
+                "paginate": {
+                    "next": "Próximo",
+                    "previous": "Anterior",
+                    "first": "Primeiro",
+                    "last": "Último"
+                }
+            },
+            "order": [
+                [0, 'asc']
+            ]
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        //Com responsividade e tradução
+        $('#table-pn').DataTable({
+            responsive: false,
+            "language": {
+                "emptyTable": "Nenhum registro encontrado",
+                "info": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "infoEmpty": "Mostrando 0 até 0 de 0 registros",
+                "infoFiltered": "(Filtrados de _MAX_ registros)",
+                "infoThousands": ".",
+                "loadingRecords": "Carregando...",
+                "processing": "Processando...",
+                "zeroRecords": "Nenhum registro encontrado",
+                "search": "Pesquisar",
+                "lengthMenu": "Exibir _MENU_ resultados por página",
+                "paginate": {
+                    "next": "Próximo",
+                    "previous": "Anterior",
+                    "first": "Primeiro",
+                    "last": "Último"
+                }
+            },
+            "order": [
+                [0, 'asc']
+            ]
+        });
+    });
+</script>
