@@ -117,68 +117,70 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && i
         <!--REFUSE-->
         <div id="div-refuse" class="animate__animated animate__fadeIn">
             <form id="form-refuse" method="POST">
-                <h1>REFUGO</h1>
-
                 <!---------------->
                 <div class="div-maquina">
                     <label class="maquina">Máquina:</label>
                     <select class="hvr-float" id="maquina" name="maquina">
-                        <option value="<?php /* Para deixar último código usado selecionado*/if (isset($ultimachine)) {
-                            echo $ultimachine;
-                        } ?>"><?php /* Para deixar último código usado selecionado*/if (isset($ultimachine)) {
-                             echo $ultimachine;
-                         } ?></option>
+                        <option value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimachine)) {
+                                            echo $ultimachine;
+                                        } ?>"><?php /* Para deixar último código usado selecionado*/ if (isset($ultimachine)) {
+                                                    echo $ultimachine;
+                                                } ?></option>
                         <?php machineOption(); ?>
                     </select>
                 </div>
                 <!---------------->
-                <p style="background: #004479; color: whitesmoke; text-align: center;">Selecione o motivo do refugo:</p>
-                <table id="table-cod">
-                    <thead>
-                        <th>Cod</th>
-                        <th class="th-desc">Descrição</th>
-                    </thead>
-                    <tbody>
-                        <?php codTable(); ?>
-                    </tbody>
-                </table>
-                <!---------------->
-                <div class="div-cod">
-                    <label class="codigo">Selecionado:</label>
-                    <input class="hvr-float" id="cod" name="cod" type="number" value="<?php /* Para deixar último código usado selecionado*/if (isset($ultimocode)) {
-                        echo $ultimocode;
-                    } ?>">
+                <div class="divCod">
+                    <p style="background: #004479; color: whitesmoke; text-align: center;">MOTIVO DO REFUGO:</p>
+                    <table id="table-cod">
+                        <thead>
+                            <th>Cod</th>
+                            <th class="th-desc">Descrição</th>
+                        </thead>
+                        <tbody>
+                            <?php codTable(); ?>
+                        </tbody>
+                    </table>
+                    <div class="div-cod">
+                        <label class="codigo">Motivo selecionado:</label>
+                        <input class="hvr-float" id="cod" name="cod" type="number" value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimocode)) {
+                                                                                                echo $ultimocode;
+                                                                                            } ?>">
+                    </div>
                 </div>
+
+
                 <!---------------->
 
                 <!---------------->
-                <p style="background: #004479; color: whitesmoke; text-align: center;">Selecione o Partnumber:</p>
-                <table id="tabled">
-                    <thead>
-                        <th>PN</th>
-                        <th class="th">Descrição</th>
-                    </thead>
-                    <tbody>
-                        <?php itemTable(); ?>
-                    </tbody>
-                </table>
-                <!---------------->
-                <!---------------->
-                <div class="div-cod">
-                    <label class="codigo">Selecionado:</label>
-                    <input class="hvr-float" id="pn" name="pn" type="number" value="<?php /* Para deixar último código usado selecionado*/if (isset($ultimopn)) {
-                        echo $ultimopn;
-                    } ?>">
+                <div class="divPn">
+                    <table id="table-pn">
+                        <p style="background: #004479; color: whitesmoke; text-align: center;">PARTNUMBER:</p>
+                        <thead>
+                            <th>PN</th>
+                            <th class="th">Descrição</th>
+                        </thead>
+                        <tbody>
+                            <?php itemTable(); ?>
+                        </tbody>
+                    </table>
+                    <!---------------->
+                    <!---------------->
+                    <div class="div-cod">
+                        <label class="codigo">Partnumber selecionado:</label>
+                        <input class="hvr-float" id="pn" name="pn" type="number" value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimopn)) {
+                                                                                            echo $ultimopn;
+                                                                                        } ?>">
+                    </div>
                 </div>
                 <!---------------->
                 <div class="quantidade">
                     <label>Quantidade:</label>
                     <div class="div-qtd">
                         <div class="menos hvr-float" onclick="menos()">-</div>
-                        <input id="qtd" name="qtd" class="qtd hvr-float" type="number" min="1" value="<?php /* Para deixar último código usado selecionado*/if (isset($ultimaqtd)) {
-                            echo $ultimaqtd;
-                        } ?>"
-                            placeholder="">
+                        <input id="qtd" name="qtd" class="qtd hvr-float" type="number" min="1" value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimaqtd)) {
+                                                                                                            echo $ultimaqtd;
+                                                                                                        } ?>" placeholder="">
                         <div class="mais hvr-float" onclick="mais()">+</div>
                     </div>
                 </div>
@@ -197,7 +199,7 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && i
 </html>
 
 <script>
-    document.getElementById('form-refuse').addEventListener('submit', function (event) {
+    document.getElementById('form-refuse').addEventListener('submit', function(event) {
         event.preventDefault();
         document.getElementById('enviar').setAttribute('disabled', 'disabled');
         this.submit();
@@ -205,10 +207,10 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && i
 </script>
 
 <script>
-    setTimeout(function () {
+    setTimeout(function() {
         $('#mensagem').hide(); // "foo" é o id do elemento que seja manipular.
     }, 2500); // O valor é representado em milisegundos.
-    setTimeout(function () {
+    setTimeout(function() {
         $('#mensagemerro').hide(); // "foo" é o id do elemento que seja manipular.
     }, 2500); // O valor é representado em milisegundos.
 </script>

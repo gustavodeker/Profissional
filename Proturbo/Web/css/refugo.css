@@ -1,50 +1,81 @@
 /***REFUSE***/
 #div-refuse{
-    display: block;
     margin-left: auto;
     margin-right: auto;
     /*display: none;*/
     max-width: 1200px;
     width: 90%;
+    height: 600px;
     overflow: auto;
-    padding: 15px;
+    padding: 0px;
     background-color: whitesmoke;
     border-radius: 5px;
 }
 
 #form-refuse{
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
     margin-top: 0px;
+    padding: 5px;
+    justify-content: center;
 }
 label{
-    font-size: 20pt;
+    font-size: 16pt;
     font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
 }
 /******************************/
+/***MAQUINA***/
+.div-maquina{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.div-maquina select{
+    margin-left: 5px;
+    width: 20%;
+    height: 30px;
+    font-size: 18pt;
+    text-align: center;
+    border-radius: 5px;
+}
+/******/
 
+.divCod{
+    width: 40%;
+}
+.divPn{
+    width: 60%;
+}
 /***TABLE***/
-table{
+#table-cod, #table-pn{
     display: block;
-    max-width: 600px;
+    width: 100%;
     height: 250px;
     margin-left: auto;
     margin-right: auto;
     overflow: auto;
 }
-tbody tr{
+#table-cod tbody tr, #table-pn tbody tr{
     cursor: pointer;
 }
-tbody tr:hover{
+#table-cod tbody tr:hover, #table-pn tbody tr:hover{
     background-color: var(--azul-empresa);
 }
-td, th{
+#table-cod td, #table-pn td{
     vertical-align: middle;
     text-align: left;
-    font-size: 16pt;
-    padding-left: 5px;
+    font-size: 12pt;
+    padding: 0px 10px;
 }
-td{
+#table-cod td, #table-pn td{
     border-bottom: 1px dotted gray;
+}
+#table-cod td:hover, #table-pn td:hover{
+    color: whitesmoke;
 }
 /******/
 
@@ -53,8 +84,9 @@ td{
 /***COD**/
 .div-cod{
     display: flex;
+    width: 100%;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
     align-items: baseline;
     margin-bottom: 5px;
 }
@@ -65,28 +97,8 @@ td{
 .div-cod input{
     height: 30px;
     width: 50%;
-    font-size: 20pt;
-    margin-top: 5px;
-    text-align: center;
-    border-radius: 5px;
-}
-/******/
-
-/******************************/
-
-/***MAQUINA***/
-.div-maquina{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
-    margin-bottom: 5px;
-}
-.div-maquina select{
-    margin-left: 5px;
-    width: 60%;
-    height: 30px;
     font-size: 18pt;
+    margin-top: 5px;
     text-align: center;
     border-radius: 5px;
 }
@@ -97,10 +109,10 @@ td{
 /***QUANTIDADE***/
 .quantidade{
     display: flex;
-    justify-content: space-around;
+    justify-content: left;
     align-items: center;
-    width: 100%;
-    flex-wrap: nowrap;
+    width: 50%;
+    flex-wrap: wrap;
     margin: 0px;
 }
 .div-qtd{
