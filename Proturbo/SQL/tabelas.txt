@@ -69,17 +69,27 @@ CREATE TABLE refuse (
 );
 
 
-CREATE TABLE proddiaria (  ********************************************************************************
-    prod_id int(11) PRIMARY KEY AUTO_INCREMENT,
-    prod_machine_name varchar(50) NOT NULL,
-    prod_item_pn varchar(50) NOT NULL,
-    prod_item_pn_desc varchar(255) NOT NULL,
-    prod_item_setor_cod int(11) NOT NULL,
-    prod_item_setor_name varchar(50) NOT NULL,
-    prod_value int(11) NOT NULL,
-    prod_datetime datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    prod_user_name varchar(50) NULL,
-    prod_reason varchar(255) NULL,
-    FOREIGN KEY (prod_machine_name) REFERENCES machines(machine_name),
-    FOREIGN KEY (prod_item_pn) REFERENCES itens(item_pn)
+CREATE TABLE proddia (
+    proddia_id int(11) PRIMARY KEY AUTO_INCREMENT,
+    proddia_item_pn varchar(50) NOT NULL,
+    proddia_item_pn_desc varchar(255) NOT NULL,
+    proddia_item_setor_cod int(11) NOT NULL,
+    proddia_item_setor_name varchar(50) NOT NULL,
+    proddia_value int(11) NOT NULL,
+    proddia_datetime datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+
+CREATE TRIGGER trigger_insert_proddia
+AFTER INSERT ON prod
+FOR EACH ROW
+BEGIN
+    DECLARE existente INT;
+    SELECT COUNT(*) INTO existente FROM proddia WHERE proddia_item_pn = NEW.prod_item_pn AND DATE(proddia_datetime) = DATE(NEW.prod_datetime);
+    IF existente > 0 THEN
+        UPDATE proddia SET proddia_value = proddia_value + NEW.prod_value WHERE proddia_item_pn = NEW.prod_item_pn AND DATE(proddia_datetime) = DATE(NEW.prod_datetime);
+    ELSE
+        INSERT INTO proddia (proddia_item_pn, proddia_item_pn_desc, proddia_item_setor_cod, proddia_item_setor_name, proddia_value, proddia_datetime)
+        VALUES (NEW.prod_item_pn, NEW.prod_item_pn_desc, NEW.prod_item_setor_cod, NEW.prod_item_setor_name, NEW.prod_value, DATE(NEW.prod_datetime));
+    END IF;
+END;
