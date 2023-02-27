@@ -1,39 +1,186 @@
 /***Produção***/
 #div-producao{
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
     margin-left: auto;
     margin-right: auto;
     /*display: none;*/
-    max-width: 700px;
-    width: 90%;
-    height: max-content;
-    border: 1px solid whitesmoke;
+    max-width: 800px;
+    width: 95%;
+    height: 600px;
     overflow: auto;
-    padding: 15px;
+    padding: 0px 20px;
     background-color: whitesmoke;
     border-radius: 5px;
 }
-#form-refuse{
-    display: block;
-    margin-top: 0px;
-}
-label{
-    font-size: 20pt;
-    font-family: Arial, Helvetica, sans-serif;
+/******************************/
+
+/******************************/
+@media(max-width: 450px ){
+    #table-pn{
+        width: 100% !important;
+    }
+    .div-maquina select{
+        width: 100% !important;
+    }
+    .div-maquina{
+        width: 100%;
+        justify-content: left;
+    }
+    .div-maquina label{
+        width: 100% !important;
+        text-align: left !important;
+    }
+    #table-pn td{
+        font-size: 10pt !important;
+    }
+    .quantidade label{
+        margin-right: 5px !important;
+        width: 100%;
+        text-align: left !important;
+    }
+    thead, tr{
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    #enviar{
+        font-size: 26pt !important;
+    }
 }
 /******************************/
+@media(max-height: 750px){
+    #corpo{
+        align-items: flex-start;
+        padding-top: 20px;
+    }
+}
+/******************************/
+/******************************/
+@media(max-width: 450px) and (min-height: 700px){
+    .div-maquina select{
+        width: 100% !important;
+    }
+    .div-qtd{
+        justify-content: center !important;
+        width: 100%;
+    }
+    #corpo{
+        align-items: start !important;
+    }
+    #div-producao{
+        height: 600px;
+    }
+}
+/******************************/
+@media(max-width: 450px) and (min-height: 820px){
+    #div-producao{
+        height: 720px;
+    }
+    #table-pn{
+        height: 250px !important;
+    }
+}
+/******************************/
+@media(max-width: 450px) and (min-height: 900px){
+    #div-producao{
+        height: 760px;
+    }
+}
+@media(max-width: 830px) and (min-height: 1000px){
+    #div-producao{
+        height: 800px;
+    }
+    #table-pn{
+        height: 400px !important;
+    }
+}
+@media(max-width: 830px) and (min-height: 1000px){
+    #div-producao{
+        height: 900px;
+    }
+    #table-pn{
+        height: 500px !important;
+    }
+}
+@media(max-width: 950px) and (min-height: 1300px){
+    #div-producao{
+        height: 1200px;
+    }
+    #table-pn{
+        height: 700px !important;
+    }
+}
+/******************************/
+
+h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100% !important;
+    margin: 0px !important;
+    padding: 0px !important;
+}
+#form-producao{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 0px;
+    justify-content: center;
+}
+label{
+    font-size: 14pt;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    margin-left: 5px;
+}
+/******************************/
+
+.divPn{
+    width: 100%;
+    margin:1px;
+}
+/***TABLE***/
+.titulo-tabela{
+    background: #004479;
+    color: whitesmoke;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 5px;
+}
+#table-pn{
+    display: block;
+    width: 95%;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: auto;
+}
+#table-pn tbody tr{
+    cursor: pointer;
+}
+#table-pn tbody tr:hover{
+    background-color: var(--azul-empresa);
+}
+#table-pn td{
+    vertical-align: middle;
+    text-align: left;
+    font-size: 12pt;
+    padding: 0px 10px;
+}
+
+#table-pn td:hover{
+    color: whitesmoke;
+}
 
 /***MAQUINA***/
 .div-maquina{
     display: flex;
-    flex-wrap: wrap;
     justify-content: left;
-    align-items: center;
-    margin-bottom: 5px;
+    align-items: center !important;
 }
 .div-maquina select{
     margin-left: 5px;
-    width: 60%;
+    width: 200px;
     height: 30px;
     font-size: 18pt;
     text-align: center;
@@ -42,24 +189,41 @@ label{
 /******/
 
 /******************************/
+.div-cod{
+    margin-top: 5px;
+    text-align: center;
+}
+.div-cod input{
+    width: 300px;
+    font-size: 16pt;
+    text-align: center;
+    border-radius: 5px;
+}
+
+
+/******************************/
 
 /***QUANTIDADE***/
+.quantidade{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0px;
+}
 .div-qtd{
     display: flex;
-    align-items: center;
-    width: 100%;
-    justify-content: center;
-    margin: 10px 0px;
+    justify-content: left;
+    margin-bottom: 5px;
 }
-.div-qtd label{
-    margin-bottom: 10px;
+.quantidade label{
     margin-right: 5px;
+    text-align: left;
 }
 .div-qtd input{
-    width: 25%;
+    width: 100px;
     text-align: center;
-    font-size: 20pt;
-    height: 50px;
+    font-size: 16pt;
 }
 .div-qtd div{ 
     font-size: 20pt;
@@ -72,7 +236,7 @@ label{
     align-items: center;
     justify-content: center;
     width: 100px;
-    height: 50px;
+    height: 30px;
     border: 1px solid var(--azul-empresa);
     cursor: pointer;
 }
@@ -96,6 +260,7 @@ label{
     border: 1px solid red;
 }
 /******/
+/******/
 
 /***BOTÃO ENVIAR***/
 #enviar{
@@ -103,12 +268,13 @@ label{
     margin-top: 4px;
     background-color: var(--azul-empresa);
     border: 2px solid var(--azul-empresa);
-    color: whitesmoke;
-    height: 100px;
+    color: var(--text-claro);
+    height: 60px;
     transition: 0.1s;
     cursor: pointer;
     font-size: 32pt;
     border-radius: 5px;
+    margin-bottom: 10px;
 }
 
 /******/
@@ -126,56 +292,22 @@ label{
     float: left;
 }
 textarea{
-    font-size: 22pt;
+    font-size: 16pt;
     width: 100%;
     border-radius: 5px;
+    height: 60px;
 }
 /******************************/
 /******/
 /******************************/
-.pform{
-    text-align: center;
-    margin: 10px;
-    font-size: 20px;
+p.pform{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: red;
+    width: 100%;
+    padding: 0;
 }
 
 /******************************/
-@media(max-width: 450px){
-    #div-producao{
-        padding: 15px;
-        margin-top: 0px;
-    }
-    #enviar{
-        height: 80px;
-    }
-    .menos, .mais{
-        width: 150px;
-        height: 60px;
-    }
-
-    td, th{
-        font-size: 12pt;
-    }
-    label{
-        font-size: 18pt;
-    }
-
-    .div-cod input, .div-maquina input{
-        height: 30px;
-    }
-    .div-qtd input{
-        width: 50%;
-        height: 60px;
-    }
-    
-}
-
-@media(max-height: 750px){
-    #corpo{
-        align-items: flex-start;
-        padding-top: 10px;
-    }
-    .pform{
-        font-size: 12pt;
-    }
-}

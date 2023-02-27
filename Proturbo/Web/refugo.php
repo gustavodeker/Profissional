@@ -123,11 +123,11 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && i
                 <div class="div-maquina">
                     <label class="maquina">Máquina:</label>
                     <select class="hvr-float" id="maquina" name="maquina">
-                        <option value="<?php /* Para deixar último código usado selecionado*/if (isset($ultimachine)) {
-                            echo $ultimachine;
-                        } ?>"><?php /* Para deixar último código usado selecionado*/if (isset($ultimachine)) {
-                             echo $ultimachine;
-                         } ?></option>
+                        <option value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimachine)) {
+                                            echo $ultimachine;
+                                        } ?>"><?php /* Para deixar último código usado selecionado*/ if (isset($ultimachine)) {
+                                    echo $ultimachine;
+                                } ?></option>
                         <?php machineOption(); ?>
                     </select>
                 </div>
@@ -136,10 +136,9 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && i
                     <label>Quantidade:</label>
                     <div class="div-qtd">
                         <div class="menos hvr-float" onclick="menos()">-</div>
-                        <input id="qtd" name="qtd" class="qtd hvr-float" type="number" min="1" value="<?php /* Para deixar último código usado selecionado*/if (isset($ultimaqtd)) {
-                            echo $ultimaqtd;
-                        } ?>"
-                            placeholder="">
+                        <input id="qtd" name="qtd" class="qtd hvr-float" type="number" min="1" value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimaqtd)) {
+                                                                                                            echo $ultimaqtd;
+                                                                                                        } ?>" placeholder="">
                         <div class="mais hvr-float" onclick="mais()">+</div>
                     </div>
                 </div>
@@ -158,19 +157,16 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && i
                     </table>
                     <div class="div-cod">
                         <label class="codigo">Motivo selecionado:</label>
-                        <input class="hvr-float" id="cod" name="cod" type="number" value="<?php /* Para deixar último código usado selecionado*/if (isset($ultimocode)) {
-                            echo $ultimocode;
-                        } ?>">
+                        <input class="hvr-float" id="cod" name="cod" type="number" value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimocode)) {
+                                                                                                echo $ultimocode;
+                                                                                            } ?>">
                     </div>
                 </div>
-
-
                 <!---------------->
-
                 <!---------------->
                 <div class="divPn">
+                    <p class="titulo-tabela">PARTNUMBER:</p>
                     <table id="table-pn">
-                        <p class="titulo-tabela">PARTNUMBER:</p>
                         <thead>
                             <th>PN</th>
                             <th class="th">Descrição</th>
@@ -183,9 +179,9 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && i
                     <!---------------->
                     <div class="div-cod">
                         <label class="codigo">Partnumber selecionado:</label>
-                        <input class="hvr-float" id="pn" name="pn" type="number" value="<?php /* Para deixar último código usado selecionado*/if (isset($ultimopn)) {
-                            echo $ultimopn;
-                        } ?>">
+                        <input class="hvr-float" id="pn" name="pn" type="number" value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimopn)) {
+                                                                                            echo $ultimopn;
+                                                                                        } ?>">
                     </div>
                 </div>
                 <!---------------->
@@ -203,7 +199,7 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && i
 </html>
 
 <script>
-    document.getElementById('form-refuse').addEventListener('submit', function (event) {
+    document.getElementById('form-refuse').addEventListener('submit', function(event) {
         event.preventDefault();
         document.getElementById('enviar').setAttribute('disabled', 'disabled');
         this.submit();
@@ -211,10 +207,10 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && i
 </script>
 
 <script>
-    setTimeout(function () {
+    setTimeout(function() {
         $('#mensagem').hide(); // "foo" é o id do elemento que seja manipular.
     }, 2500); // O valor é representado em milisegundos.
-    setTimeout(function () {
+    setTimeout(function() {
         $('#mensagemerro').hide(); // "foo" é o id do elemento que seja manipular.
     }, 2500); // O valor é representado em milisegundos.
 </script>
@@ -249,7 +245,7 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && i
 <script src="js/datatable.js"></script>
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         //Com responsividade e tradução
         $('#table-cod').DataTable({
             responsive: true,
@@ -279,7 +275,7 @@ if (isset($_POST['maquina']) && isset($_POST['cod']) && isset($_POST['pn']) && i
 </script>
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         //Com responsividade e tradução
         $('#table-pn').DataTable({
             responsive: false,

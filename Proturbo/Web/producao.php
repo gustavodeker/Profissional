@@ -78,7 +78,7 @@ if (isset($_POST['maquina']) && isset($_POST['pn']) && isset($_POST['motivo']) &
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/geral.css">
     <link rel="stylesheet" href="css/producao.css">
-    <link rel="stylesheet" href="css/refugo.css">
+    <link rel="stylesheet" href="css/datatablePesquisa.css">
     <title>Próturbo :: Produção</title>
 </head>
 
@@ -113,53 +113,61 @@ if (isset($_POST['maquina']) && isset($_POST['pn']) && isset($_POST['motivo']) &
                 sistema automatizado.</p>
             <form id="form-producao" method="POST">
                 <!---------------->
+                <!---------------->
                 <div class="div-maquina">
                     <label class="maquina">Máquina:</label>
                     <select class="hvr-float" id="maquina" name="maquina">
-                        <option value="<?php /* Para deixar último código usado selecionado*/if (isset($ultimachine)) {
-                            echo $ultimachine;
-                        } ?>">
-                            <?php /* Para deixar último código usado selecionado*/if (isset($ultimachine)) {
-                                echo $ultimachine;
-                            } ?></option>
+                        <option value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimachine)) {
+                                            echo $ultimachine;
+                                        } ?>"><?php /* Para deixar último código usado selecionado*/ if (isset($ultimachine)) {
+                                    echo $ultimachine;
+                                } ?></option>
                         <?php machineOption(); ?>
                     </select>
                 </div>
                 <!---------------->
-                <p style="background: #004479; color: whitesmoke; text-align: center;">Selecione o Partnumber:</p>
-                <table id="tabled">
-                    <thead>
-                        <th>PN</th>
-                        <th class="th">Descrição</th>
-                    </thead>
-                    <tbody>
-                        <?php itemTable(); ?>
-                    </tbody>
-                </table>
-                <!---------------->
-                <!---------------->
-                <div class="div-cod">
-                    <label class="codigo">Selecionado:</label>
-                    <input class="hvr-float" id="pn" name="pn" type="number" value="<?php /* Para deixar último código usado selecionado*/if (isset($ultimopn)) {
-                        echo $ultimopn;
-                    } ?>">
-                </div>
-                <!---------------->
-                <!---------------->
-                <div class="div-motivo">
-                    <label class="labelmotivo">Motivo:</label>
-                    <textarea class="hvr-float" name="motivo" id="motivo" cols="auto" rows="5"><?php /*o*/if (isset($ultimomotivo)) {echo $ultimomotivo;}?></textarea>
-                </div>
-                <!---------------->
-                <div class="div-qtd">
+                <div class="quantidade">
                     <label>Quantidade:</label>
-                    <div class="menos hvr-float" onclick="menos()">-</div>
-                    <input id="qtd" name="qtd" class="qtd hvr-float" type="number" min="1" value="<?php /* Para deixar último código usado selecionado*/if (isset($ultimaqtd)) {
-                        echo $ultimaqtd;
-                    } ?>" placeholder="">
-                    <div class="mais hvr-float" onclick="mais()">+</div>
+                    <div class="div-qtd">
+                        <div class="menos hvr-float" onclick="menos()">-</div>
+                        <input id="qtd" name="qtd" class="qtd hvr-float" type="number" min="1" value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimaqtd)) {
+                                                                                                            echo $ultimaqtd;
+                                                                                                        } ?>" placeholder="">
+                        <div class="mais hvr-float" onclick="mais()">+</div>
+                    </div>
                 </div>
-                <input id="enviar" class="hvr-float" type="submit" value="Enviar">
+                <!---------------->
+                <!---------------->
+                <div class="divPn">
+                    <table id="table-pn">
+                        <p class="titulo-tabela">PARTNUMBER:</p>
+                        <thead>
+                            <th>PN</th>
+                            <th class="th">Descrição</th>
+                        </thead>
+                        <tbody>
+                            <?php itemTable(); ?>
+                        </tbody>
+                    </table>
+                    <!---------------->
+                    <!---------------->
+                    <div class="div-cod">
+                        <label class="codigo">Selecionado:</label>
+                        <input class="hvr-float" id="pn" name="pn" type="number" value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimopn)) {
+                                                                                            echo $ultimopn;
+                                                                                        } ?>">
+                    </div>
+                    <!---------------->
+                    <!---------------->
+                    <div class="div-motivo">
+                        <label class="labelmotivo">Motivo:</label>
+                        <textarea class="hvr-float" name="motivo" id="motivo" cols="auto" rows="5"><?php /*o*/ if (isset($ultimomotivo)) {
+                                                                                                        echo $ultimomotivo;
+                                                                                                    } ?></textarea>
+                    </div>
+                    <!---------------->
+
+                    <input id="enviar" class="hvr-float" type="submit" value="Enviar">
             </form>
         </div>
         <!---------------->
@@ -171,7 +179,7 @@ if (isset($_POST['maquina']) && isset($_POST['pn']) && isset($_POST['motivo']) &
 </html>
 
 <script>
-    document.getElementById('form-producao').addEventListener('submit', function (event) {
+    document.getElementById('form-producao').addEventListener('submit', function(event) {
         event.preventDefault();
         document.getElementById('enviar').setAttribute('disabled', 'disabled');
         this.submit();
@@ -179,13 +187,12 @@ if (isset($_POST['maquina']) && isset($_POST['pn']) && isset($_POST['motivo']) &
 </script>
 
 <script>
-    setTimeout(function () {
+    setTimeout(function() {
         $('#mensagem').hide(); // "foo" é o id do elemento que seja manipular.
     }, 2500); // O valor é representado em milisegundos.
-    setTimeout(function () {
+    setTimeout(function() {
         $('#mensagemerro').hide(); // "foo" é o id do elemento que seja manipular.
     }, 2500); // O valor é representado em milisegundos.
-
 </script>
 <script>
     function menos() {
@@ -194,6 +201,7 @@ if (isset($_POST['maquina']) && isset($_POST['pn']) && isset($_POST['motivo']) &
             qtd.value--;
         }
     }
+
     function mais() {
         var qtd = document.getElementById("qtd");
         if (qtd.value < 999) {
@@ -206,6 +214,37 @@ if (isset($_POST['maquina']) && isset($_POST['pn']) && isset($_POST['motivo']) &
         var input = document.getElementById("pn");
         input.value = tede;
     }
-
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="js/datatable.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        //Com responsividade e tradução
+        $('#table-pn').DataTable({
+            responsive: false,
+            "language": {
+                "emptyTable": "Nenhum registro encontrado",
+                "info": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "infoEmpty": "Mostrando 0 até 0 de 0 registros",
+                "infoFiltered": "(Filtrados de _MAX_ registros)",
+                "infoThousands": ".",
+                "loadingRecords": "Carregando...",
+                "processing": "Processando...",
+                "zeroRecords": "Nenhum registro encontrado",
+                "search": "Pesquisar",
+                "lengthMenu": "Exibir _MENU_ resultados por página",
+                "paginate": {
+                    "next": "Próximo",
+                    "previous": "Anterior",
+                    "first": "Primeiro",
+                    "last": "Último"
+                }
+            },
+            "order": [
+                [0, 'asc']
+            ]
+        });
+    });
+</script>

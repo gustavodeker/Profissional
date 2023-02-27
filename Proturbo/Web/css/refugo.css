@@ -7,7 +7,7 @@
     width: 95%;
     height: 530px;
     overflow: auto;
-    padding: 0px 10px;
+    padding: 0px 20px;
     background-color: whitesmoke;
     border-radius: 5px;
 }
@@ -32,7 +32,25 @@
 @media(max-height: 750px){
     #corpo{
         align-items: flex-start;
-        padding-top: 10px;
+        padding-top: 20px;
+    }
+}
+/******************************/
+@media(max-width: 900px) and (min-height: 1000px){
+    #div-refuse{
+        height: 850px;
+    }
+    #corpo{
+        align-items: start !important;
+    }
+} 
+/******************************/
+@media(max-width: 900px) and (min-height: 1100px){
+    #div-refuse{
+        height: 950px;
+    }
+    #corpo{
+        align-items: start !important;
     }
 }
 /******************************/
@@ -54,10 +72,31 @@
 /******************************/
 @media(max-width: 450px) and (min-height: 820px){
     #div-refuse{
-        height: 700px;
+        height: 720px;
+    }
+    #table-cod{
+        height: 200px !important;
     }
 }
-
+/******************************/
+@media(max-width: 450px) and (min-height: 900px){
+    #div-refuse{
+        height: 760px;
+    }
+}
+@media(max-width: 450px){
+    #enviar{
+        font-size: 26pt !important;
+    }
+}
+@media(max-width: 950px) and (min-height: 1300px){
+    #div-refuse{
+        height: 1200px;
+    }
+    #table-pn{
+        height: 500px !important;
+    }
+}
 
 #form-refuse{
     display: flex;
@@ -128,9 +167,7 @@ label{
     font-size: 10pt;
     padding: 0px 10px;
 }
-#table-cod td, #table-pn td{
-    border-bottom: 1px dotted gray;
-}
+
 #table-cod td:hover, #table-pn td:hover{
     color: whitesmoke;
 }
@@ -228,12 +265,12 @@ label{
     background-color: var(--azul-empresa);
     border: 2px solid var(--azul-empresa);
     color: var(--text-claro);
-    height: 60px;
+    height: 50px;
     transition: 0.1s;
     cursor: pointer;
     font-size: 32pt;
     border-radius: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 /******/
 
