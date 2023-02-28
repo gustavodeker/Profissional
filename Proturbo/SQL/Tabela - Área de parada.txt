@@ -1,0 +1,13 @@
+CREATE TABLE parada (
+    parada_id int(11) PRIMARY KEY AUTO_INCREMENT,
+    parada_maquina varchar(50) NOT NULL,
+    parada_motivo varchar(255) NOT NULL,
+    parada_horainicio datetime,
+    parada_horafim datetime,
+    parada_tempoparado int AS (TIME_TO_SEC(parada_horafim) - TIME_TO_SEC(parada_horainicio)),
+    parada_coment varchar(255),
+    parada_status varchar(50) NOT NULL,
+    parada_user varchar(50) NOT NULL,
+    FOREIGN KEY (parada_maquina) REFERENCES machines(machine_name),
+    FOREIGN KEY (parada_user) REFERENCES users(user_name)
+);
