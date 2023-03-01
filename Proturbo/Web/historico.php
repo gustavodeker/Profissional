@@ -15,14 +15,6 @@ function historicoTable()
     }
     $sql->execute();
     while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
-        $sql_machine = $pdo->prepare("SELECT machine_name FROM machines WHERE machine_name = '" . $row['refuse_machine_name'] . "'");
-        $sql_machine->execute();
-        $row_machine = $sql_machine->fetch(PDO::FETCH_ASSOC);
-
-        $sql_code = $pdo->prepare("SELECT code_code FROM codes WHERE code_code = '" . $row['refuse_code_code'] . "'");
-        $sql_code->execute();
-        $row_code = $sql_code->fetch(PDO::FETCH_ASSOC);
-
         echo "<tr>";
         echo "<td>" . $row['refuse_machine_name'] . "</td>";
         echo "<td>" . $row['refuse_code_code'] . "</td>";
@@ -110,7 +102,7 @@ if (isset($_REQUEST["id"]) && !isset($_REQUEST["prod"])) {
                     <div class="div-maquina">
                         <label class="maquina">Máquina:</label>
                         <select class="hvr-float" id="maquina" name="maquina">
-                            <option value="<?php echo $row_m['machine_name'] ?>"><?php echo $row_m['machine_name'] ?></option>
+                            <option><?php echo $row_n['refuse_machine_name']; ?></option>
                             <?php machineOption(); ?>
                         </select>
                     </div>
@@ -125,10 +117,10 @@ if (isset($_REQUEST["id"]) && !isset($_REQUEST["prod"])) {
                             <?php codTable(); ?>
                         </tbody>
                     </table>
-                    <!---------------->
+                    <!----------------> 
                     <div class="div-cod">
                         <label class="codigo">Selecionado:</label>
-                        <input id="cod" class="hvr-float" name="cod" type="number" value="<?php echo $row_c['code_code'] ?>">
+                        <input id="cod" class="hvr-float" name="cod" type="number" value="<?php echo $row_n['refuse_code_code']; ?>">
                     </div>
                     <!---------------->
                     <div class="quantidade">
@@ -137,7 +129,7 @@ if (isset($_REQUEST["id"]) && !isset($_REQUEST["prod"])) {
                             <div class="menos hvr-float" onclick="menos()">
                                 <p>-</p>
                             </div>
-                            <input id="qtd" name="qtd" class="qtd hvr-float" type="number" min="1" value="<?php echo $row_n['refuse_value']  ?>">
+                            <input id="qtd" name="qtd" class="qtd hvr-float" type="number" min="1" value="<?php echo $row_n['refuse_value'];  ?>">
                             <div class="mais hvr-float" onclick="mais()">+</div>
                         </div>
                     </div>
