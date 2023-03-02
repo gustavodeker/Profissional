@@ -17,7 +17,7 @@ if (isset($_POST['maquina']) && isset($_POST['titulo']) && isset($_POST['inicio'
         $count_maquina = $sqlmaquina->fetchColumn();
         if ($count_maquina != 1) {
             $mensagemerro = "Máquina inválida";
-        }
+        } 
         //Pegando username
         global $user;
         $user = auth($_SESSION['TOKEN']);
@@ -95,7 +95,6 @@ if (isset($_REQUEST["id"])) {
 
         <!--BOTÕES NOVA PARADA / PENDENTES / FECHAR -->
         <div class="botoes">
-
             <input onclick="abrirNovaParada()" class="btn-novaParada" id="btn-novaParada" type="button" value="+ Nova parada">
             <input onclick="pend()" class="pend" id="pend" type="button" value="Pendentes">
             <input onclick="fech()" class="fech" id="fech" type="button" value="+ Fechados">
@@ -160,7 +159,7 @@ if (isset($_REQUEST["id"])) {
         <div class="divFechadas" id="divFechadas">
             <!---------------------------------------------------------------->
             <div id="divTableFechadas" class="animate__animated animate__fadeIn">
-                <table id="table-pendentes">
+                <table id="table-fechadas">
                     <thead>
                         <th>Máquina</th>
                         <th>Parada</th>

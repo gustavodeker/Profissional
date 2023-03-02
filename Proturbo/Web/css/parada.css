@@ -1,6 +1,32 @@
-#btn-novaParada{
-    padding: 10px 20px;
+html, body{
+    background-color: #004479 !important;
 }
+.divCorpo{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 800px;
+    height: 250px;
+    margin-left: auto;
+    margin-right: auto;
+    background: whitesmoke;
+
+}
+/************************************/
+.botoes{
+    width: 100%;
+}
+.botoes input{
+    margin: 0;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+/***********************************/
+.divPendentes, .divFechar{
+    height: 80%;
+    overflow-y: auto;
+}
+
 #divNovaParada{
     border: 1px solid black;
     display: none;
@@ -14,4 +40,23 @@
 #divFechar{
     border: 1px solid black;
     display: none;
+}
+
+table#table-pendentes, table#table-fechadas {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+table#table-pendentes th, table#table-fechadas th{
+    display: none;
+}
+table#table-pendentes td{
+    padding: 10px 50px;
+    border-bottom: 3px solid whitesmoke;
+    background-color: coral;
+}
+
+table#table-fechadas td{
+    padding: 10px 50px;
+    border-bottom: 3px solid whitesmoke;
+    background-color: greenyellow;
 }
