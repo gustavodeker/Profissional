@@ -1,0 +1,17 @@
+#btn-novaParada{
+    padding: 10px 20px;
+}
+#divNovaParada{
+    border: 1px solid black;
+    display: none;
+}
+#divPendentes{
+    border: 1px solid black;
+}
+#divFechadas{
+    display: none;
+}
+#divFechar{
+    border: 1px solid black;
+    display: none;
+}

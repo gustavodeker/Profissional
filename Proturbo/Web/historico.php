@@ -13,7 +13,7 @@ function historicoTable()
     } else {
         $sql = $pdo->prepare("SELECT * FROM refuse WHERE refuse_user_name = '" . $user['user_name'] . "' ORDER BY refuse_datetime DESC LIMIT 10");
     }
-    $sql->execute();
+    $sql->execute(); 
     while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
         echo "<tr>";
         echo "<td>" . $row['refuse_machine_name'] . "</td>";

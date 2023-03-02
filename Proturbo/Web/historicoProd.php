@@ -15,11 +15,8 @@ function historicoProducaoTable()
     }
     $sql->execute();
     while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
-        $sql_machine = $pdo->prepare("SELECT machine_name FROM machines WHERE machine_name = '" . $row['prod_machine_name'] . "'");
-        $sql_machine->execute();
-        $row_machine = $sql_machine->fetch(PDO::FETCH_ASSOC);
         echo "<tr>";
-        echo "<td>" . $row_machine['machine_name'] . "</td>";
+        echo "<td>" . $row['prod_machine_name'] . "</td>";
         echo "<td>" . $row['prod_value'] . "</td>";
         echo "<td>" . $row['prod_reason'] . "</td>";
         echo "<td>" . $row['prod_datetime'] . "</td>";
@@ -106,7 +103,7 @@ if (isset($_REQUEST["id"])) {
                 <div class="div-maquina">
                     <label class="maquina">Máquina:</label>
                     <select class="hvr-float" id="maquina" name="maquina">
-                        <option value="<?php echo $row_m["machine_name"]; ?>"><?php echo $row_m["machine_name"]; ?></option>
+                        <option><?php echo $row_n["prod_machine_name"]; ?></option>
                         <?php machineOption(); ?>
                     </select>
                 </div>
