@@ -31,6 +31,7 @@
                     <a id='botaologin' href='acompanhamento.php'>Acompanhamento</a>
                     <a id='botaologin' href='refugo.php'>Refugo</a>
                     <a id='botaologin' href='producao.php'>Produção</a>
+                    <a id='botaologin' href='parada.php'>Paradas</a>
                     <a id='botaologin' href='historico.php'>Histórico</a>
                     <a id='botaologin' href='https://suporte.highpot.tech/' target="_blank">Suporte</a>
                     <a id='botaologin' href='logout.php'>Sair</a>
@@ -39,6 +40,7 @@
                 <ul class="menu" id="menu" role="menu">
                     <a id='botaologin' href='refugo.php'>Refugo</a>
                     <a id='botaologin' href='producao.php'>Produção</a>
+                    <a id='botaologin' href='parada.php'>Paradas</a>
                     <a id='botaologin' href='historico.php'>Histórico</a>
                     <a id='botaologin' href='logout.php'>Sair</a>
                 </ul>

@@ -5,7 +5,7 @@ html, body{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    width: 800px;
+    width: 700px;
     height: 250px;
     margin-left: auto;
     margin-right: auto;
@@ -18,15 +18,15 @@ html, body{
 }
 .botoes input{
     margin: 0;
-    padding: 10px 20px;
+    padding: 5px 20px;
     cursor: pointer;
 }
 /***********************************/
-.divPendentes, .divFechar{
+#divPendentes, #divFechadas{
     height: 80%;
     overflow-y: auto;
 }
-
+/**/
 #divNovaParada{
     border: 1px solid black;
     display: none;
@@ -37,6 +37,7 @@ html, body{
 #divFechadas{
     display: none;
 }
+/**/
 #divFechar{
     border: 1px solid black;
     display: none;
@@ -51,8 +52,14 @@ table#table-pendentes th, table#table-fechadas th{
 }
 table#table-pendentes td{
     padding: 10px 50px;
-    border-bottom: 3px solid whitesmoke;
+    border-bottom: 5px solid whitesmoke;
+}
+table#table-pendentes tr{
     background-color: coral;
+    cursor: pointer;
+}
+table#table-pendentes tr:hover{
+    background-color: rgba(255, 127, 80, 0.8);
 }
 
 table#table-fechadas td{

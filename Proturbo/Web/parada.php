@@ -48,8 +48,8 @@ function tablePendentes()
         echo "<td>" . $sqlP['parada_maquina'] . "</td>";
         echo "<td>" . $sqlP['parada_titulo'] . "</td>";
         echo "<td>" . $sqlP['parada_horainicio'] . "</td>";
-        echo "<td class='tdeditar'><span class='material-icons hvr-float' onclick=\"location.href='parada.php?page=parada&id=" . $sqlP['parada_id'] . "'\">
-        close
+        echo "<td class='tdeditar'><span class='material-icons hvr-grow' onclick=\"location.href='parada.php?page=parada&id=" . $sqlP['parada_id'] . "'\">
+        cancel
         </span></td>";
     }
 }
@@ -83,6 +83,7 @@ if (isset($_REQUEST["id"])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parada</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/geral.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/parada.css">
