@@ -10,27 +10,79 @@ html, body{
     margin-left: auto;
     margin-right: auto;
     background: whitesmoke;
-
 }
 /************************************/
 .botoes{
     width: 100%;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
 }
 .botoes input{
     margin: 0;
-    padding: 5px 20px;
+    padding: 10px 30px;
     cursor: pointer;
+    background-color: #004479;
+    color: white;
+    border: 1px solid whitesmoke;
+}
+.botoes input:hover{
+    margin: 0;
+    padding: 10px 30px;
+    cursor: pointer;
+    background-color: whitesmoke;
+    color: #004479;
+    border: 1px solid #004479;
 }
 /***********************************/
 #divPendentes, #divFechadas{
     height: 80%;
     overflow-y: auto;
 }
+#janela-fechar{
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    padding-top: 20px;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 99;
+}
+#fechar {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+/**/
+#janela-nova{
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    padding-top: 20px;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 100;
+}
 /**/
 #divNovaParada{
+    position: fixed;
+    display: flex;
     border: 1px solid black;
-    display: none;
+    background-color: whitesmoke;
+    height: 300px;
+    width: 350px;
 }
+#divNovaParada input, #divNovaParada select{
+    height: 26px;
+    width: 90%;
+    margin: 5px;
+}
+/**/
 #divPendentes{
     border: 1px solid black;
 }
@@ -39,8 +91,15 @@ html, body{
 }
 /**/
 #divFechar{
-    border: 1px solid black;
-    display: none;
+    border: 1px solid #004479;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 400px;
+    height: 300px;
+    background-color: whitesmoke;
+    padding: 20px;
 }
 
 table#table-pendentes, table#table-fechadas {
@@ -51,19 +110,19 @@ table#table-pendentes th, table#table-fechadas th{
     display: none;
 }
 table#table-pendentes td{
-    padding: 10px 50px;
+    padding: 5px 50px;
     border-bottom: 5px solid whitesmoke;
 }
 table#table-pendentes tr{
-    background-color: coral;
+    background-color: rgba(255, 255, 0, 0.3);
     cursor: pointer;
 }
 table#table-pendentes tr:hover{
-    background-color: rgba(255, 127, 80, 0.8);
+    background-color: rgba(255, 255, 0, 0.5);
 }
 
 table#table-fechadas td{
-    padding: 10px 50px;
+    padding: 5px 50px;
     border-bottom: 3px solid whitesmoke;
-    background-color: greenyellow;
+    background-color: rgba(0, 128, 0, 0.3)
 }

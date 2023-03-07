@@ -13,9 +13,8 @@ if ($sqlP_n['parada_status'] == 'Fechada'){
 }
 
 if (isset($_POST['maquinaf']) && $_POST['titulof'] && isset($_POST['iniciof']) && isset($_POST['fimf']) && $_POST['comentf']) {
-    if (empty($_POST['maquinaf']) or empty($_POST['titulof']) or empty($_POST['iniciof']) or empty($_POST['fimf'])) {
-        $mensagemerro = "Os campos são obrigatórios, apenas comentário é opcional!";
-        echo $mensagemerro;
+    if (empty($_POST['maquinaf']) or empty($_POST['titulof']) or empty($_POST['iniciof']) or empty($_POST['fimf']) or empty($_POST['comentf'])) {
+        $mensagemerro = "Os campos são obrigatórios!";
     } else {
         $maquina = limpaPost($_POST['maquinaf']);
         $titulo = limpaPost($_POST['titulof']);

@@ -1,2 +1,0 @@
-- O mesmo produto pode ser produzido por setores difererentes
-- A mesma desc de Refugo pode ter diferentes códigos, diferenciado por F U ou FE

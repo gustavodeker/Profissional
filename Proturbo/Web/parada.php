@@ -5,7 +5,6 @@ sessionVerif();
 if (isset($_POST['maquina']) && isset($_POST['titulo']) && isset($_POST['inicio'])) {
     if (empty($_POST['maquina']) or empty($_POST['titulo']) or empty($_POST['inicio'])) {
         $mensagemerro = "Preencher todos os campos!";
-        echo $mensagemerro;
     } else {
         $maquina = limpaPost($_POST['maquina']);
         $titulo = limpaPost($_POST['titulo']);
@@ -17,7 +16,7 @@ if (isset($_POST['maquina']) && isset($_POST['titulo']) && isset($_POST['inicio'
         $count_maquina = $sqlmaquina->fetchColumn();
         if ($count_maquina != 1) {
             $mensagemerro = "Máquina inválida";
-        } 
+        }
         //Pegando username
         global $user;
         $user = auth($_SESSION['TOKEN']);
@@ -57,15 +56,14 @@ function tablePendentes()
 function tableFechadas()
 {
     global $pdo;
-    $sqlPendentes = $pdo->prepare("SELECT * FROM parada WHERE parada_status = 'Fechada'");
+    $sqlPendentes = $pdo->prepare("SELECT * FROM parada WHERE parada_status = 'Fechada' LIMIT 20");
     $sqlPendentes->execute();
 
     while ($sqlP = $sqlPendentes->fetch(PDO::FETCH_ASSOC)) {
         echo "<tr>";
         echo "<td>" . $sqlP['parada_maquina'] . "</td>";
         echo "<td>" . $sqlP['parada_titulo'] . "</td>";
-        echo "<td>" . $sqlP['parada_horainicio'] . "</td>";
-        echo "<td>" . $sqlP['parada_horafim'] . "</td>";
+        echo "<td>" . $sqlP['parada_duracao'] . "</td>";
     }
 }
 
@@ -93,48 +91,65 @@ if (isset($_REQUEST["id"])) {
     <?php include("header.php") ?>
 
     <div class="divCorpo">
+            <!---------------->
+            <?php //mensagem
+            if (isset($mensagem)) { ?>
+                <div id="mensagem" class="mensagem">
+                    <?php echo "<p>" . $mensagem . "<p>"; ?>
+                </div>
+            <?php } ?>
 
+            <?php //mensagemerro
+            if (isset($mensagemerro)) { ?>
+                <div id="mensagemerro" class="mensagemerro">
+                    <?php echo "<p>" . $mensagemerro . "<p>"; ?>
+                    <script>abrirNova();</script>
+                </div>
+            <?php } ?>
+            <!---------------->
         <!--BOTÕES NOVA PARADA / PENDENTES / FECHAR -->
         <div class="botoes">
-            <input onclick="abrirNovaParada()" class="btn-novaParada" id="btn-novaParada" type="button" value="+ Nova parada">
+            <input onclick="abrirNova()" class="btn-novaParada" id="btn-novaParada" type="button"
+                value="+ Nova parada">
             <input onclick="pend()" class="pend" id="pend" type="button" value="Pendentes">
-            <input onclick="fech()" class="fech" id="fech" type="button" value="+ Fechados">
+            <input onclick="fech()" class="fech" id="fech" type="button" value="Fechados">
         </div>
 
 
         <!--NOVA PARADA-->
-        <div class="divNovaParada" id="divNovaParada">
-            <button class="fecharN" id="fecharN" onclick="fecharNovaParada()">X</button>
+        <div class="janela-nova" id="janela-nova">
+            <div class="divNovaParada" id="divNovaParada">
+            <button class="fechar" id="fechar" onclick="fecharNova()">X</button>
 
-            <form id="formNovaParada" action="" method="post">
-                <!---------------->
-                <div class="div-maquina">
-                    <label class="maquina">Máquina:</label>
-                    <select class="hvr-float" id="maquina" name="maquina">
-                        <option value="<?php /* Para deixar último código usado selecionado*/ if (isset($ultimachine)) {
-                                            echo $ultimachine;
-                                        } ?>"><?php /* Para deixar último código usado selecionado*/ if (isset($ultimachine)) {
-                                                    echo $ultimachine;
-                                                } ?></option>
-                        <?php machineOption(); ?>
-                    </select>
-                </div>
-                <!---------------->
-                <div class="div-titulo">
-                    <label for="titulo">Título:</label>
-                    <input name="titulo" id="titulo" type="text">
-                </div>
-                <!---------------->
-                <div class="div-inicio">
-                    <label for="inicio">Início:</label>
-                    <input name="inicio" id="inicio" type="datetime-local">
-                </div>
-                <!---------------->
-                <input id="enviar" class="hvr-float" type="submit" value="Enviar">
-                <!---------------->
-            </form>
+                <form id="formNovaParada" action="" method="post">
+                    <!---------------->
+                    <div class="div-maquina">
+                        <label class="maquina">Máquina:</label>
+                        <select class="hvr-float" id="maquina" name="maquina">
+                            <option value="<?php /* Para deixar último código usado selecionado*/if (isset($ultimachine)) {
+                                echo $ultimachine;
+                            } ?>"><?php /* Para deixar último código usado selecionado*/if (isset($ultimachine)) {
+                                 echo $ultimachine;
+                             } ?></option>
+                            <?php machineOption(); ?>
+                        </select>
+                    </div>
+                    <!---------------->
+                    <div class="div-titulo">
+                        <label for="titulo">Título:</label>
+                        <input name="titulo" id="titulo" type="text">
+                    </div>
+                    <!---------------->
+                    <div class="div-inicio">
+                        <label for="inicio">Início:</label>
+                        <input name="inicio" id="inicio" type="datetime-local">
+                    </div>
+                    <!---------------->
+                    <input id="enviar" class="hvr-float" type="submit" value="Enviar">
+                    <!---------------->
+                </form>
+            </div>
         </div>
-
         <!--PENDENTES-->
         <div class="divPendentes" id="divPendentes">
             <!---------------------------------------------------------------->
@@ -155,8 +170,8 @@ if (isset($_REQUEST["id"])) {
             </div>
             <!---------------------------------------------------------------->
         </div>
-        
-        <!--PENDENTES-->
+
+        <!--FECHADAS-->
         <div class="divFechadas" id="divFechadas">
             <!---------------------------------------------------------------->
             <div id="divTableFechadas" class="animate__animated animate__fadeIn">
@@ -164,8 +179,7 @@ if (isset($_REQUEST["id"])) {
                     <thead>
                         <th>Máquina</th>
                         <th>Parada</th>
-                        <th>Início</th>
-                        <th>Fim</th>
+                        <th>Tempo parado</th>
                     </thead>
                     <tbody>
                         <?php
@@ -178,32 +192,19 @@ if (isset($_REQUEST["id"])) {
         </div>
 
         <!--FECHAR-->
-        <div class="divFechar">
-            <!---------------->
-            <?php //mensagem
-            if (isset($mensagem)) { ?>
-                <div id="mensagem" class="mensagem">
-                    <?php echo "<p>" . $mensagem . "<p>"; ?>
-                </div>
-            <?php } ?>
+        <div class="janela-fechar" id="janela-fechar">
 
-            <?php //mensagemerro
-            if (isset($mensagemerro)) { ?>
-                <div id="mensagemerro" class="mensagemerro">
-                    <?php echo "<p>" . $mensagemerro . "<p>"; ?>
-                </div>
-            <?php } ?>
-            <!---------------->
             <!---------------------------------------------------------------->
             <div id="divFechar" class="animate__animated animate__fadeIn">
                 <button class="fechar" id="fechar" onclick="fecharFechar()">X</button>
-
                 <form id="formFechar" action="" method="post">
                     <!---------------->
                     <div class="div-maquina">
                         <label class="maquina">Máquina:</label>
                         <select class="hvr-float" id="maquinaf" name="maquinaf">
-                            <option><?php echo $sqlP_n['parada_maquina']; ?></option>
+                            <option>
+                                <?php echo $sqlP_n['parada_maquina']; ?>
+                            </option>
                             <?php machineOption(); ?>
                         </select>
                     </div>
@@ -215,7 +216,8 @@ if (isset($_REQUEST["id"])) {
                     <!---------------->
                     <div class="div-inicio">
                         <label for="iniciof">Início:</label>
-                        <input name="iniciof" id="iniciof" type="datetime-local" value="<?php echo $sqlP_n['parada_horainicio'];  ?>">
+                        <input name="iniciof" id="iniciof" type="datetime-local"
+                            value="<?php echo $sqlP_n['parada_horainicio']; ?>">
                     </div>
                     <!---------------->
                     <div class="div-fim">
@@ -243,62 +245,56 @@ if (isset($_REQUEST["id"])) {
 </html>
 
 
+<script>
+    /**ABRIR NOVA PARADA */
+    function abrirNova() {
+        pend();
+        let modal = document.getElementById('janela-nova');
+        modal.style.display = 'flex';
+    }
+    /**FECHAR NOVA PARADA */
+    function fecharNova() {
+        let modal = document.getElementById('janela-nova');
+        modal.style.display = 'none';
+    }
+</script>
+
 <?php /**ABRIR FECHAR**/
 if (isset($_REQUEST["id"])) { ?>
     <script>
-        let modal = document.getElementById('divFechar');
+        let modal = document.getElementById('janela-fechar');
         modal.style.display = 'flex';
     </script>
 <?php } ?>
 <script>
     /**FECHAR FECHAR */
     function fecharFechar() {
-        let modal = document.getElementById('divFechar');
+        let modal = document.getElementById('janela-fechar');
         modal.style.display = 'none';
         location.href = 'parada.php';
     }
 </script>
 
 <script>
-    /**ABRIR NOVA PARADA */
-    function abrirNovaParada() {
-        let modal = document.getElementById('divNovaParada');
-        modal.style.display = 'flex';
-    }
-    /**FECHAR NOVA PARADA */
-    function fecharNovaParada() {
-        let modal = document.getElementById('divNovaParada');
-        modal.style.display = 'none';
-    }
-</script>
-
-<script>
-    /** */
+    /* ALTENAR VISUALIZAÇÃO PARA PENDENTES */
     function pend() {
         let modal = document.getElementById('divPendentes');
         modal.style.display = 'flex';
         let modal2 = document.getElementById('divFechadas');
         modal2.style.display = 'none';
     }
-
+    /* ALTENAR VISUALIZAÇÃO PARA FECHADAS */
     function fech() {
         let modal = document.getElementById('divPendentes');
         modal.style.display = 'none';
         let modal2 = document.getElementById('divFechadas');
         modal2.style.display = 'flex';
-        let modal3 = document.getElementById('divNovaParada');
-        modal3.style.display = 'none';
-        let modal4 = document.getElementById('divFechar');
-        modal4.style.display = 'none';
     }
 </script>
 
-
-
-
 <script>
     /**DESABILITAR BOTÃO DE ENVIAR */
-    document.getElementById('form-refuse').addEventListener('submit', function(event) {
+    document.getElementById('formNovaParada').addEventListener('submit', function (event) {
         event.preventDefault();
         document.getElementById('enviar').setAttribute('disabled', 'disabled');
         this.submit();
@@ -308,10 +304,10 @@ if (isset($_REQUEST["id"])) { ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
     /** MENSAGENS E MENSAGEM ERRO**/
-    setTimeout(function() {
+    setTimeout(function () {
         $('#mensagem').hide(); // "foo" é o id do elemento que seja manipular.
     }, 2500); // O valor é representado em milisegundos.
-    setTimeout(function() {
+    setTimeout(function () {
         $('#mensagemerro').hide(); // "foo" é o id do elemento que seja manipular.
     }, 2500); // O valor é representado em milisegundos.
 </script>
