@@ -1,0 +1,30 @@
+DELIMITER $$
+CREATE TRIGGER update_item_prodtotal AFTER INSERT ON prod
+FOR EACH ROW
+BEGIN
+    UPDATE itens
+    SET item_prodtotal = item_prodtotal + NEW.prod_value
+    WHERE item_pn = NEW.prod_item_pn;
+END$$
+DELIMITER ;
+
+-----------------------------------------------------------------------------------------------------
+
+DELIMITER $$
+CREATE TRIGGER `insert_auxprod` AFTER INSERT ON `auxprod` FOR EACH ROW BEGIN
+DECLARE machine_pn_var varchar(50);
+DECLARE item_pn_desc_var varchar(255);
+DECLARE item_setor_cod_var int(11);
+DECLARE item_setor_name_var varchar(50);
+
+SELECT machine_pn INTO machine_pn_var FROM machines WHERE machine_name = NEW.auxprod_machine_name;
+
+SELECT item_pn_desc, item_setor_cod, item_setor_name INTO item_pn_desc_var, item_setor_cod_var, item_setor_name_var FROM itens WHERE item_pn = machine_pn_var;
+
+INSERT INTO prod (prod_machine_name, prod_item_pn_desc, prod_item_pn, prod_item_setor_cod, prod_item_setor_name, prod_value, prod_user_name, prod_reason) VALUES (NEW.auxprod_machine_name, item_pn_desc_var, machine_pn_var, item_setor_cod_var, item_setor_name_var, NEW.auxprod_value, NULL, NULL);
+END$$
+DELIMITER ;
+
+-----------------------------------------------------------------------------------------------------
+
+
