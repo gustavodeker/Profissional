@@ -12,7 +12,7 @@ if ($sqlP_n['parada_status'] == 'Fechada'){
     header('Location: parada.php');
 }
 
-if (isset($_POST['maquinaf']) && $_POST['titulof'] && isset($_POST['iniciof']) && isset($_POST['fimf']) && $_POST['comentf']) {
+if (isset($_POST['maquinaf']) && isset($_POST['titulof']) && isset($_POST['iniciof']) && isset($_POST['fimf']) && isset($_POST['comentf'])) {
     if (empty($_POST['maquinaf']) or empty($_POST['titulof']) or empty($_POST['iniciof']) or empty($_POST['fimf']) or empty($_POST['comentf'])) {
         $mensagemerro = "Os campos são obrigatórios!";
     } else {

@@ -14,6 +14,15 @@ function machineOption()
         echo "<option value='". $row['machine_name']."'>". $row['machine_name']."</option>";
     }
 }
+function celulaOption()
+{   
+    global $pdo;
+    $sql = $pdo->prepare("SELECT * FROM users");
+    $sql->execute();
+    while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+        echo "<option value='". $row['user_name']."'>". $row['user_name']."</option>";
+    }
+}
  
 function codTable() //exibe a tabela
 {
@@ -48,20 +57,5 @@ function itemTable() //exibe a tabela
         $u++;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ?>

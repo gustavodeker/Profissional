@@ -27,4 +27,15 @@ DELIMITER ;
 
 -----------------------------------------------------------------------------------------------------
 
+DELIMITER //
+
+CREATE TRIGGER parada_timediff
+BEFORE INSERT ON parada
+FOR EACH ROW
+BEGIN
+    SET NEW.parada_duracao = TIMEDIFF(NEW.parada_horafim, NEW.parada_horainicio);
+END//
+
+DELIMITER ;
+
 

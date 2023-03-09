@@ -28,7 +28,7 @@ function historicoProducaoTable()
 
 /**EDITAR**/
 if (isset($_REQUEST["id"])) {
-    include("editarProd.php");
+    include("processamento/editarProd.php");
 }
 /**EDITAR**/
 ?>

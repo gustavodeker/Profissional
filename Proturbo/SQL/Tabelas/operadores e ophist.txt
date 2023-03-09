@@ -1,0 +1,18 @@
+CREATE TABLE operadores (
+    operador_re varchar(50) PRIMARY KEY,
+    operador_nome varchar(255) UNIQUE NOT NULL,
+    operador_celula varchar(50) NULL,
+    FOREIGN KEY (operador_celula) REFERENCES users(user_name)
+);
+
+CREATE TABLE ophist (
+    ophist_id int(11) AUTO_INCREMENT PRIMARY KEY,
+    ophist_re varchar(50) NOT NULL,
+    ophist_nome varchar(255) NOT NULL,
+    ophist_horai datetime NOT NULL,
+    ophist_horaf datetime NULL,
+    ophist_celula varchar(50),
+    FOREIGN KEY (ophist_celula) REFERENCES users(user_name),
+    FOREIGN KEY (ophist_re) REFERENCES operadores(operador_re),
+    FOREIGN KEY (ophist_nome) REFERENCES operadores(operador_nome)
+);

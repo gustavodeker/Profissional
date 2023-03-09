@@ -28,7 +28,7 @@ function historicoTable()
 
 /**EDITAR**/
 if (isset($_REQUEST["id"]) && !isset($_REQUEST["prod"])) {
-    include("editar.php");
+    include("processamento/editar.php");
 }
 /**EDITAR**/
 ?>

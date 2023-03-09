@@ -17,10 +17,10 @@ UPDATE parada SET parada_duracao = TIMEDIFF(parada_horafim, parada_horainicio);
 DELIMITER //
 
 CREATE TRIGGER parada_timediff
-BEFORE INSERT ON parada
+AFTER INSERT ON parada
 FOR EACH ROW
 BEGIN
-    SET NEW.duracao_parada = TIMEDIFF(NEW.parada_horafim, NEW.parada_horainicio);
+    SET NEW.parada_duracao = TIMEDIFF(NEW.parada_horafim, NEW.parada_horainicio);
 END//
 
 DELIMITER ;
