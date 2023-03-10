@@ -4,23 +4,10 @@ CREATE TABLE parada (
     parada_titulo varchar(255) NOT NULL,
     parada_horainicio datetime NOT NULL,
     parada_horafim datetime NULL,
+    parada_duracao TIME AS (TIME_FORMAT(TIMEDIFF(parada_horafim, parada_horainicio), '%H:%i:%s')) STORED,
     parada_coment varchar(255) NULL,
     parada_status varchar(50) NOT NULL,
     parada_user varchar(50) NOT NULL,
     FOREIGN KEY (parada_maquina) REFERENCES machines(machine_name),
     FOREIGN KEY (parada_user) REFERENCES users(user_name)
 );
-ALTER TABLE parada ADD COLUMN parada_duracao TIME AFTER parada_horafim;
-UPDATE parada SET parada_duracao = TIMEDIFF(parada_horafim, parada_horainicio);
-
-************************************** CRIARRRRRRRR TRIGGERRRRRR
-DELIMITER //
-
-CREATE TRIGGER parada_timediff
-AFTER INSERT ON parada
-FOR EACH ROW
-BEGIN
-    SET NEW.parada_duracao = TIMEDIFF(NEW.parada_horafim, NEW.parada_horainicio);
-END//
-
-DELIMITER ;

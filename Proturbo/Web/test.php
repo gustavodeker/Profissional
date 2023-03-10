@@ -16,31 +16,10 @@ $operadores = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Operador</title>
     <style>
-#janela-modal {
-    display: none;
-    position: fixed;
-    z-index: 9999;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
-#janela-modal-conteudo {
-    background-color: #fff;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-}
-
     </style>
 </head>
 
 <body>
-<button onclick="abrirModal()">Abrir janela modal</button>
 <div id="janela-modal">
     <div id="janela-modal-conteudo">
                 <!---------------->
@@ -66,31 +45,7 @@ $operadores = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
         <input type="text">
     </div>
     <div>
-        <button></button>
     </div>
-</div>
-        <button onclick="fecharModal()">Cancelar</button>
-        <button onclick="confirmarOperacao()">OK</button>
-    </div>
-</div>
 </body>
 
 </html>
-<script>
-    function abrirModal() {
-    document.getElementById("janela-modal").style.display = "block";
-}
-
-function fecharModal() {
-    document.getElementById("janela-modal").style.display = "none";
-}
-function confirmarOperacao() {
-    // Executa a operação desejada, por exemplo:
-    // Envia um formulário usando AJAX
-    // Deleta um registro do banco de dados usando PHP e MySQL
-    // etc.
-    
-    // Fecha a janela modal
-    fecharModal();
-}
-</script>

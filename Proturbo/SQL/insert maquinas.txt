@@ -1,9 +1,9 @@
 INSERT INTO `machines` VALUES
-(1, 'CF338','Marca', '#,704070,#'),
-(2, 'CF428','Marca', '#,704070,#'),
-(3, 'CF309','Marca', '#,704070,#'),
-(4, 'CF310','Marca', '#,704070,#'),
-(5, 'CU311','Marca', '#,Gaiolas Valeo 1,#'),
-(6, 'CF174','Marca', '#,Gaiolas Valeo 1,#'),
-(7, 'CF395','Marca', '#,Gaiolas Valeo 2,#'),
-(8, 'CF383','Marca', '#,Gaiolas Valeo 2,#');
+(1, 'CF338','Marca', '#,704070,#', null),
+(2, 'CF428','Marca', '#,704070,#', null),
+(3, 'CF309','Marca', '#,704070,#', null),
+(4, 'CF310','Marca', '#,704070,#', null),
+(5, 'CU311','Marca', '#,Gaiolas Valeo 1,#', null),
+(6, 'CF174','Marca', '#,Gaiolas Valeo 1,#', null),
+(7, 'CF395','Marca', '#,Gaiolas Valeo 2,#', null),
+(8, 'CF383','Marca', '#,Gaiolas Valeo 2,#', null);

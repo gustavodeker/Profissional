@@ -270,4 +270,5 @@ INSERT INTO itens VALUES
 (null,'700001832','TAMPA (4475.305.568)',110,'Precision',0,0,DEFAULT),
 (null,'700002538','MANCAL RADIAL TO4  1 - 1',110,'Precision',0,0,DEFAULT);
 
+INSERT INTO `operadores` (`operador_re`, `operador_nome`, `operador_celula`) VALUES ('1253', 'Gustavo Santos', NULL), ('4456', 'Eduardo Ricardo', NULL), ('5521', 'Rodrigo Claudio', NULL), ('6985', 'Maria Cristina', NULL), ('6963', 'Igor Marques', NULL), ('9555', 'Claudio Roberto', NULL);
 

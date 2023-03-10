@@ -16,3 +16,11 @@ CREATE TABLE ophist (
     FOREIGN KEY (ophist_re) REFERENCES operadores(operador_re),
     FOREIGN KEY (ophist_nome) REFERENCES operadores(operador_nome)
 );
+
+CREATE TABLE opatuais (
+    opatual_id int(11) AUTO_INCREMENT PRIMARY KEY,
+    opatual_user_name varchar(50) NOT NULL,
+    opatual_operador_nome varchar(255) NOT NULL,
+    FOREIGN KEY (opatual_user_name) REFERENCES users(user_name),
+    FOREIGN KEY (opatual_operador_nome) REFERENCES operadores(operador_nome)
+);

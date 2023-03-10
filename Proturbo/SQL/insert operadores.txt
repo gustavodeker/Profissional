@@ -1,0 +1,1 @@
+INSERT INTO `operadores` (`operador_re`, `operador_nome`, `operador_celula`) VALUES ('1253', 'Gustavo Santos', NULL), ('4456', 'Eduardo Ricardo', NULL), ('5521', 'Rodrigo Claudio', NULL), ('6985', 'Maria Cristina', NULL), ('6963', 'Igor Marques', NULL), ('9555', 'Claudio Roberto', NULL);

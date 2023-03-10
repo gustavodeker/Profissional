@@ -7,22 +7,6 @@ CREATE TABLE users (
     user_token varchar(255) NULL
 );
 
-CREATE TABLE machines (
-    machine_id int(11) PRIMARY KEY AUTO_INCREMENT,
-    machine_name varchar(50) UNIQUE NOT NULL,
-    machine_marca varchar(255) NOT NULL,
-    machine_users varchar(255) NULL,
-    machine_pn varchar(50) NULL,
-    FOREIGN KEY (machine_pn) REFERENCES itens(item_pn)
-);
-
-CREATE TABLE codes (
-    code_id int(11) PRIMARY KEY AUTO_INCREMENT,
-    code_code varchar(50) UNIQUE NOT NULL,
-    code_desc varchar(255) NOT NULL,
-    code_processo varchar(4) NOT NULL
-);
-
 CREATE TABLE itens (
     item_id int(11) PRIMARY KEY AUTO_INCREMENT,
     item_pn varchar(50) UNIQUE NOT NULL,
@@ -32,6 +16,22 @@ CREATE TABLE itens (
     item_prodtotal int(11),
     item_refugototal int(11),
     item_ppm DECIMAL(11,0) GENERATED ALWAYS AS ((NULLIF(item_refugototal, 0) / NULLIF(item_prodtotal, 0)) * 1000000) STORED
+);
+
+CREATE TABLE codes (
+    code_id int(11) PRIMARY KEY AUTO_INCREMENT,
+    code_code varchar(50) UNIQUE NOT NULL,
+    code_desc varchar(255) NOT NULL,
+    code_processo varchar(4) NOT NULL
+);
+
+CREATE TABLE machines (
+    machine_id int(11) PRIMARY KEY AUTO_INCREMENT,
+    machine_name varchar(50) UNIQUE NOT NULL,
+    machine_marca varchar(255) NOT NULL,
+    machine_users varchar(255) NULL,
+    machine_pn varchar(50) NULL,
+    FOREIGN KEY (machine_pn) REFERENCES itens(item_pn)
 );
 
 CREATE TABLE auxprod (
@@ -77,6 +77,51 @@ CREATE TABLE refuse (
     FOREIGN KEY (refuse_item_pn) REFERENCES itens(item_pn),
     FOREIGN KEY (refuse_code_code) REFERENCES codes(code_code)
 );
+
+CREATE TABLE parada (
+    parada_id int(11) PRIMARY KEY AUTO_INCREMENT,
+    parada_maquina varchar(50) NOT NULL,
+    parada_titulo varchar(255) NOT NULL,
+    parada_horainicio datetime NOT NULL,
+    parada_horafim datetime NULL,
+    parada_duracao TIME AS (TIME_FORMAT(TIMEDIFF(parada_horafim, parada_horainicio), '%H:%i:%s')) STORED,
+    parada_coment varchar(255) NULL,
+    parada_status varchar(50) NOT NULL,
+    parada_user varchar(50) NOT NULL,
+    FOREIGN KEY (parada_maquina) REFERENCES machines(machine_name),
+    FOREIGN KEY (parada_user) REFERENCES users(user_name)
+);
+
+CREATE TABLE operadores (
+    operador_re varchar(50) PRIMARY KEY,
+    operador_nome varchar(255) UNIQUE NOT NULL,
+    operador_celula varchar(50) NULL,
+    FOREIGN KEY (operador_celula) REFERENCES users(user_name)
+);
+
+CREATE TABLE ophist (
+    ophist_id int(11) AUTO_INCREMENT PRIMARY KEY,
+    ophist_re varchar(50) NOT NULL,
+    ophist_nome varchar(255) NOT NULL,
+    ophist_horai datetime NOT NULL,
+    ophist_horaf datetime NULL,
+    ophist_celula varchar(50),
+    FOREIGN KEY (ophist_celula) REFERENCES users(user_name),
+    FOREIGN KEY (ophist_re) REFERENCES operadores(operador_re),
+    FOREIGN KEY (ophist_nome) REFERENCES operadores(operador_nome)
+);
+
+CREATE TABLE opatuais (
+    opatual_id int(11) AUTO_INCREMENT PRIMARY KEY,
+    opatual_user_name varchar(50) NOT NULL,
+    opatual_operador_nome varchar(255) NOT NULL,
+    FOREIGN KEY (opatual_user_name) REFERENCES users(user_name),
+    FOREIGN KEY (opatual_operador_nome) REFERENCES operadores(operador_nome)
+);
+
+
+
+
 
 
 CREATE TABLE proddia (
